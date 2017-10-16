@@ -3,7 +3,7 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="css/common.css">
         <link rel="stylesheet" type="text/css" href="css/each.css">
-        <title>강사가 수정한 파일입니다</title>
+        <title>강사가 수정했지롱</title>
         <link rel="stylesheet" type="text/css" 
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
