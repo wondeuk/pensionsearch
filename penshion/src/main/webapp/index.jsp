@@ -148,7 +148,7 @@
                     <td class="midth" rowspan="2" border="1">평일/AM 09:00 ~ PM 05:00<br>
                     점심 / PM12:30 ~ PM 01:30<br>
                     상담업무시간외엔 질분답변<br>
-                    이나 일대일상담을 이용하시기 바랍니다.
+                    이나  이용하시기 바랍니다.
                     </td>
                      <td class="bottombtn" rowspan="2">
                     <button type="button" onclick="location.href='main3.html'" class="btn">질문답변 바로가기</button>
