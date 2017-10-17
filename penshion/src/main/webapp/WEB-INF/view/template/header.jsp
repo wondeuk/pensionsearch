@@ -1,33 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/common.css">
-        <link rel="stylesheet" type="text/css" href="css/each.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/each.css">
+        
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reserve.css">
         <title>펜션</title>
         <link rel="stylesheet" type="text/css" 
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="${pageContext.request.contextPath}/js/user_register.js"></script>
+        
     </head>
     <body>
         <div class="page">
         <!-- 상단영역, 메뉴영역 -->
             <header>
-                <a href="#" class="">
+                <a href="${pageContext.request.contextPath}" class="">
                 <div class="rogo">
-                    <img src="icon/pen-icon.png"></div>
+                    <img src="${pageContext.request.contextPath}/icon/pen-icon.png"></div>
                 </a>
             
                 <a href="#" class="left">펜션찾기</a>
                 <a href="#" class="left">예약확인</a>
-                <a href="#" class="left">회원가입</a>
+                <a href="${pageContext.request.contextPath}/member/user_register01" class="left">회원가입</a>
+                <a href="${pageContext.request.contextPath}/reserve" class="left">예약</a>
                 <div class="plus">
                 <a href="#" class="lef"><i class="fa fa-plus"></i></a>
                     <ul>
                         <li><a href="#" class="">공지사항</a></li>
-                        <li><a href="#" class="">마이페이지</a></li>
+                        <li><a href="${pageContext.request.contextPath}/member/myinfo" class="">마이페이지</a></li>
                     </ul>
                 </div>
                 <!--<a href="#" class="right">로그아웃</a>-->
-                <a href="#" class="right">로그인</a>
+                <a href="${pageContext.request.contextPath}/member/login" class="right">로그인</a>
             </header>
             
             <!-- 검색영역 -->
