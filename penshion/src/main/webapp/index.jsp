@@ -170,27 +170,13 @@
                    <td class="bottombtn" rowspan="2">
                     <button type="button" onclick="location.href='main3.html'" class="btn">업소 등록하기</button>
                 </tr>
-                
-
-
-               
             </table>
-
-
-
-
-
-
         </main>
 
         <footer>
             <h3>copy&copy; 펜션(주)</h3>
         </footer>
     </div>
-
-
-
-
 
 </body>
 
