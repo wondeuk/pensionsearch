@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
+<<<<<<< HEAD
 
 <head>
     <meta charset="utf-8">
@@ -17,6 +18,18 @@
 
 <body>
     <div class="page">
+=======
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/each.css">
+        <title>강사가 수정했지롱~!</title>
+        <link rel="stylesheet" type="text/css" 
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <div class="page">
+>>>>>>> branch 'master' of https://github.com/wondeuk/pensionsearch.git
         <!-- 상단영역, 메뉴영역 -->
         <header>
             <a href="#" class="">
@@ -182,3 +195,5 @@
 </body>
 
 </html>
+
+<!-- 강사가 올린 코드 -->
