@@ -3,8 +3,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/each.css">
+        <link rel="stylesheet" type="text/css" href="common.css">
+        <link rel="stylesheet" type="text/css" href="each.css">
         
         <title>펜션</title>
         <link rel="stylesheet" type="text/css" 
