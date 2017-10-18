@@ -23,6 +23,6 @@
    </bean>
    
    	<mvc:view-controller path="/" view-name="home"/>
-   
+  
 
 </beans>
