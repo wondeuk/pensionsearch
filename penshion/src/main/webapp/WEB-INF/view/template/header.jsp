@@ -18,7 +18,7 @@
             <header>
                 <a href="${pageContext.request.contextPath}" class="">
                 <div class="rogo">
-                    <img src="${pageContext.request.contextPath}/icon/pen-icon.png"></div>
+                    <img src="pen-icon.png"></div>
                 </a>
             
                 <a href="#" class="left">펜션찾기</a>

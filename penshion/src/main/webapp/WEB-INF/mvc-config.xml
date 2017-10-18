@@ -12,8 +12,10 @@
     <mvc:resources location="/css/" mapping="*.css"/>
     <mvc:resources location="/good/" mapping="*.jpg"/>
     <mvc:resources location="/icon/" mapping="*.png"/>
-    <mvc:resources location="/upload/" mapping="/file/**"/>
-    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/js/" mapping="*.js"/>
+    
+   	<context:component-scan base-package="spring.controller"/>
+	<context:component-scan base-package="spring.model"/> 
     
 
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
