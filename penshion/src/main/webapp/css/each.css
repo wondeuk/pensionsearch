@@ -140,31 +140,6 @@ a:hover{
 }
 
 
-/* 사진 */
- .gallary{
-                width:70%;
-                display:flex;
-                flex-direction: row;
-                flex-wrap:wrap;
-                
-            }
-            .gallary .image{
-                padding:10px;
-                width:20%;
-                flex-grow:1;
-/*                border:1px solid black;*/
-            }
-            .gallary .image img{
-                width:80%;
-                height:auto;
-            }
-
-            
-            @media screen and (max-width:960px){
-                .gallary .image{
-                    width:45%;
-                }
-            }
 /* 화면이 작아질 경우(800px 이하)에 대한 처리 */
 @media screen and (max-width: 800px){
     .area-20, .area-30, .area-40, .area-50, .area-60, .area-70, .area-80, .area-90{
@@ -193,37 +168,6 @@ textarea{
 .active{
     color:red;
 }
-
-/* Main CSS*/
-   
-        .topth {
-            width: 400px;
-            border: 0px;
-            text-align: left;
-        }
-        
-        .img {
-           
-            height: 200px;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-        .midth{
-            border: 0px;
-            
-        }
-
-        .bottombtn{
-            border: 0px;
-        }
-        .btn{
-            border: 0px;
-            width: 250px;
-            background-color: lightgray;
-            color: black;
-        }
-
-
 
 
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp" %> 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member.css">   
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_login.css">   
 <form action="#" method="post">
                 <div class="xans-member-login">
                     <div class="login">
