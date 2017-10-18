@@ -13,11 +13,16 @@
     <mvc:resources location="/good/" mapping="*.jpg"/>
     <mvc:resources location="/icon/" mapping="*.png"/>
     <mvc:resources location="/upload/" mapping="/file/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    
 
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
            <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
            <property name="prefix" value="/WEB-INF/view/"/>
            <property name="suffix" value=".jsp"/>
    </bean>
+   
+   	<mvc:view-controller path="/" view-name="home"/>
+   
 
 </beans>
