@@ -25,7 +25,7 @@
                     <td width="20%" class="img" background="3.jpg">&nbsp;1행 3열</td>
                 </tr>
                 <tr height=50px>
-                    <th class="midth">끼야호펜션</th>
+                    <th class="midth">끼야호펜션22</th>
                     <th class="midth">이요오펜션</th>
                     <th class="midth">꾸이익펜션</th>
                 </tr>
