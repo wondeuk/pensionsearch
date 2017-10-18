@@ -6,7 +6,6 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/each.css">
         
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reserve.css">
         <title>펜션</title>
         <link rel="stylesheet" type="text/css" 
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
