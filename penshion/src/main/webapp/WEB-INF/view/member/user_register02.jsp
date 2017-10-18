@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp" %>    
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_register.css">
-			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member.css">
-			<script src="${pageContext.request.contextPath}/js/user_register.js"></script>
+<link rel="stylesheet" type="text/css" href="member_register.css">
+			<link rel="stylesheet" type="text/css" href="member.css">
+			<script src="user_register.js"></script>
 			<script src="https://code.jquery.com/jquery-latest.js"></script>
 
 			<script>

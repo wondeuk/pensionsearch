@@ -1,62 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
+<%@ include file="/WEB-INF/view/template/header.jsp" %>   
 
-
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="common.css">
-    <link rel="stylesheet" type="text/css" href="each.css">
-    <title>펜션</title>
-
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-    <!-- jQuery를 사용하기 위한 CDN 설정 -->
-    <script src="https://code.jquery.com/jquery-latest.js"></script>
-
-</head>
-
-<body>
-    <div class="page">
-
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/common.css">
-        <link rel="stylesheet" type="text/css" href="css/each.css">
-        <title>강사가 수정했지롱~!</title>
-        <link rel="stylesheet" type="text/css" 
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <body>
-        <div class="page">
->>>>>>> branch 'master' of https://github.com/wondeuk/pensionsearch.git
-        <!-- 상단영역, 메뉴영역 -->
-        <header>
-            <a href="#" class="">
-                <div class="rogo">
-                    <img src="pen-icon.png"></div>
-            </a>
-
-            <a href="#" class="left">이용후기</a>
-            <a href="#" class="left">예약확인/취소</a>
-            <a href="#" class="left">문의하기</a>
-            
-            <!--<a href="#" class="right">로그아웃</a>-->
-            <a href="${pageContext.request.contextPath}/member/user_login.jsp" class="right">로그인 &#124;</a>
-            <a href="#" class="left">&nbsp;회원가입</a>
-        </header>
-
-        <!-- 검색영역 -->
-        <nav>
-            <form action="#">
-                지역<input type="text" placeholder="도시,지역으로 검색"> 예약일
-                <input type="date" placeholder="예약일"> 인원
-                <input type="number" min="1" max="35" placeholder="인원">
-                <input type="submit" value="검색">
-            </form>
-        </nav>
-
-        <main>
             <div class="empty-row"></div>
             <div class="empty-row"></div>
             
@@ -172,14 +117,6 @@
                 </tr>
             </table>
         </main>
-
-        <footer>
-            <h3>copy&copy; 펜션(주)</h3>
-        </footer>
-    </div>
-
-</body>
-
-</html>
-
-<!-- 펜션서 올린 코드ㅇㅇㅇㅇ ddd-->
+        
+        <%@ include file="/WEB-INF/view/template/footer.jsp" %>   
+        
