@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp" %> 
-<link rel="stylesheet" type="text/css" href="member.css">   
-<link rel="stylesheet" type="text/css" href="member_login.css">   
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/member.css">   
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/member_login.css">   
 <form action="#" method="post">
                 <div class="xans-member-login">
                     <div class="login">
@@ -19,7 +19,7 @@
                             </ul>
                             <p class="link">
                                 회원가입을 하시면 다양하고<br>특별한 혜택이 준비되어 있습니다.
-                                <a href="user_register01"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_join.gif" alt="회원가입"></a>
+                                <a href="${pageContext.request.contextPath}/member/user_register01"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_join.gif" alt="회원가입"></a>
                             </p>
                         </fieldset>
                     </div>

@@ -3,8 +3,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="common.css">
-        <link rel="stylesheet" type="text/css" href="each.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/each.css">
         
         <title>펜션</title>
         <link rel="stylesheet" type="text/css" 
@@ -18,22 +18,16 @@
             <header>
                 <a href="${pageContext.request.contextPath}" class="">
                 <div class="rogo">
-                    <img src="pen-icon.png"></div>
+                    <img src="${pageContext.request.contextPath}/pen-icon.png"></div>
                 </a>
             
                 <a href="#" class="left">펜션찾기</a>
-                <a href="#" class="left">예약확인</a>
-                <a href="${pageContext.request.contextPath}/member/user_register01" class="left">회원가입</a>
-                <a href="${pageContext.request.contextPath}/reserve" class="left">예약</a>
-                <div class="plus">
-                <a href="#" class="lef"><i class="fa fa-plus"></i></a>
-                    <ul>
-                        <li><a href="#" class="">공지사항</a></li>
-                        <li><a href="${pageContext.request.contextPath}/member/myinfo" class="">마이페이지</a></li>
-                    </ul>
-                </div>
+                <a href="#" class="left">예약확인/취소</a>
+                <a href="#" class="left">공지사항</a></li>
+                <a href="${pageContext.request.contextPath}/member/myinfo" class="left">마이페이지</a></li>
                 <!--<a href="#" class="right">로그아웃</a>-->
-                <a href="${pageContext.request.contextPath}/member/login" class="right">로그인</a>
+                <a href="${pageContext.request.contextPath}/member/login" class="right">로그인  &#124;</a>
+                <a href="${pageContext.request.contextPath}/member/user_register01" class="left">&nbsp;회원가입</a>
             </header>
             
             <!-- 검색영역 -->

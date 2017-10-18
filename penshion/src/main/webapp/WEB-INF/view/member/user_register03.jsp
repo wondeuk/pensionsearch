@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp" %>   
-<link rel="stylesheet" type="text/css" href="member.css"> 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/member.css"> 
 <div class="area-90 center">
 	<div class="text-center">
 	    <h1>회원가입 성공!</h1>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp" %>    
 <link rel="stylesheet" type="text/css" href="member_register.css">
-			<link rel="stylesheet" type="text/css" href="member.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/member.css">
 			<script src="user_register.js"></script>
 			<script src="https://code.jquery.com/jquery-latest.js"></script>
 
