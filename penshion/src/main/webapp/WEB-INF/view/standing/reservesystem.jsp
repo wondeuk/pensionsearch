@@ -13,7 +13,6 @@
                 
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/standing/standing2">입점 안내</a></li>
-                    <li><a href="">입점 문의</a></li>
                     <li><a href="${pageContext.request.contextPath}/standing/reservesystem">예약시스템안내</a></li>
                 </ul>
             </div> 
@@ -50,7 +49,7 @@
                  </tr>
                   <tr>
                       <th><font size="4.5em" color="red"><u>실시간 예약시스템 연동 지원 (API)</u></font><br><br>
-- 떠나요닷컴의 예약시스템은 외부 프로그램과 연동할수 있는 기능을 제공합니다.<br>
+- 펭션의 예약시스템은 외부 프로그램과 연동할수 있는 기능을 제공합니다.<br>
 - 사용중인 홈페이지에서 객실안내 및 요금/예약현황을 쉽게 연동할 수 있습니다.<br>
 - 많은 홈페이지 제작사들이 떠나요닷컴의 예약시스템을 사용하여 펜션 홈페이지를 만들고 있습니다.<br>
 - 객실정보 및 요금정보를 예약시스템에서 수정하면 펜션 홈페이지도 반영되도록 연동이 가능합니다.</th>
@@ -69,16 +68,16 @@
                 <tr height=50px>
                     <td class="midth" rowspan="2">펜션 사진(번호)</td>
                     <td class="midth" rowspan="2" border="1">평일/AM 09:00 ~ PM 05:00<br>
-                    점심 / PM12:30 ~ PM 01:30<br>
+                    점심 / PM12:30 ~ PM `01:30<br>
                     상담업무시간외엔 질분답변<br>
                     일대일상담을 이용하시기 바랍니다.
                     </td>
                      <td class="bottombtn" rowspan="2">
-                    <button type="button" onclick="location.href='main3.html'" class="btn">질문답변 바로가기</button>
+                    <input type="button" value="입점 신청하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/pension_register' "></button>
                     
                     
                    <td class="bottombtn" rowspan="2">
-                    <button type="button" onclick="location.href='main3.html'" class="btn">업소 등록하기</button>
+                    <input type="button" value="입점 신청하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/pension_register' "></button>
                 </tr>
                 
             </table>

@@ -14,7 +14,6 @@
                 
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/standing/standing2">입점 안내</a></li>
-                    <li><a href="">입점 문의</a></li>
                      <li><a href="${pageContext.request.contextPath}/standing/reservesystem">예약시스템 안내</a></li>
                 </ul>
             </div> 
@@ -25,7 +24,7 @@
                 <tr>
                     <th><font size="5em" color="red"><u>입점안내</u></font><br><br>
                         
-떠나요닷컴은 약 1700 여개의 펜션의 예약관리를 하고 있습니다.(2016년 6월기준)<br>
+펭션은 약 1700 여개의 펜션의 예약관리를 하고 있습니다.(2016년 6월기준)<br>
 입점시 고정 광고비가 지출되지 않고 예약 성사된 건에 대해서만 대행수수료 발생
                     </th>
                  </tr>
@@ -46,7 +45,7 @@
                   
                   <tr>
                       <th><font size="5em" color="red"><u>입점시 예약시스템 지원</u></font><br><br>
-                          떠나요닷컴 객실관리는 쉽고 편리합니다. 초보자도 쉽게 직관적으로 사용이 가능합니다.
+                          펭션 객실관리는 쉽고 편리합니다. 초보자도 쉽게 직관적으로 사용이 가능합니다.
                       </th>
                  </tr>
                   
