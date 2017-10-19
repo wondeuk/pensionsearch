@@ -23,6 +23,7 @@
                 <a href="#" class="left">펜션찾기</a>
                 <a href="#" class="left">예약확인/취소</a>
                 <a href="#" class="left">공지사항</a>
+                <a href="${pageContext.request.contextPath}/standing/standing2" class="left">입점 문의</a>
                 <a href="test" class="left">테스트</a>
                 
                 <a href="${pageContext.request.contextPath}/member/myinfo" class="left">마이페이지</a>

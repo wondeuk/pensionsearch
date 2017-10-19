@@ -15,4 +15,15 @@ public class PensionController {
 	public String reservation() {
 		return "pension/reservation";
 	}
+	
+	@RequestMapping("/pension_register")
+	public String pension_register() {
+		System.out.println("??");
+		return "pension/pension_register";
+	}
+	
+	@RequestMapping("/room_register")
+	public String room_register() {
+		return "pension/room_register";
+	}
 }
