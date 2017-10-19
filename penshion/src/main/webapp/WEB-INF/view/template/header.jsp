@@ -3,13 +3,12 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/each.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/each.css">
         
         <title>펜션</title>
         <link rel="stylesheet" type="text/css" 
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="${pageContext.request.contextPath}/js/user_register.js"></script>
         
     </head>
     <body>
@@ -18,13 +17,15 @@
             <header>
                 <a href="${pageContext.request.contextPath}" class="">
                 <div class="rogo">
-                    <img src="${pageContext.request.contextPath}/pen-icon.png"></div>
+                    <img src="${pageContext.request.contextPath}/img/pen-icon.png"></div>
                 </a>
             
                 <a href="#" class="left">펜션찾기</a>
                 <a href="#" class="left">예약확인/취소</a>
-                <a href="#" class="left">공지사항</a></li>
-                <a href="${pageContext.request.contextPath}/member/myinfo" class="left">마이페이지</a></li>
+                <a href="#" class="left">공지사항</a>
+                <a href="test" class="left">테스트</a>
+                
+                <a href="${pageContext.request.contextPath}/member/myinfo" class="left">마이페이지</a>
                 <!--<a href="#" class="right">로그아웃</a>-->
                 <a href="${pageContext.request.contextPath}/member/login" class="right">로그인  &#124;</a>
                 <a href="${pageContext.request.contextPath}/member/user_register01" class="left">&nbsp;회원가입</a>

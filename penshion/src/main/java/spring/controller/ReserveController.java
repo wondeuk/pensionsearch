@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ReserveController {
 	private Logger log = LoggerFactory.getLogger(getClass());
 
-	@RequestMapping("/reserve")
+	@RequestMapping("/test")
 	public String reserve(Model model) {
 		Date today = new Date();
 		SimpleDateFormat format01 = new SimpleDateFormat("MM/dd");
@@ -31,6 +31,6 @@ public class ReserveController {
 		model.addAttribute("m_week", m_week);
 		model.addAttribute("dayCount", dayCount);
 		
-		return "reserve";
+		return "test";
 	}
 }

@@ -41,4 +41,34 @@ public class MemberController {
 		return "member/myinfo";
 	}
 	
+	@RequestMapping("/mileage")
+	public String mileage() {
+		return "member/mileage";
+	}
+	
+	@RequestMapping("/edit")
+	public String edit() {
+		return "member/edit";
+	}
+	
+	@RequestMapping("/unregister")
+	public String unregister() {
+		return "member/unregister";
+	}
+	
+	@RequestMapping("/findid")
+	public String findid() {
+		return "member/findid";
+	}
+	
+	@RequestMapping("/findpw")
+	public String findpw() {
+		return "member/findpw";
+	}
+	
+	@RequestMapping("/customer")
+	public String customer() {
+		return "member/customer";
+	}
+	
 }

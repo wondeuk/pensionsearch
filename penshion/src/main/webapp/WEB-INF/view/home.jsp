@@ -19,13 +19,13 @@
                     <!-- 수평정렬[align] :center, right, left
      수직정렬[valign] : top, middle, bottom-->
                     
-                    <td width="20%" class="img" background="1.jpg" onclick="location.href='main3.html'">&nbsp;1행 1열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/1.jpg" onclick="location.href='reserve'">&nbsp;1행 1열</td>
 
-                    <td width="20%" class="img" background="2.jpg">&nbsp;1행 2열</td>
-                    <td width="20%" class="img" background="3.jpg">&nbsp;1행 3열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/2.jpg">&nbsp;1행 2열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/3.jpg">&nbsp;1행 3열</td>
                 </tr>
                 <tr height=50px>
-                    <th class="midth">끼야호펜션22</th>
+                    <th class="midth">끼야호펜션</th>
                     <th class="midth">이요오펜션</th>
                     <th class="midth">꾸이익펜션</th>
                 </tr>
@@ -35,10 +35,10 @@
                     <!-- 수평정렬[align] :center, right, left
      수직정렬[valign] : top, middle, bottom-->
                     
-                    <td width="20%" class="img" background="1.jpg" onclick="location.href='main2.html'">&nbsp;1행 1열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/1.jpg" onclick="location.href='main2.html'">&nbsp;1행 1열</td>
 
-                    <td width="20%" class="img" background="2.jpg">&nbsp;1행 2열</td>
-                    <td width="20%" class="img" background="3.jpg">&nbsp;1행 3열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/2.jpg">&nbsp;1행 2열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/3.jpg">&nbsp;1행 3열</td>
                 </tr>
                 <tr height=50px>
                     <th class="midth">끼야호펜션</th>
@@ -63,10 +63,10 @@
                     <!-- 수평정렬[align] :center, right, left
      수직정렬[valign] : top, middle, bottom-->
                     
-                    <td width="20%" class="img" background="1.jpg" onclick="location.href='main3.html'">&nbsp;1행 1열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/1.jpg" onclick="location.href='main3.html'">&nbsp;1행 1열</td>
 
-                    <td width="20%" class="img" background="2.jpg">&nbsp;1행 2열</td>
-                    <td width="20%" class="img" background="3.jpg">&nbsp;1행 3열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/2.jpg">&nbsp;1행 2열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/3.jpg">&nbsp;1행 3열</td>
                 </tr>
                 <tr height=50px>
                     <th class="midth">끼야호펜션</th>
@@ -79,10 +79,10 @@
                     <!-- 수평정렬[align] :center, right, left
      수직정렬[valign] : top, middle, bottom-->
                     
-                    <td width="20%" class="img" background="1.jpg" onclick="location.href='main2.html'">&nbsp;1행 1열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/1.jpg" onclick="location.href='main2.html'">&nbsp;1행 1열</td>
 
-                    <td width="20%" class="img" background="2.jpg">&nbsp;1행 2열</td>
-                    <td width="20%" class="img" background="3.jpg">&nbsp;1행 3열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/2.jpg">&nbsp;1행 2열</td>
+                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/3.jpg">&nbsp;1행 3열</td>
                 </tr>
                 <tr height=50px>
                     <th class="midth">끼야호펜션</th>

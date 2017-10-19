@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp" %>  
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/member.css">  
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member.css"> 
+<script src="${pageContext.request.contextPath}/js/user_register.js"></script>
+ 
 	<form action="user_register02" method="get" onsubmit="agreeCheck();" id="next01">
 		<div class="area-50 center">
 			<h1>회원가입</h1>
