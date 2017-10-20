@@ -102,8 +102,7 @@ blockquote,
 th,
 td,
 img {
-    margin: 0;
-    padding: 0;
+    
 }
 
 html {
@@ -157,7 +156,7 @@ input,
 select,
 textarea {
     font-size: 100%;
-    font-family: "돋움", Dotum;
+    font-family: "�룍��", Dotum;
     color: #353535;
     vertical-align: middle;
 }

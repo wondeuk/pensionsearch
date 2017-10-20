@@ -11,6 +11,7 @@ div, header, footer, main, nav, aside, article, section{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    
 }
 
 /* 검색창 nav */
@@ -92,8 +93,8 @@ header{
     flex-direction: row;
     flex-wrap: nowrap;
     padding:0.5em;
-    border-top:3px double black;
-    border-bottom:3px double black;
+    border-top:0em;
+    border-bottom:0em;
 }
 header .left{
     margin-right: 1.5em;
