@@ -1,14 +1,32 @@
 package spring.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import spring.bean.User;
+import spring.bean.Member;
+import spring.model.MemberDao;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+	private Logger log = LoggerFactory.getLogger(getClass());
+	
+	@Autowired
+	private MemberDao memberDao;
 
 	@RequestMapping("/user_register01")
 	public String user_register01() {
@@ -16,13 +34,23 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping("/user_register02")
-	public String user_register02() {
+	@RequestMapping(value="/user_register02", method=RequestMethod.GET)
+	public String user_register02_1(HttpServletRequest request, Model model) {
+		log.debug("check:{}", request.getParameter("checkbox"));
+		
+		if(request.getParameter("checkbox")==null) {
+			model.addAttribute("agree", "안함");
+		}else {
+			model.addAttribute("agree", "동의");
+		}
+		
 		return "member/user_register02";
 	}
 	
 	@RequestMapping(value="/user_register02", method=RequestMethod.POST)
-	public String user_register02(User user) {
+	public String user_register02_2(HttpServletRequest request) {
+		Member member = new Member(request);
+		memberDao.insert(member);
 		return "redirect:user_register03";
 	}
 	
@@ -32,12 +60,43 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/login")
-	public String user_login() {
+	public String login(HttpServletRequest request, Model model) {
 		return "member/user_login";
 	}
 	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login(@RequestParam(required=true) String id,
+			@RequestParam(required=true) String pw,
+			@RequestParam(required=false) String save,
+			HttpSession session,
+			HttpServletResponse response) throws IOException {
+		boolean result = memberDao.login(id, pw);
+		if(result) {
+			session.setAttribute("userId", id);
+			session.setAttribute("loginFlag", "true");
+			Cookie c = new Cookie("save", id);
+			c.setMaxAge(save==null?0:2419200);
+			response.addCookie(c);
+			return "redirect:/";
+		}else {
+			response.sendError(500);
+			return null;
+		}
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 	@RequestMapping("/myinfo")
-	public String myinfo() {
+	public String myinfo(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("userId");
+		log.debug("id1:{}", id);
+		Member member = memberDao.info(id);
+		log.debug("id2:{}", member.getId());
+		model.addAttribute("info", member);
 		return "member/myinfo";
 	}
 	
@@ -47,7 +106,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit() {
+	public String edit(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("userId");
+		Member member = memberDao.info(id);
+		model.addAttribute("info", member);
 		return "member/edit";
 	}
 	
@@ -61,9 +123,39 @@ public class MemberController {
 		return "member/findid";
 	}
 	
+	@RequestMapping(value="findid", method=RequestMethod.POST)
+	public String findid(String type, String name, String email, RedirectAttributes ra) {
+		log.debug("type : {}", type);
+		log.debug("name : {}", name);
+		log.debug("email : {}", email);
+		String findedId = memberDao.findId(type, name, email);
+		log.debug("findedId : {}", findedId);
+		
+		ra.addAttribute("findedId", findedId);
+		
+		return "redirect:findid01";
+	}
+	
+	@RequestMapping("/findid01")
+	public String findid01(HttpServletRequest request, Model model) {
+		String findedId = request.getParameter("findedId");
+		model.addAttribute("findedId", findedId);
+		return "member/findid01";
+	}
+	
 	@RequestMapping("/findpw")
 	public String findpw() {
 		return "member/findpw";
+	}
+	
+	@RequestMapping(value="findpw", method=RequestMethod.POST)
+	public String findpw(String type, String id, String name, String email) {
+		return "redirect:findpw01";
+	}
+	
+	@RequestMapping("/findpw01")
+	public String findpw01() {
+		return "member/findpw01";
 	}
 	
 	@RequestMapping("/customer")
