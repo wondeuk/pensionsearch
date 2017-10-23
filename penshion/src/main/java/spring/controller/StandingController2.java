@@ -16,4 +16,8 @@ public class StandingController2 {
 	public String reservesystem() {
 		return "standing/reservesystem";
 	}
+	@RequestMapping("/questionboard")
+	public String questionboard() {
+		return "standing/questionboard";
+	}
 }
