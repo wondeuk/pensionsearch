@@ -5,39 +5,20 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_findid.css">
 			<div class="roll center">
 				<div class="titleArea">
-					<h2>비밀번호 찾기</h2>
+					<h2>아이디 찾기</h2>
 				</div>
-				<form id="findIdForm" name="findPwForm" action="/exec/front/Member/findId/" method="post">
+
+				<form id="findIdForm" name="findIdForm" action="findpw" method="post" enctype="multipart/form-data">
 					<input id="returnUrl" name="returnUrl" value="/member/id/find_id_result.html" type="hidden">
 					<div class="xans-member xans-member-findid">
 						<div class="findId">
-							<h3><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/h3_find_pw.gif" alt="비밀번호 찾기"></h3>
-							<fieldset>
-								<legend>아이디 찾기</legend>
-								<p class="member">
-									<strong>회원유형</strong>
-									<select id="searchType" name="searchType">
-										<option value="user" selected="selected">개인회원</option>
-										<option value="company">사업자회원</option>
-									</select>
-								</p>
-								<p class="id">
-									<strong>아이디</strong>
-									<input id="member_id" name="member_id" class="lostInput" placeholder="" value="" type="text">
-								</p>
-								<p id="name_view" class="name" style="">
-									<strong id="name_lable">이름</strong>
-									<input id="name" name="name"  class="lostInput" placeholder="" value="" type="text">
-								</p>
-								<p id="email_view" class="email" style="">
-									<strong>이메일</strong> 
-									<input id="email" name="email" class="lostInput" placeholder="" value="" type="text">
-								</p>
-								<p class="button">
-									<a href="#none" onclick=""><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_submit.gif" alt="확인"></a>
-								</p>
-							</fieldset>
+							<h3><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/h3_find_id.gif" alt="아이디 찾기"></h3>
 						</div>
+						<div class="text-center">
+							<p>아이디 : ${findedId}</p>
+						</div>
+						<div class="empty-row"></div>
+						<div class="text-center"><a href="login"><img src="img/btn_login01.png"/></a></div>
 					</div>
 				</form>
 			</div>

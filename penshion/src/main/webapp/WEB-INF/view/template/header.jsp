@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <meta charset="utf-8">
@@ -25,11 +26,16 @@
                 <a href="#" class="left">공지사항</a>
                 <a href="${pageContext.request.contextPath}/standing/standing2" class="left">입점 문의</a>
                 <a href="test" class="left">테스트</a>
-                
-                <a href="${pageContext.request.contextPath}/member/myinfo" class="left">마이페이지</a>
-                <!--<a href="#" class="right">로그아웃</a>-->
-                <a href="${pageContext.request.contextPath}/member/login" class="right">로그인  &#124;</a>
-                <a href="${pageContext.request.contextPath}/member/user_register01" class="left">&nbsp;회원가입</a>
+                <c:choose>
+                	<c:when test="${loginFlag}">
+            		    <a href="${pageContext.request.contextPath}/member/myinfo" class="left">마이페이지</a>
+           		   		<a href="${pageContext.request.contextPath}/member/logout" class="right">로그아웃</a>
+                	</c:when>
+                	<c:otherwise>
+		                <a href="${pageContext.request.contextPath}/member/login" class="right">로그인  &#124;</a>
+		                <a href="${pageContext.request.contextPath}/member/user_register01" class="left">&nbsp;회원가입</a>
+                	</c:otherwise>
+                </c:choose>
             </header>
             
             <!-- 검색영역 -->

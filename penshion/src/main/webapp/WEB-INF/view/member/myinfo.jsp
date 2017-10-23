@@ -28,27 +28,27 @@ $(document).ready(function() {
 <div class="area-70" id="main">
 	<div class="table-users">
 		<div class="header">
-			<p class="left">누구누구 님의 회원정보 </p>
-			<p class="right">회원가입일 2017.10.11</p>
+			<p class="left">${info.name} 님의 회원정보 </p>
+			<p class="right">회원가입일 : ${info.date}</p>
 		</div>
 		<table id="profile">
 			<tr>
 				<th>적립금</th>
 				<th>아이디</th>
-				<td>alsduq1919</td>
+				<td>${info.id}</td>
 			</tr>
 			<tr>
-				<td rowspan="3" id="mileage">3728원</td>
+				<td rowspan="3" id="mileage">${info.mileage} 원</td>
 				<th>이름</th>
-				<td>파뿌리</td>
+				<td>${info.name}</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td>alsduq1919@네이버.컴</td>
+				<td>${info.email}</td>
 			</tr>
 			<tr>
 				<th>핸드폰 번호</th>
-				<td>010-1010-2722</td>
+				<td>${info.mobile}</td>
 			</tr>
 		</table>
 	</div>
