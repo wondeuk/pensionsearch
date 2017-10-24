@@ -10,7 +10,7 @@
             <div class="empty-row"></div>
             <div class="empty-row"></div>
             
-            <c:forEach var="q" items="${list}">     
+                 
             <div class="submenucontext">
            
               <table border="1" width="50%" align="center" height="50%">
@@ -24,19 +24,20 @@
         		<th>내용</th>
         		
         	</tr>
+        	<c:forEach var="q" items="${list}">
         	<tr>
         		<td>${q.boardno}</td>
         		<td>${q.writer}</td>
         		<td>${q.title}</td>
         		<td>${q.detail}</td>
         	</tr>
-        
+        	</c:forEach>
 			
 	       </tbody>
             </table>
                     
             </div>
-            </c:forEach>
+            
         </main>
 
         <%@ include file="/WEB-INF/view/template/footer.jsp" %>
