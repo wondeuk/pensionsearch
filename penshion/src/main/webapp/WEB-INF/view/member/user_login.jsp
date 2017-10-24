@@ -3,9 +3,16 @@
 <%@ include file="/WEB-INF/view/template/header.jsp" %> 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member.css">   
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_login.css">   
-<form action="login" method="post">
-                <div class="xans-member-login">
-                    <div class="login">
+<form action="#" method="post">
+				<div class="xans-member-login">
+					<div class="login">
+						<div class="area-100 center" id="login_type">
+							<input id="member_type0" name="member_type" value="user" type="radio" checked="checked">
+							<label for="member_type0">개인회원</label>
+							<input id="member_type1" name="member_type" value="company" type="radio">
+							<label for="member_type1">사업자회원</label>
+						</div>
+						<div class="empty-row"></div>
                         <h3><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/h3_login.gif" alt="회원로그인" /></h3>
                         <fieldset>
                             <legend>회원로그인</legend>

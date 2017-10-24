@@ -7,7 +7,7 @@
 				<div class="titleArea">
 					<h2>비밀번호 찾기</h2>
 				</div>
-				<form id="findIdForm" name="findPwForm" action="/exec/front/Member/findId/" method="post">
+				<form id="findIdForm" name="findPwForm" action="findpw" method="post">
 					<input id="returnUrl" name="returnUrl" value="/member/id/find_id_result.html" type="hidden">
 					<div class="xans-member xans-member-findid">
 						<div class="findId">
@@ -34,7 +34,7 @@
 									<input id="email" name="email" class="lostInput" placeholder="" value="" type="text">
 								</p>
 								<p class="button">
-									<a href="#none" onclick=""><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_submit.gif" alt="확인"></a>
+									<button id="btn_form" type="submit"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_submit.gif" alt="확인"></button>
 								</p>
 							</fieldset>
 						</div>
