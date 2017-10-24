@@ -14,7 +14,8 @@
 				});
 			</script>
 
-			<form action="user_register02" method="post" id="next02">
+			<form action="pension_register02" method="post" id="next02">
+			<input type="hidden" name="company_no" value="${session.getAttribute().toString() }">
 				<div class="xans-member-join area-50 center">
 					<h3>펜션 등록</h3>
 					<p class="required"><img src="img/ico_required.gif" /> 필수입력사항</p>
@@ -24,7 +25,7 @@
 							<tbody>
 								<tr>
 									<th>펜션이름 <img src="img/ico_required.gif" /></th>
-									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
+									<td><input id="pension_name" name="pension_name" class="inputTypeText" type="text" required="required"></td>
 								</tr>
 								<tr>
 									<th>펜션 주소 <img src="img/ico_required.gif" /></th>
@@ -82,9 +83,9 @@
 								<tr>
 									<th>펜션 연락처 <img src="img/ico_required.gif" /></th>
 									<td>
-										<input id="mobile1" name="mobile[]" maxlength="4" value="" type="text"> -
-										<input id="mobile2" name="mobile[]" maxlength="4" value="" type="text"> -
-										<input id="mobile3" name="mobile[]" maxlength="4" value="" type="text">
+										<input id="mobile1" name="mobile1" maxlength="4" value="" type="text"> -
+										<input id="mobile2" name="mobile2" maxlength="4" value="" type="text"> -
+										<input id="mobile3" name="mobile3" maxlength="4" value="" type="text">
 									</td>
 								</tr>
 								<tr>
@@ -99,61 +100,73 @@
 								<tr>
 									<th>이용/시설 안내 <img src="img/ico_required.gif" /></th>
 									<td>
-										<textarea class="editor"></textarea>
+										<textarea class="editor" name="guide"></textarea>
 									</td>
 								</tr>
 								<tr>
 									<th>주의사항/취소안내 <img src="img/ico_required.gif" /></th>
 									<td>
-										<textarea class="editor"></textarea>
+										<textarea class="editor" name="caution"></textarea>
 									</td>
 								</tr>
 								<tr>
 									<th>은행명 <img src="img/ico_required.gif" /></th>
 									<td>
-										<input type="text" name="name" id="name" maxlength="20">
+										<input type="text" name="bank" id="name" maxlength="20">
 									</td>
 								</tr>
 								<tr>
 									<th>계좌번호 <img src="img/ico_required.gif" /></th>
 									<td>
-										<input type="text" name="name" id="name" maxlength="20">
+										<input type="text" name="caution" id="name" maxlength="20">
 									</td>
 								</tr>
 								<tr>
 									<th>예금주 <img src="img/ico_required.gif" /></th>
 									<td>
-										<input type="text" name="name" id="name" maxlength="20">
+										<input type="text" name="depositor" id="name" maxlength="20">
+									</td>
+								</tr>
+								<tr>
+									<th>성수기 시작 <img src="img/ico_required.gif" /></th>
+									<td>
+										<input type="date" name="peak_start" id="name">
+									</td>
+								</tr>
+								<tr>
+									<th>성수기 마침 <img src="img/ico_required.gif" /></th>
+									<td>
+										<input type="date" name="peak_end" id="name">
 									</td>
 								</tr>
 								<tr>
 									<th>펜션사진1</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="file" id="file" name="photo1" class="user-input fill">
 									</td>
 								</tr>
 								<tr>
 									<th>펜션사진2</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="file" id="file" name="photo2" class="user-input fill">
 									</td>
 								</tr>
 								<tr>
 									<th>펜션사진3</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="file" id="file" name="photo3" class="user-input fill">
 									</td>
 								</tr>
 								<tr>
 									<th>펜션사진4</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="file" id="file" name="photo4" class="user-input fill">
 									</td>
 								</tr>
 								<tr>
 									<th>펜션사진5</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="file" id="file" name="photo5" class="user-input fill">
 									</td>
 								</tr>
 
@@ -163,8 +176,9 @@
 				</div>
 				<div class="empty-row"></div>
 				<div class="btnArea text-center">
-					<a href="#none" onclick="sendCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join1.gif"/></a>
-					<a href="${pageContext.request.contextPath}"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join_cancel.gif" alt="회원가입취소" /></a>
+					<button type="submit" onclick="sendCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join1.gif"/></button>
+					<button onclick="location.href='${pageContext.request.contextPath}'"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join_cancel.gif" alt="회원가입취소" /></button>
+					
 				</div>
 			</form>
 			
