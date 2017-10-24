@@ -86,6 +86,14 @@ public class Company {
 	public String getEmail() {
 		return email;
 	}
+	public String getEmail01() {
+		int idx = email.indexOf("@");
+		return email.substring(0, idx);
+	}
+	public String getEmail02() {
+		int idx = email.indexOf("@");
+		return email.substring(idx+1);
+	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -109,6 +117,15 @@ public class Company {
 	}
 	public String getMobile() {
 		return mobile;
+	}
+	public String getMobile01() {
+		return mobile.substring(0, 3);
+	}
+	public String getMobile02() {
+		return mobile.substring(4, 8);
+	}
+	public String getMobile03() {
+		return mobile.substring(9, 13);
 	}
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
