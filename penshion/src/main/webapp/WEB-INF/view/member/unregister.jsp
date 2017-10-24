@@ -17,10 +17,10 @@
 			<form action="#" method="post">
 				<div class="area-20 center">
 					<div class="empty-row"></div>
-					<div class="row">
+					<div class="row text-center">
 						<h3>회원 탈퇴</h3>
 					</div>
-					<div class="row">
+					<div class="row text-center">
 						비밀번호 : <input type="password" name="pw">
 					</div>
 					<div class="text-center">

@@ -18,7 +18,7 @@
 					$("#member_type0").on("change", function() {
 						$(".company").css("display", "none");
 					});
-
+					
 				});
 			</script>
 			<aside>
@@ -32,11 +32,11 @@
 				</div>
 			</aside>
 
-			<form action="user_register02" method="post" id="next02">
+			<form action="edit" method="post" id="next02">
 				<div class="xans-member-join area-50 center">
 					<div class="boardWrite type">
 						<table border="1" summary="">
-							<caption>회원가입</caption>
+							<caption>정보수정</caption>
 							<tbody>
 								<tr>
 									<th>
@@ -49,8 +49,6 @@
 										<label for="member_type1">사업자회원</label>
 									</td>
 								</tr>
-
-
 							</tbody>
 						</table>
 					</div>
@@ -63,7 +61,7 @@
 							<tbody>
 								<tr>
 									<th>아이디 <img src="img/ico_required.gif" /></th>
-									<td><input id="member_id" name="id" class="inputTypeText" placeholder="" value="" type="text" onblur="idCheck();"> (영문소문자/숫자, 4~16자)</td>
+									<td><input id="member_id" name="id" class="inputTypeText" placeholder="" value="${info.id}" type="text" onblur="idCheck();" readonly> (영문소문자/숫자, 4~16자)</td>
 								</tr>
 								<tr>
 									<th>비밀번호 <img src="img/ico_required.gif" /></th>
@@ -78,7 +76,7 @@
 								<tr>
 									<th id="{$name_title}">이름 <img src="img/ico_required.gif" /></th>
 									<td>
-										<span id="{$name_contents}"><input type="text" name="name" id="name" maxlength="20" onblur="nameCheck();"></span>
+										<span id="{$name_contents}"><input type="text" name="name" id="name" maxlength="20" onblur="nameCheck();" value="${info.name}"></span>
 									</td>
 								</tr>
 
@@ -92,7 +90,7 @@
 									<td id="companySsn"><input id="crn" name="crn" class="inputTypeText" placeholder="" maxlength="20" value="" type="text"></td>
 								</tr>
 
-								<tr>
+								<tr class="company">
 									<th>주소 <img src="img/ico_required.gif" class="{$display_required_address|display}" /></th>
 									<td>
 										<input type="text" id="sample6_postcode" placeholder="우편번호">
@@ -152,33 +150,80 @@
 								<tr>
 									<th>휴대전화 <img src="img/ico_required.gif" class="{$display_required_cell|display}" /></th>
 									<td>
-										<select id="mobile1" name="mobile[]">
-                                        <option value="010">010</option>
-                                        <option value="011">011</option>
-                                        <option value="016">016</option>
-                                        <option value="017">017</option>
-                                        <option value="018">018</option>
-                                        <option value="019">019</option>
-                                    </select> -
-										<input id="mobile2" name="mobile[]" maxlength="4" value="" type="text"> -
-										<input id="mobile3" name="mobile[]" maxlength="4" value="" type="text">
+										<c:choose>
+											<c:when test="${info.mobile01 == '010'}">
+												<select id="mobile1" name="mobile01">
+			                                        <option value="010" selected>010</option>
+			                                        <option value="011">011</option>
+			                                        <option value="016">016</option>
+			                                        <option value="017">017</option>
+			                                        <option value="018">018</option>
+			                                        <option value="019">019</option>
+			                                    </select>
+											</c:when>
+											<c:when test="${info.mobile01 == '011'}">
+												<select id="mobile1" name="mobile01">
+			                                        <option value="010">010</option>
+			                                        <option value="011" selected>011</option>
+			                                        <option value="016">016</option>
+			                                        <option value="017">017</option>
+			                                        <option value="018">018</option>
+			                                        <option value="019">019</option>
+			                                    </select>
+											</c:when>
+											<c:when test="${info.mobile01 == '016'}">
+												<select id="mobile1" name="mobile01">
+			                                        <option value="010">010</option>
+			                                        <option value="011">011</option>
+			                                        <option value="016" selected>016</option>
+			                                        <option value="017">017</option>
+			                                        <option value="018">018</option>
+			                                        <option value="019">019</option>
+			                                    </select>
+											</c:when>
+											<c:when test="${info.mobile01 == '017'}">
+												<select id="mobile1" name="mobile01">
+			                                        <option value="010">010</option>
+			                                        <option value="011">011</option>
+			                                        <option value="016">016</option>
+			                                        <option value="017" selected>017</option>
+			                                        <option value="018">018</option>
+			                                        <option value="019">019</option>
+			                                    </select>
+											</c:when>
+											<c:when test="${info.mobile01 == '018'}">
+												<select id="mobile1" name="mobile01">
+			                                        <option value="010">010</option>
+			                                        <option value="011">011</option>
+			                                        <option value="016">016</option>
+			                                        <option value="017">017</option>
+			                                        <option value="018" selected>018</option>
+			                                        <option value="019">019</option>
+			                                    </select>
+											</c:when>
+											<c:when test="${info.mobile01 == '019'}">
+												<select id="mobile1" name="mobile01">
+			                                        <option value="010">010</option>
+			                                        <option value="011">011</option>
+			                                        <option value="016">016</option>
+			                                        <option value="017">017</option>
+			                                        <option value="018">018</option>
+			                                        <option value="019" selected>019</option>
+			                                    </select>
+											</c:when>
+										</c:choose>
+										 -
+										<input id="mobile2" name="mobile02" maxlength="4" type="text" value="${info.mobile02}"> -
+										<input id="mobile3" name="mobile03" maxlength="4" type="text" value="${info.mobile03}">
 									</td>
 								</tr>
 								<tr>
 									<th>이메일 <img src="img/ico_required.gif" class="{$display_required_cell|display}" /></th>
-									<td><input id="email1" name="email1" value="" type="text">@<input id="email2" name="email2" readonly="readonly" value="" type="text"><select id="email3">
-                                <option value="" selected="selected">- 이메일 선택 -</option>
-                                <option value="naver.com">naver.com</option>
-                                <option value="daum.net">daum.net</option>
-                                <option value="nate.com">nate.com</option>
-                                <option value="hotmail.com">hotmail.com</option>
-                                <option value="yahoo.com">yahoo.com</option>
-                                <option value="empas.com">empas.com</option>
-                                <option value="korea.com">korea.com</option>
-                                <option value="dreamwiz.com">dreamwiz.com</option>
-                                <option value="gmail.com">gmail.com</option>
-                                <option value="etc">직접입력</option>
-                                </select></td>
+									<td>
+										<input id="email1" name="email01" value="${info.email01}" type="text">
+										@
+										<input id="email2" name="email02" value="${info.email02}" type="text">
+									</td>
 								</tr>
 								<tr class="company">
 									<th>홈페이지 도메인 <img src="img/ico_required.gif" class="{$display_required_cell|display}" /></th>

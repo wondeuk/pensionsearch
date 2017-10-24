@@ -206,3 +206,8 @@
 		.roll {
 			max-width: 736px;
 		}
+		
+		#btn_form {
+			border: 0;
+			background-color: white;
+		}
