@@ -10,7 +10,7 @@
             
                   
             <div class="submenucontext">
-            <form action="" method="post">
+            <form action="questionboard" method="post">
               <table border="1" width="50%" align="center" height="50%">
                   
 		      <tbody>

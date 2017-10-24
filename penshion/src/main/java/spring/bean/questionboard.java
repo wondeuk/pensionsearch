@@ -4,11 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class questionboard {
+	private int boardno;
 	private String writer;
 	private String title;
 	private String detail;
 	private String pw;
 	public questionboard(ResultSet rs) throws SQLException{
+		setBoardno(rs.getInt("boardno"));
 		setWriter(rs.getString("writer"));
 		setTitle(rs.getString("title"));
 		setDetail(rs.getString("detail"));
@@ -18,11 +20,16 @@ public class questionboard {
 	public questionboard() {
 		super();
 	}
-	
-	
 	@Override
 	public String toString() {
-		return "questionboard [writer=" + writer + ", title=" + title + ", detail=" + detail + ", pw=" + pw + "]";
+		return "questionboard [boardno=" + boardno + ", writer=" + writer + ", title=" + title + ", detail=" + detail
+				+ ", pw=" + pw + "]";
+	}
+	public int getBoardno() {
+		return boardno;
+	}
+	public void setBoardno(int boardno) {
+		this.boardno = boardno;
 	}
 	public String getWriter() {
 		return writer;
@@ -48,6 +55,8 @@ public class questionboard {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
+	
+	
 }
 	
 	
