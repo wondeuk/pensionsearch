@@ -5,7 +5,12 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Member {
+	private Logger log = LoggerFactory.getLogger(getClass());
+
 	private int member_no;
 	private String id;
 	private String name;
@@ -33,6 +38,9 @@ public class Member {
 		String mobile01 = request.getParameter("mobile01");
 		String mobile02 = request.getParameter("mobile02");
 		String mobile03 = request.getParameter("mobile03");
+		log.debug("1:{}", mobile01);
+		log.debug("2:{}", mobile02);
+		log.debug("3:{}", mobile03);
 		setMobile(mobile01+"-"+mobile02+"-"+mobile03);
 		setReg(request.getParameter("reg"));
 		String mileage = request.getParameter("mileage");

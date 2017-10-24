@@ -121,7 +121,11 @@
 	left: 240px;
 }
 
-#save{
+#save {
 	width: 15px;
 	height: 15px;
+}
+
+#login_type {
+	width: 360px;
 }

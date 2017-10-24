@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import spring.bean.Company;
 import spring.bean.Member;
 import spring.model.MemberDao;
 
@@ -36,21 +37,26 @@ public class MemberController {
 	
 	@RequestMapping(value="/user_register02", method=RequestMethod.GET)
 	public String user_register02_1(HttpServletRequest request, Model model) {
-		log.debug("check:{}", request.getParameter("checkbox"));
-		
 		if(request.getParameter("checkbox")==null) {
 			model.addAttribute("agree", "안함");
 		}else {
 			model.addAttribute("agree", "동의");
 		}
-		
 		return "member/user_register02";
 	}
 	
 	@RequestMapping(value="/user_register02", method=RequestMethod.POST)
 	public String user_register02_2(HttpServletRequest request) {
-		Member member = new Member(request);
-		memberDao.insert(member);
+		String member_type = request.getParameter("member_type");
+		
+		if(member_type.equals("user")) {
+			Member member = new Member(request);
+			memberDao.insert(member);
+		}else {
+			Company company = new Company(request);
+			memberDao.insert(company);
+		}
+			
 		return "redirect:user_register03";
 	}
 	
@@ -68,20 +74,39 @@ public class MemberController {
 	public String login(@RequestParam(required=true) String id,
 			@RequestParam(required=true) String pw,
 			@RequestParam(required=false) String save,
+			@RequestParam(required=true) String member_type,
 			HttpSession session,
 			HttpServletResponse response) throws IOException {
-		boolean result = memberDao.login(id, pw);
-		if(result) {
-			session.setAttribute("userId", id);
-			session.setAttribute("loginFlag", "true");
-			Cookie c = new Cookie("save", id);
-			c.setMaxAge(save==null?0:2419200);
-			response.addCookie(c);
-			return "redirect:/";
+		
+		if(member_type.equals("user")) {
+			boolean result = memberDao.login(id, pw);
+			if(result) {
+				session.setAttribute("userId", id);
+				session.setAttribute("loginFlag", "true");
+				Cookie c = new Cookie("save", id);
+				c.setMaxAge(save==null?0:2419200);
+				response.addCookie(c);
+				return "redirect:/";
+			}else {
+				response.sendError(500);
+				return null;
+			}
 		}else {
-			response.sendError(500);
-			return null;
+			boolean result = memberDao.login_company(id, pw);
+			if(result) {
+				session.setAttribute("userId", id);
+				session.setAttribute("loginFlag", "true");
+				session.setAttribute("companyFlag", "true");
+				Cookie c = new Cookie("save", id);
+				c.setMaxAge(save==null?0:2419200);
+				response.addCookie(c);
+				return "redirect:/";
+			}else {
+				response.sendError(500);
+				return null;
+			}
 		}
+		
 	}
 	
 	@RequestMapping("/logout")
@@ -93,9 +118,7 @@ public class MemberController {
 	@RequestMapping("/myinfo")
 	public String myinfo(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("userId");
-		log.debug("id1:{}", id);
 		Member member = memberDao.info(id);
-		log.debug("id2:{}", member.getId());
 		model.addAttribute("info", member);
 		return "member/myinfo";
 	}
@@ -113,9 +136,35 @@ public class MemberController {
 		return "member/edit";
 	}
 	
+	@RequestMapping(value="/edit", method=RequestMethod.POST)
+	public String edit(HttpServletRequest request) {
+		Member member = new Member(request);
+		memberDao.edit(member);
+		return "redirect:myinfo";
+	}
+	
 	@RequestMapping("/unregister")
 	public String unregister() {
 		return "member/unregister";
+	}
+	
+	@RequestMapping(value="/unregister", method=RequestMethod.POST)
+	public String unregister(@RequestParam String pw, HttpSession session, HttpServletResponse response) throws IOException {
+		String id = (String)session.getAttribute("userId");
+		
+		boolean result = memberDao.unregister(id, pw);
+		if(result) {
+			session.invalidate();
+			return "redirect:goodbye";
+		}else {
+			response.sendError(500);
+			return null;
+		}
+	}
+	
+	@RequestMapping("/goodbye")
+	public String goodbye() {
+		return "member/goodbye";
 	}
 	
 	@RequestMapping("/findid")
@@ -125,14 +174,8 @@ public class MemberController {
 	
 	@RequestMapping(value="findid", method=RequestMethod.POST)
 	public String findid(String type, String name, String email, RedirectAttributes ra) {
-		log.debug("type : {}", type);
-		log.debug("name : {}", name);
-		log.debug("email : {}", email);
 		String findedId = memberDao.findId(type, name, email);
-		log.debug("findedId : {}", findedId);
-		
 		ra.addAttribute("findedId", findedId);
-		
 		return "redirect:findid01";
 	}
 	
