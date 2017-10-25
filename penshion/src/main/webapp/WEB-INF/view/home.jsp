@@ -64,8 +64,6 @@
                     <th class="midth">이요오펜션</th>
                     <th class="midth">꾸이익펜션</th>
                 </tr>
-
-
                 <tr valign="top" bgcolor="silver">
                     <!-- 수평정렬[align] :center, right, left
      수직정렬[valign] : top, middle, bottom-->
