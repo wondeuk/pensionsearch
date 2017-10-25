@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file ="/WEB-INF/view/template/header.jsp" %>
-
+<style>
+	.pbtn{
+        width: 120px;
+        height: 40px;
+        background-color: #CAC5C5;
+        display: inline;
+        font-size: 1em; 
+        border: 0.2px solid white;
+        background-size: 30px;      
+        color: #515050;
+    }
+</style>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_myinfo.css">
 <div class="empty-row"></div>
 <div class="area-70 center">
@@ -74,11 +85,14 @@
             <td>받을사람 대표할 이름</td>
         </tr>
     </table>
+    </div>
+    <div class="empty-row"></div>
     
-    
-    <button>객실등록</button>
-    <button>정보수정</button>
-</div>
+    <div class="area-30 right">
+    <a href="${pageContext.request.contextPath}/pension/room_register"><button class="pbtn">객실등록</button></a>
+    <a href="${pageContext.request.contextPath}/pension_edit"><button class="pbtn">정보수정</button></a>
+    </div>
+
         <div class="empty-row"></div>
         
         <hr>

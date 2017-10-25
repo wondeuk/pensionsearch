@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/view/template/header.jsp" %>    
 
 
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_myinfo.css">
 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -20,7 +21,7 @@ $(document).ready(function() {
 		<ul>
 			<li><a href="myinfo" class="">나의 정보 수정</a></li>
 			<li><a href="pension_info" class="">펜션정보 현황</a></li>
-			<li><a href="#" class="">객실정보 현황</a></li>
+			<li><a href="#" class="">펜션예약 상태</a></li>
 			<li><a href="unregister" class="">펜션 답변상황</a></li>
 		</ul>
 	</div>
@@ -86,7 +87,7 @@ $(document).ready(function() {
 				<td>주소</td>
 				<td>펜션연락연락</td>
                 <td>2014.10.23</td>
-				<td><a href="${pageContext.request.contextPath}/pension_edit">수정</a>/<a href="#">등록</a></td>
+				<td><a href="${pageContext.request.contextPath}/pension_edit">수정</a>/<a href="${pageContext.request.contextPath}/pension/room_register">등록</a></td>
 			</tr>
 		</table>
 		<div class="empty-row"></div>
@@ -124,6 +125,7 @@ $(document).ready(function() {
 	<div class="empty-row"></div>
 	<div class="empty-row"></div>
 </div>
+
 			
 <%@ include file="/WEB-INF/view/template/footer.jsp" %>    
 			

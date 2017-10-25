@@ -14,8 +14,7 @@
 				});
 			</script>
 
-			<form action="pension_register02" method="post" id="next02">
-			<input type="hidden" name="company_no" value="${session.getAttribute().toString() }">
+			<form action="pension_register" method="post" id="next02"  enctype="multipart/form-data">
 				<div class="xans-member-join area-50 center">
 					<h3>펜션 등록</h3>
 					<p class="required"><img src="img/ico_required.gif" /> 필수입력사항</p>
@@ -29,10 +28,10 @@
 								</tr>
 								<tr>
 									<th>펜션 주소 <img src="img/ico_required.gif" /></th>
-									<td><input type="text" id="sample6_postcode" placeholder="우편번호">
+									<td><input type="text" id="sample6_postcode" placeholder="우편번호" name="loc01">
 										<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-										<input type="text" id="sample6_address" placeholder="주소">
-										<input type="text" id="sample6_address2" placeholder="상세주소">
+										<input type="text" id="sample6_address" placeholder="주소" name="loc02">
+										<input type="text" id="sample6_address2" placeholder="상세주소" name="loc03">
 
 										<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 										<script>
@@ -93,7 +92,7 @@
 									<td>
 										<select id="pickup" name="pickup">
                                             <option value="가능">가능</option>
-                                            <option value="불가능">불가능</option>
+                                            <option value="불가">불가능</option>
                                         </select>
 									</td>
 								</tr>
@@ -118,7 +117,7 @@
 								<tr>
 									<th>계좌번호 <img src="img/ico_required.gif" /></th>
 									<td>
-										<input type="text" name="caution" id="name" maxlength="20">
+										<input type="text" name="account" id="name" maxlength="20">
 									</td>
 								</tr>
 								<tr>

@@ -31,8 +31,8 @@
             		    <a href="${pageContext.request.contextPath}/member/myinfo" class="left">마이페이지</a>
            		   		<a href="${pageContext.request.contextPath}/member/logout" class="right">로그아웃</a>
                 	</c:when>
-                	<c:when test="${loginFlag && companyFlag }">
-                		<a href="${pageContext.request.contextPath}/pension/management" class="left">관리페이지</a>
+                	<c:when test="${companyFlag}">
+                		<a href="${pageContext.request.contextPath}/pension/management" class="left">관리자페이지</a>
            		   		<a href="${pageContext.request.contextPath}/member/logout" class="right">로그아웃</a>
                 	</c:when>
                 	<c:otherwise>

@@ -3,9 +3,9 @@
 <%@ include file="/WEB-INF/view/template/header.jsp" %>   
 
 
-<link rel="stylesheet" type="text/css" href="css/member.css">
-			<link rel="stylesheet" type="text/css" href="css/member_register.css">
-			<link rel="stylesheet" type="text/css" href="css/jquery-te-1.4.0.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_register.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-te-1.4.0.css">
 
 			<script src="https://code.jquery.com/jquery-latest.js"></script>
 			<script src="js/jquery-te-1.4.0.js"></script>
@@ -17,18 +17,18 @@
 			
 			<form action="user_register02" method="post" id="next02">
 				<div class="xans-member-join area-50 center">
-					<h3>펜션 등록</h3>
-					<p class="required"><img src="img/ico_required.gif" /> 필수입력사항</p>
+					<h2>객실 등록</h2>
+					<p class="required"><img src="../img/ico_required.gif" /> 필수입력사항</p>
 					<div class="boardWrite">
 						<table>
 							<caption>회원 기본정보</caption>
 							<tbody>
 								<tr>
-									<th>객실명 <img src="img/ico_required.gif" /></th>
+									<th>객실명 <img src="../img/ico_required.gif" /></th>
 									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
 								</tr>
 								<tr>
-									<th>구조/넓이<img src="img/ico_required.gif" /></th>
+									<th>구조/넓이<img src="../img/ico_required.gif" /></th>
 									<td>
 										<textarea class="textarea"></textarea>
 									</td>
@@ -46,35 +46,35 @@
 									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
 								</tr>
 								<tr>
-									<th>비수기 주중가격 <img src="img/ico_required.gif" /></th>
+									<th>비수기 주중가격 <img src="../img/ico_required.gif" /></th>
 									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
 								</tr>
 								<tr>
-									<th>비수기 주말가격 <img src="img/ico_required.gif" /></th>
+									<th>비수기 주말가격 <img src="../img/ico_required.gif" /></th>
 									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
 								</tr>
 								<tr>
-									<th>성수기 주중가격<img src="img/ico_required.gif" /></th>
+									<th>성수기 주중가격<img src="../img/ico_required.gif" /></th>
 									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
 								</tr>
 								<tr>
-									<th>성수기 주말가격 <img src="img/ico_required.gif" /></th>
+									<th>성수기 주말가격 <img src="../img/ico_required.gif" /></th>
 									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
 								</tr>
 								<tr>
-									<th>구비시설 <img src="img/ico_required.gif" /></th>
+									<th>구비시설 <img src="../img/ico_required.gif" /></th>
 									<td>
 										<textarea class="textarea"></textarea>
 									</td>
 								</tr>
 								<tr>
-									<th>특이사항 <img src="img/ico_required.gif" /></th>
+									<th>특이사항 <img src="../img/ico_required.gif" /></th>
 									<td>
 										<textarea class="textarea"></textarea>
 									</td>
 								</tr>
 								<tr>
-									<th>기준인원 <img src="img/ico_required.gif" /></th>
+									<th>기준인원 <img src="../img/ico_required.gif" /></th>
 									<td>
 										<select>
 											<option value="1">1</option>
@@ -111,7 +111,7 @@
 									</td>
 								</tr>
 								<tr>
-									<th>최대인원 <img src="img/ico_required.gif" /></th>
+									<th>최대인원 <img src="../img/ico_required.gif" /></th>
 									<td>
 										<select>
 											<option value="1">1</option>

@@ -1,6 +1,8 @@
 package spring.bean;
-import javax.servlet.http.HttpServletRequest;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public class Pension {
@@ -144,33 +146,65 @@ public class Pension {
 		this.photo5 = photo5;
 	}
 	
-	public Pension(HttpServletRequest request, MultipartHttpServletRequest mRequest) {
-		String company_no = request.getParameter("company_no");
-		setCompany_no(company_no == null?0:Integer.parseInt(company_no));
-		setPension_name(request.getParameter("pension_name"));
-		setLocation(request.getParameter("sample6_postcode")+request.getParameter("sample6_address")+request.getParameter("sample6_address2"));
-		setPhone(request.getParameter("mobile1")+ request.getParameter("mobile2")+ request.getParameter("mobile3"));
-		setPickup(request.getParameter("pickup"));
-		setGuide(request.getParameter("guide"));
-		setCaution(request.getParameter("caution"));
-		setBank(request.getParameter("bank"));
-		setAccount(request.getParameter("account"));
-		setDepositor(request.getParameter("depositor"));
-		setPeak_start(request.getParameter("peak_start"));
-		setPeak_end(request.getParameter("peak_end"));
-		setReg(request.getParameter("reg"));
-		String photo1 = mRequest.getFile("photo1").getOriginalFilename();
-		setPhoto1(photo1);
-		String photo2 = mRequest.getFile("photo2").getOriginalFilename();
-		setPhoto1(photo2);
-		String photo3 = mRequest.getFile("photo3").getOriginalFilename();
-		setPhoto1(photo3);
-		String photo4 = mRequest.getFile("photo4").getOriginalFilename();
-		setPhoto1(photo4);
-		String photo5 = mRequest.getFile("photo5").getOriginalFilename();
-		setPhoto1(photo5);
-
+	public Pension(MultipartHttpServletRequest mRequest, int company_no) {
+		setCompany_no(company_no);
+		setPension_name(mRequest.getParameter("pension_name"));
+		setLocation(mRequest.getParameter("loc01")+mRequest.getParameter("loc02")+mRequest.getParameter("loc03"));
+		setPhone(mRequest.getParameter("mobile1")+ mRequest.getParameter("mobile2")+ mRequest.getParameter("mobile3"));
+		setPickup(mRequest.getParameter("pickup"));
+		setGuide(mRequest.getParameter("guide"));
+		setCaution(mRequest.getParameter("caution"));
+		setBank(mRequest.getParameter("bank"));
+		setAccount(mRequest.getParameter("account"));
+		setDepositor(mRequest.getParameter("depositor"));
+		setPeak_start(mRequest.getParameter("peak_start"));
+		setPeak_end(mRequest.getParameter("peak_end"));
+		setReg(mRequest.getParameter("reg"));
+		
+		MultipartFile photo1 = mRequest.getFile("photo1");
+		setPhoto1(photo1.getOriginalFilename());
+		MultipartFile photo2 = mRequest.getFile("photo2");
+		setPhoto2(photo2.getOriginalFilename());
+		MultipartFile photo3 = mRequest.getFile("photo3");
+		setPhoto3(photo3.getOriginalFilename());
+		MultipartFile photo4 = mRequest.getFile("photo4");
+		setPhoto4(photo4.getOriginalFilename());
+		MultipartFile photo5 = mRequest.getFile("photo5");
+		setPhoto5(photo5.getOriginalFilename());
 	}
+	
+	public Pension(ResultSet rs) throws SQLException {
+		setCompany_no(rs.getInt("company_no"));
+		setPension_no(rs.getInt("pension_no"));
+		setPension_name(rs.getString("pension_name"));
+		setLocation(rs.getString("location"));
+		setPhone(rs.getString("phone"));
+		setPickup(rs.getString("pickup"));
+		setGuide(rs.getString("guide"));
+		setCaution(rs.getString("caution"));
+		setBank(rs.getString("bank"));
+		setAccount(rs.getString("account"));
+		setDepositor(rs.getString("depositor"));
+		setPeak_start(rs.getString("peak_start"));
+		setPeak_end(rs.getString("peak_end"));
+		setReg(rs.getString("reg"));
+		setPhoto1(rs.getString("photo1"));
+		setPhoto2(rs.getString("photo2"));
+		setPhoto3(rs.getString("photo3"));
+		setPhoto4(rs.getString("photo4"));
+		setPhoto5(rs.getString("photo5"));
+	}
+
+	@Override
+	public String toString() {
+		return "Pension [company_no=" + company_no + ", pension_no=" + pension_no + ", pension_name=" + pension_name
+				+ ", location=" + location + ", phone=" + phone + ", pickup=" + pickup + ", guide=" + guide
+				+ ", caution=" + caution + ", bank=" + bank + ", account=" + account + ", depositor=" + depositor
+				+ ", peak_start=" + peak_start + ", peak_end=" + peak_end + ", reg=" + reg + ", photo1=" + photo1
+				+ ", photo2=" + photo2 + ", photo3=" + photo3 + ", photo4=" + photo4 + ", photo5=" + photo5 + "]";
+	}
+	
+	
 
 
 }

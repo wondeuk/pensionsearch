@@ -14,6 +14,7 @@
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/standing/standing2">입점 안내</a></li>
                     <li><a href="${pageContext.request.contextPath}/standing/reservesystem">예약시스템안내</a></li>
+                    <li><a href="${pageContext.request.contextPath}/standing/questionboardlist">Q & A</a></li>
                 </ul>
             </div> 
         
@@ -73,7 +74,7 @@
                     일대일상담을 이용하시기 바랍니다.
                     </td>
                      <td class="bottombtn" rowspan="2">
-                    <input type="button" value="입점 신청하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/pension_register' "></button>
+                    <input type="button" value="문의하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/standing/questionboard' "></button>
                     
                     
                    <td class="bottombtn" rowspan="2">

@@ -1,5 +1,8 @@
 package spring.bean;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class Company {
@@ -47,6 +50,24 @@ public class Company {
 		setReg(request.getParameter("reg"));
 		setAgree(request.getParameter("agree"));
 	}
+	
+	public Company(ResultSet rs) throws SQLException {
+		setCompany_no(rs.getInt("company_no"));
+		setDomain(rs.getString("domain"));
+		setPhone(rs.getString("phone"));
+		setCrn(rs.getString("crn"));
+		setCompany_name(rs.getString("company_name"));
+		setLocation(rs.getString("location"));
+		setEmail(rs.getString("email"));
+		setId(rs.getString("id"));
+		setPw(rs.getString("pw"));
+		setManager_name(rs.getString("manager_name"));
+		setMobile(rs.getString("mobile"));
+		setReg(rs.getString("reg"));
+		setAgree(rs.getString("agree"));
+	}
+	
+	
 	public int getCompany_no() {
 		return company_no;
 	}

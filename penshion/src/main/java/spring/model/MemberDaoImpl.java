@@ -19,7 +19,6 @@ import spring.bean.Member;
 public class MemberDaoImpl implements MemberDao{
 	private Logger log = LoggerFactory.getLogger(getClass());
 
-	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -43,8 +42,19 @@ public class MemberDaoImpl implements MemberDao{
 		}
 	};
 	
+	private ResultSetExtractor<Company> extractor2 = new ResultSetExtractor<Company>() {
+		public Company extractData(ResultSet rs) throws SQLException, DataAccessException{
+			//rs.next()가 이루어지지 않은 상태로 들어오기 때문에 내가 직접 처리해야 한다
+			if(rs.next()) {
+				return new Company(rs);
+			}else
+				return null;
+		}
+	};
+	
 	//회원 가입 메소드
 		public void insert(Member member){
+			log.debug("phone:{}", member.getMobile());
 			String sql = "select member_seq.nextval from dual";
 			int member_no = jdbcTemplate.queryForObject(sql, Integer.class);
 			sql = "insert into member values(?, ?, ?, ?, ?, ?, sysdate, 5000, '일반', ?)";
@@ -83,6 +93,12 @@ public class MemberDaoImpl implements MemberDao{
 			String sql = "select * from member where id=?";
 			Object[] args = {id};
 			return jdbcTemplate.query(sql, extractor, args);
+		}
+		
+		public Company info2(String id) {
+			String sql = "select * from company where id=?";
+			Object[] args = {id};
+			return jdbcTemplate.query(sql, extractor2, args);
 		}
 
 		public void edit(Member member) {

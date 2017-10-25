@@ -8,8 +8,13 @@ import spring.bean.Pension;
 
 @Repository
 public interface PensionDao {
+
 	void insert(Pension pension);
 	List<Pension> list();
 	Pension pensionInfo(int no);
+
+	int insert(int company_no, Pension pension);
+	Pension info(int pension_no);
+	List<Pension> list_latest();
 
 }
