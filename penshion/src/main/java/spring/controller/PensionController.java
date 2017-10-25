@@ -55,4 +55,24 @@ public class PensionController {
 	public String room_register() {
 		return "pension/room_register";
 	}
+	
+	@RequestMapping("pension/management")
+	public String management() {
+		
+		return "pension/management";
+	}
+	
+	
+	@RequestMapping("/pension_edit")
+	public String pEdit() {
+//		int no = Integer.parseInt(request.getParameter("no"));
+//		pensionDao.pensionInfo(no);
+		return "pension/pension_edit";
+	}
+	
+	@RequestMapping("/pension_info")
+	public String pInfo() {
+		return "pension/pension_info";
+	}
 }
+
