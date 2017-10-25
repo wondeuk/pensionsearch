@@ -15,6 +15,7 @@
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/standing/standing2">입점 안내</a></li>
                      <li><a href="${pageContext.request.contextPath}/standing/reservesystem">예약시스템 안내</a></li>
+                     <li><a href="${pageContext.request.contextPath}/standing/questionboardlist">Q & A</a></li>
                 </ul>
             </div> 
         

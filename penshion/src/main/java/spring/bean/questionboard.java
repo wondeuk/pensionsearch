@@ -9,21 +9,25 @@ public class questionboard {
 	private String title;
 	private String detail;
 	private String pw;
+	private String reg;
 	public questionboard(ResultSet rs) throws SQLException{
 		setBoardno(rs.getInt("boardno"));
 		setWriter(rs.getString("writer"));
 		setTitle(rs.getString("title"));
 		setDetail(rs.getString("detail"));
 		setPw(rs.getString("pw"));
+		setReg(rs.getString("reg"));
+		
 		
 	}
 	public questionboard() {
 		super();
 	}
+	
 	@Override
 	public String toString() {
 		return "questionboard [boardno=" + boardno + ", writer=" + writer + ", title=" + title + ", detail=" + detail
-				+ ", pw=" + pw + "]";
+				+ ", pw=" + pw + ", reg=" + reg + "]";
 	}
 	public int getBoardno() {
 		return boardno;
@@ -54,6 +58,12 @@ public class questionboard {
 	}
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+	public String getReg() {
+		return reg;
+	}
+	public void setReg(String reg) {
+		this.reg = reg;
 	}
 	
 	

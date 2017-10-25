@@ -47,7 +47,7 @@ public class questionboardController {
 		
 		System.out.println(writer+title+detail+pw);
 		
-		log.debug("저장 완료dㅏㅏㄴ");
+		log.debug("저장 완료");
 		
 		return "standing/questionregister";
 	}

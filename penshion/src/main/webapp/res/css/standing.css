@@ -111,6 +111,12 @@
             background-color: lightgray;
             color: black;
         }
-
-
+        
+        
+ /* questionboardlist.jsp */
+ 
+.questionlist th{
+            text-align:center;
+        }
+ 
         

@@ -1,44 +1,99 @@
+<%@page import="spring.model.questionboardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ include file="/WEB-INF/view/template/header.jsp" %>
- 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/standing.css">      
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/template/header.jsp"%>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/standing.css">
 
-            <div class="empty-row"></div>
-            <div class="empty-row"></div>
-            
-                 
-            <div class="submenucontext">
-           
-              <table border="1" width="50%" align="center" height="50%">
-                  
-		      <tbody>
-		    
-        	<tr>
-        		<th>번d호</th>
-        		<th>작성자</th>
-        		<th>제목</th>
-        		<th>내용</th>
-        		
-        	</tr>
-        	<c:forEach var="q" items="${list}">
-        	<tr>
-        		<td>${q.boardno}</td>
-        		<td>${q.writer}</td>
-        		<td>${q.title}</td>
-        		<td>${q.detail}</td>
-        	</tr>
-        	</c:forEach>
+
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/standing.css">
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/standing.css">
+
+<div class="empty-row"></div>
+<div class="empty-row"></div>
+
+<div class="submenu">
+
+	<div class="menu">
+
+		<ul>
+			<li><a
+				href="${pageContext.request.contextPath}/standing/standing2">입점
+					안내</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/standing/reservesystem">예약시스템
+					안내</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/standing/questionboardlist">Q
+					& A</a></li>
+		</ul>
+	</div>
+
+	<div class="submenucontext">
+	<div align="center"><h3>문의 목록</h3>
+	</div>
+		<table border="1" width="100%" height="13%" align="center">
+
+			<thead>
 			
-	       </tbody>
-            </table>
-                    
-            </div>
-            
-        </main>
+		<tr align="center">
+			<th>번호</th>
+			<th width="40%">제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach var="q" items="${list}">
+		<tr align="center">
+			<td width="10%">${q.boardno}</td>
+			<td width="45%" align="left">&nbsp;&nbsp;&nbsp;${q.title}</td>
+			<td width="25%">${q.writer}</td>
+			<td>${q.reg}</td>
+			
+		</tr>
+		
+		</c:forEach>
+	</tbody>
 
-        <%@ include file="/WEB-INF/view/template/footer.jsp" %>
+		</table>
+		<div class="empty-row"></div>
+		
+		
+		<div class="writerbtn" align="right">
+		<input type="button" value="글쓰기" style="width:100; height:30;" onclick="location.href='${pageContext.request.contextPath}/standing/questionboard' ">
+		</div>
+		
+		
+		<div align="center">
+		<form action="list.jsp" method="get">
+			<select name="type">
+				<%--  <%
+					if (type != null && type.equals("writer")) {
+				%>
+				<option value="title">제목</option>
+				<option value="writer" selected>작성자</option>
+				<%
+					} else {
+				%>
+				<option value="title">제목</option>
+				<option value="writer">작성자</option>
+				 <%
+					}
+				%>  --%>
+			</select> <input type="search" name="key" placeholder="검색어" required
+				<%-- value="<%=key == null ? "" : key%> --%>"> <input type="submit"
+				value="검색">
+		</form>
+		</div>
 
+	</div>
+
+</div>
+
+</main>
+
+<%@ include file="/WEB-INF/view/template/footer.jsp"%>

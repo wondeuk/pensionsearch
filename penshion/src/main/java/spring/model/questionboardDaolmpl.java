@@ -23,7 +23,7 @@ public class questionboardDaolmpl implements questionboardDao{
 //	}
 	@Override
 	public void insert(questionboard q) {
-		String sql="insert into questionboard values(questionboard_seq.nextval, ?, ?, ?, ?)";
+		String sql="insert into questionboard values(questionboard_seq.nextval, ?, ?, ?, ?, sysdate)";
 		Object[] args = {
 				q.getWriter(), q.getTitle(), q.getDetail(), q.getPw()
 		};
