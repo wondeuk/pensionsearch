@@ -42,13 +42,14 @@ public class PensionController {
 	public String home(Model model) {
 		List<Pension> list_latest = pensionDao.list_latest();
 		model.addAttribute("list_latest", list_latest);
+		String path = servletContext.getRealPath("/upload");
+		log.debug(path);
 		return "home";
 	}
 	
 	@RequestMapping("/reserve")
 	public String reserve(@RequestParam int pension_no, Model model) {
 		Pension pension = pensionDao.info(pension_no);
-		log.debug("no:{}", pension_no);
 		model.addAttribute("pension", pension);
 		return "pension/reserve";
 	}

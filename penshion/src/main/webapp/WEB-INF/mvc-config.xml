@@ -20,15 +20,15 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <mvc:resources location="/upload/" mapping="/pension/**"/>
    
     
-      <context:component-scan base-package="spring.controller"/>
-   <context:component-scan base-package="spring.model"/> 
+	<context:component-scan base-package="spring.controller"/>
+   	<context:component-scan base-package="spring.model"/> 
     
 
-   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
            <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
            <property name="prefix" value="/WEB-INF/view/"/>
            <property name="suffix" value=".jsp"/>
-   </bean>
+	</bean>
    
       <mvc:view-controller path="/" view-name="home"/>
       

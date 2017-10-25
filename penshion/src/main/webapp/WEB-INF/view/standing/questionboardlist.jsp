@@ -58,6 +58,33 @@
 		
 		</c:forEach>
 	</tbody>
+	<tfoot>
+                <tr>
+                    <th colspan="8" align="right">
+                        <a href="write.it">글쓰기</a>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="8" align="right">
+                    	<c:if test="${blockstart > 1}">
+                    		<a href="list.it?page=${blockstart-1}${searchParam}">[이전]</a>
+                    	</c:if>
+                        <c:forEach var="n" begin="${blockstart}" end="${blockend}">
+                        	<c:choose>
+                        		<c:when test="${pageNo==n}">
+                        			<a href="#" class="active">${n}</a>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<a href="${pageContext.request.contextPath}/standing/questionboardlist?page=${n}">${n}</a>
+                        		</c:otherwise>
+                        	</c:choose>
+                        </c:forEach>
+                        <c:if test="${blockend < blocktotal}">
+                        	<a href="list.it?page=${blockend+1}${searchParam}">[다음]</a>
+                        </c:if>
+                    </th>
+                </tr>
+            </tfoot>
 
 		</table>
 		<div class="empty-row"></div>
