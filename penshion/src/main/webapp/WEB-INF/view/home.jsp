@@ -12,31 +12,22 @@
                 <!-- cellpadding : 테두리와 텍스트 사이의 여백
     cellspacing :  셀과 셀 사이의 간격-->
                 <tr height=50px>
-                    <th class="topth"><h2>@요즘 제일 잘나가@ </h2></th>
-                   
+                    <th class="topth"><h2>@요즘 제일 잘나가@</h2></th>
                 </tr>
                 <tr valign="top" bgcolor="silver">
-                    <!-- 수평정렬[align] :center, right, left
-     수직정렬[valign] : top, middle, bottom-->
-                    
-                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/1.jpg" onclick="location.href='reserve'">&nbsp;1행 1열</td>
-
-                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/2.jpg">&nbsp;1행 2열</td>
-                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/3.jpg">&nbsp;1행 3열</td>
+              		<c:forEach var="pension"  begin="0" step="1" end="2" items="${list_latest}">
+	                   <td width="20%" class="img" background="${pageContext.request.contextPath}/pension/${pension.photo1}" onclick="location.href='reserve?pension_no=${pension.pension_no}'"></td>
+                	</c:forEach>
                 </tr>
                 <tr height=50px>
-                    <th class="midth">끼야호펜션</th>
-                    <th class="midth">이요오펜션</th>
-                    <th class="midth">꾸이익펜션</th>
+              		<c:forEach var="pension"  begin="0" step="1" end="2" items="${list_latest}">
+	                    <th class="midth">${pension.pension_name}</th>
+                	</c:forEach>
                 </tr>
 
 
                 <tr valign="top" bgcolor="silver">
-                    <!-- 수평정렬[align] :center, right, left
-     수직정렬[valign] : top, middle, bottom-->
-                    
                     <td width="20%" class="img" background="${pageContext.request.contextPath}/img/1.jpg" onclick="location.href='main2.html'">&nbsp;1행 1열</td>
-
                     <td width="20%" class="img" background="${pageContext.request.contextPath}/img/2.jpg">&nbsp;1행 2열</td>
                     <td width="20%" class="img" background="${pageContext.request.contextPath}/img/3.jpg">&nbsp;1행 3열</td>
                 </tr>

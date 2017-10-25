@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/each.css">
         
-        <title>펜1션</title>
+        <title>펜션</title>
         <link rel="stylesheet" type="text/css" 
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
@@ -31,8 +31,8 @@
             		    <a href="${pageContext.request.contextPath}/member/myinfo" class="left">마이페이지</a>
            		   		<a href="${pageContext.request.contextPath}/member/logout" class="right">로그아웃</a>
                 	</c:when>
-                	<c:when test="${loginFlag && companyFlag }">
-                		<a href="${pageContext.request.contextPath}/pension/management" class="left">관리페이지</a>
+                	<c:when test="${companyFlag}">
+                		<a href="${pageContext.request.contextPath}/pension/management" class="left">관리자페이지</a>
            		   		<a href="${pageContext.request.contextPath}/member/logout" class="right">로그아웃</a>
                 	</c:when>
                 	<c:otherwise>

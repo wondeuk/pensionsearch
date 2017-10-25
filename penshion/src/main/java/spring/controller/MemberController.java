@@ -94,8 +94,8 @@ public class MemberController {
 		}else {
 			boolean result = memberDao.login_company(id, pw);
 			if(result) {
+				Company company = memberDao.info2(id);
 				session.setAttribute("userId", id);
-				session.setAttribute("loginFlag", "true");
 				session.setAttribute("companyFlag", "true");
 				Cookie c = new Cookie("save", id);
 				c.setMaxAge(save==null?0:2419200);
