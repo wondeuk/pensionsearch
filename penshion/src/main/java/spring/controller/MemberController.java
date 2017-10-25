@@ -94,6 +94,8 @@ public class MemberController {
 		}else {
 			boolean result = memberDao.login_company(id, pw);
 			if(result) {
+				Company company = memberDao.info2(id);
+				log.debug("info:{}", company);
 				session.setAttribute("userId", id);
 				session.setAttribute("loginFlag", "true");
 				session.setAttribute("companyFlag", "true");

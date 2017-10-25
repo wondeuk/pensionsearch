@@ -60,25 +60,25 @@
 				<table class="outtable center">
 					<tr>
 						<td>
-							<img src="img/77030173.jpg">
+							<img src="${pageContext.request.contextPath}/pension/${pension.photo1}">
 						</td>
 						<td class="pinfo">
 
-							<h3>놀러올 펜션(펜션이름)</h3>
+							<h3>${pension.pension_name}</h3>
 							<hr>
 							<table class="intable">
 
 								<tr>
 									<th>주소</th>
-									<td>경기도 어쩌구 저쩌구</td>
+									<td>${pension.location}</td>
 								</tr>
 								<tr>
 									<th>예약문의</th>
-									<td>예약문의</td>
+									<td>${pension.phone}</td>
 								</tr>
 								<tr>
-									<th>사용시간</th>
-									<td>사용시간</td>
+									<th>픽업여부</th>
+									<td>${pension.pickup}</td>
 								</tr>
 								<tr>
 									<th>시설</th>
@@ -122,10 +122,10 @@
 				</ul>
 			</div>
 			<div class="checkedc">
-				<h1>안내 내용입니다</h1>
+				<h1>${pension.guide}</h1>
 			</div>
 			<div class="rowc">
-				<h1>규정사항 안내입니다</h1>
+				<h1>${pension.caution}</h1>
 			</div>
 			<div class="askc">
 				<h1>질문게시판입니다</h1>
@@ -174,10 +174,11 @@
 
 			<div class="imglist">
 				<h3>이미지</h3>
-				<img src="img/201683125855.jpg" width="300px" height="240px">
-				<img src="img/borddeau_1.jpg" width="300px" height="240px">
-				<img src="img/2016421144648.jpg" width="300px" height="240px">
-				<img src="img/2016101115840.jpg" width="300px" height="240px">
+				<img src="${pageContext.request.contextPath}/pension/${pension.photo1}" width="290px" height="232px">
+				<img src="${pageContext.request.contextPath}/pension/${pension.photo2}" width="290px" height="232px">
+				<img src="${pageContext.request.contextPath}/pension/${pension.photo3}" width="290px" height="232px">
+				<img src="${pageContext.request.contextPath}/pension/${pension.photo4}" width="290px" height="232px">
+				<img src="${pageContext.request.contextPath}/pension/${pension.photo5}" width="290px" height="232px">
 			</div>
 
 			<div class="empty-row"></div>

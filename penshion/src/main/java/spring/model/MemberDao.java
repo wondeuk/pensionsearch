@@ -15,4 +15,6 @@ public interface MemberDao {
 	void insert(Company company);
 	boolean login_company(String id, String pw);
 	boolean unregister(String id, String pw);
+	Company info2(String id);
+
 }

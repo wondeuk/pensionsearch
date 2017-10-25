@@ -43,6 +43,17 @@ public class MemberDaoImpl implements MemberDao{
 		}
 	};
 	
+	private ResultSetExtractor<Company> extractor2 = new ResultSetExtractor<Company>() {
+		public Company extractData(ResultSet rs) throws SQLException, DataAccessException{
+			//rs.next()가 이루어지지 않은 상태로 들어오기 때문에 내가 직접 처리해야 한다
+			if(rs.next()) {
+				log.debug("여기2");
+				return new Company(rs);
+			}else
+				return null;
+		}
+	};
+	
 	//회원 가입 메소드
 		public void insert(Member member){
 			String sql = "select member_seq.nextval from dual";
@@ -83,6 +94,14 @@ public class MemberDaoImpl implements MemberDao{
 			String sql = "select * from member where id=?";
 			Object[] args = {id};
 			return jdbcTemplate.query(sql, extractor, args);
+		}
+		
+		public Company info2(String id) {
+			log.debug("여기당");
+			String sql = "select * from company where id=?";
+			Object[] args = {id};
+			log.debug("여기1");
+			return jdbcTemplate.query(sql, extractor2, args);
 		}
 
 		public void edit(Member member) {
