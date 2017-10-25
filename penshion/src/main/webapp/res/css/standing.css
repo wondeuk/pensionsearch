@@ -43,13 +43,11 @@
             flex-grow: 1;
         }
         th{
-            text-align: left;
+            text-align: center;
         }
         .requestbtn{
             align-content: center;
-            
         }
-        
         
 /*standing.html*/
 
@@ -85,21 +83,6 @@
             flex-direction: row;
             flex-wrap: wrap;
 /*            border: 1px solid black;*/
-        }
-        .menu{
-            width: 18%;
-        }
-        .submenucontext{
-            flex-grow: 1;
-        }
-        th{
-            text-align: left;
-        }
-
-        
-        .requestbtn{
-            align-content: center;
-            
         }
         
    .bottombtn{

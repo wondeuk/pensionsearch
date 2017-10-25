@@ -12,4 +12,6 @@ public interface questionboardDao {
 	List<questionboard> list(int start, int end);
 	void insert(questionboard q);
 	int getBoardCount();
+	int getBoardCount(String type, String key);
+	List<questionboard> search(String type, String key, int start, int end);
 }

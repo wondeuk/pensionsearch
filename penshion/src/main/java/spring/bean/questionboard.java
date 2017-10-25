@@ -62,6 +62,9 @@ public class questionboard {
 	public String getReg() {
 		return reg;
 	}
+	public String getDate() {
+		return reg.substring(0, 11);
+	}
 	public void setReg(String reg) {
 		this.reg = reg;
 	}

@@ -46,6 +46,10 @@ public class StandingController2 {
 	
 	@RequestMapping("/questionboardlist")
 	public String questionboardlist(HttpServletRequest request, Model model) {
+		String type = request.getParameter("type");
+		String key = request.getParameter("key");
+		boolean searchFlag = type != null && key != null;
+		
 		String pageStr = request.getParameter("page");
 		int pageNo;
 		try{
@@ -56,7 +60,13 @@ public class StandingController2 {
 		}
 		
 		int count;
+		if(searchFlag){
+			count = questionboardDao.getBoardCount(type, key);
+		}else{
 			count = questionboardDao.getBoardCount();
+		} 
+		
+		
 		int start = pageNo * boardsize - boardsize + 1;
 		int end = start + boardsize - 1;
 		
@@ -65,9 +75,19 @@ public class StandingController2 {
 		int blockend = blockstart + blocksize - 1;
 		if(blockend > blocktotal) blockend = blocktotal;
 		
-		List<questionboard> list = questionboardDao.list(start, end);
+		List<questionboard> list;
+		if(searchFlag){
+			list = questionboardDao.search(type, key, start, end); 
+		}else{
+			list = questionboardDao.list(start, end);
+		}
+		
+		String searchParam;
+		if(searchFlag) searchParam = "&type="+type+"&key="+key;
+		else searchParam = "";
 
 		//전달할 데이터 첨부
+		model.addAttribute("searchFlag", searchFlag);
 		model.addAttribute("pageStr", pageStr);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("start", start);
@@ -77,6 +97,7 @@ public class StandingController2 {
 		model.addAttribute("blockstart", blockstart);
 		model.addAttribute("blockend", blockend);
 		model.addAttribute("list", list);
+		model.addAttribute("searchParam", searchParam);
 		
 		return "standing/questionboardlist";
 	}
