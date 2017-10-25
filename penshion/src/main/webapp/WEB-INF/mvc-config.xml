@@ -18,10 +18,10 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <mvc:resources location="/res/img/" mapping="/img/**"/>
     <mvc:resources location="/res/js/" mapping="/js/**"/>
     <mvc:resources location="/upload/" mapping="/pension/**"/>
-	
+   
     
-   	<context:component-scan base-package="spring.controller"/>
-	<context:component-scan base-package="spring.model"/> 
+      <context:component-scan base-package="spring.controller"/>
+   <context:component-scan base-package="spring.model"/> 
     
 
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,15 +30,15 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            <property name="suffix" value=".jsp"/>
    </bean>
    
-   	<mvc:view-controller path="/" view-name="home"/>
-   	
-   	<!-- 파일 업로드에 필요한 bean 등록 multipart/form-data  -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 기본적인 업로드 옵션을 지정할 수 있다 -->
-		<property name="defaultEncoding" value="UTF-8"/>
-		<property name="maxUploadSize" value="50000000"/>
-		<!-- <property name="maxInMemorySize" value="메모리크기(byte)"/> -->
-	</bean>
+      <mvc:view-controller path="/" view-name="home"/>
+      
+      <!-- 파일 업로드에 필요한 bean 등록 multipart/form-data  -->
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <!-- 기본적인 업로드 옵션을 지정할 수 있다 -->
+      <property name="defaultEncoding" value="UTF-8"/>
+      <property name="maxUploadSize" value="50000000"/>
+      <!-- <property name="maxInMemorySize" value="메모리크기(byte)"/> -->
+   </bean>
   
 
 </beans>
