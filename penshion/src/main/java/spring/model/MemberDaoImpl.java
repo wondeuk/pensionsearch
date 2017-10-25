@@ -19,7 +19,6 @@ import spring.bean.Member;
 public class MemberDaoImpl implements MemberDao{
 	private Logger log = LoggerFactory.getLogger(getClass());
 
-	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -55,6 +54,7 @@ public class MemberDaoImpl implements MemberDao{
 	
 	//회원 가입 메소드
 		public void insert(Member member){
+			log.debug("phone:{}", member.getMobile());
 			String sql = "select member_seq.nextval from dual";
 			int member_no = jdbcTemplate.queryForObject(sql, Integer.class);
 			sql = "insert into member values(?, ?, ?, ?, ?, ?, sysdate, 5000, '일반', ?)";
