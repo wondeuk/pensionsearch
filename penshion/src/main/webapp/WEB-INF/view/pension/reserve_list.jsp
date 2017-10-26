@@ -5,10 +5,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_myinfo.css">   
 <div class="area-60 center">
 <h2>펜션예약 상태</h2>
-    <div>
+    <div class="area-60 center">
         <p>펜션예약 현황을 확인할 수 있습니다<br>
         예약상태를 변경할 수 있습니다</p>
-    </div class="area-60 center">
+    </div>
 		<table id="qna">
 			<tr>
 				<th>펜션명</th>
