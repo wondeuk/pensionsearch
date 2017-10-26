@@ -95,9 +95,11 @@
 
         <div class="empty-row"></div>
         
-        <hr>
-		<div class="empty-row"></div>
+        
 <div class="area-70 center">
+<hr>
+	<div class="empty-row"></div>
+		
     <h2>객실정보 리스트</h2>
 		<table id="interest">
 			<tr>
@@ -115,8 +117,8 @@
                 <td>123호</td>
                 <td>ㄷ</td>
                 <td>3/5(명)</td>
-                <td><a href=#>상세보기</a></td>
-                <td><a href=#>수정</a></td>
+                <td><a href="${pageContext.request.contextPath}/pension/room_info">상세보기</a></td>
+                <td><a href="${pageContext.request.contextPath}/room_edit">수정</a></td>
 			</tr>
 		</table>
 </div>

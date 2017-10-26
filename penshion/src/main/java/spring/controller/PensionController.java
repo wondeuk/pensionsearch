@@ -134,5 +134,30 @@ public class PensionController {
 	public String roomRegister() {
 		return "pension/room_register";
 	}
+	
+	@RequestMapping("pension/answer_list")
+	public String answerList() {
+		return "pension/answer_list";
+	}
+	
+	@RequestMapping("pension/room_info")
+	public String roomInfo() {
+		return "pension/room_info";
+	}
+	
+	@RequestMapping("/room_edit")
+	public String roomEdit() {
+		return "pension/room_edit";
+	}
+	
+	@RequestMapping("pension/reserve_list")
+	public String reserveList() {
+		return "pension/reserve_list";
+	}
+	
+	@RequestMapping("/imglook")
+	public String imgLook() {
+		return "pension/imglook";
+	}
 }
 

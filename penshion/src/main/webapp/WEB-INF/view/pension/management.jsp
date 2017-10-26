@@ -15,18 +15,19 @@ $(document).ready(function() {
 	});
 });
 </script>
-
-<aside>
+<div class="empty-row"></div>
+<aside class="area-20">
 	<div class="row">
 		<ul>
 			<li><a href="myinfo" class="">나의 정보 수정</a></li>
 			<li><a href="pension_info" class="">펜션정보 현황</a></li>
-			<li><a href="#" class="">펜션예약 상태</a></li>
-			<li><a href="unregister" class="">펜션 답변상황</a></li>
+			<li><a href="${pageContext.request.contextPath}/pension/reserve_list" class="">펜션예약 상태</a></li>
+			<li><a href="${pageContext.request.contextPath}/pension/answer_list" class="">펜션 답변상황</a></li>
 		</ul>
 	</div>
 </aside>
-<div class="area-70" id="main">
+
+<div class="area-60 center" id="main">
 	<div class="table-users">
 		<div class="header center">
 			<p class="right"> 특정회사 의 가입 아이디(님) </p>
@@ -68,6 +69,8 @@ $(document).ready(function() {
 		</table>
 	</div>
 	<div class="empty-row"></div>
+	<hr>
+	<div class="empty-row"></div>
 	<div class="row">
 		<h3>펜션등록 현황</h3>
 		<p>현재 등록된 펜션입니다<br>
@@ -90,36 +93,9 @@ $(document).ready(function() {
 				<td><a href="${pageContext.request.contextPath}/pension_edit">수정</a>/<a href="${pageContext.request.contextPath}/pension/room_register">등록</a></td>
 			</tr>
 		</table>
-		<div class="empty-row"></div>
-		<div class="empty-row"></div>
-		<hr>
 		
-		<div class="empty-row"></div>
+	
 
-		<h3>객실등록 현황</h3>
-		<table id="interest">
-			<tr>
-                <th>객실 번호</th>
-				<th>펜션명</th>
-				<th>객실명</th>
-				<th>구조/넓이</th>
-				<th>기준/최대인원</th>
-				<th>상세보기</th>
-                <th>수정</th>
-			</tr>
-			<tr>
-                <td>1341324</td>
-				<td>밤도펜션</td>
-                <td>123호</td>
-                <td>ㄷ</td>
-                <td>3/5(명)</td>
-                <td><a href=#>상세보기</a></td>
-                <td><a href=#>수정</a></td>
-			</tr>
-		</table>
-        
-        
-		
 	</div>
 	<div class="empty-row"></div>
 	<div class="empty-row"></div>
