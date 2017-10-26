@@ -2,9 +2,11 @@ package spring.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -44,13 +46,35 @@ public class PensionController {
 		model.addAttribute("list_latest", list_latest);
 		String path = servletContext.getRealPath("/upload");
 		log.debug(path);
+		
+		String test = "첫번째　두번째　세번째";
+		String[] tests = test.split("　");
+		log.debug(tests[0]);
+		log.debug(tests[1]);
+		log.debug(tests[2]);
+		
+		
+		
 		return "home";
 	}
 	
 	@RequestMapping("/reserve")
-	public String reserve(@RequestParam int pension_no, Model model) {
+	public String reserve(@RequestParam int pension_no, Model model, HttpSession session, HttpServletRequest request) {
 		Pension pension = pensionDao.info(pension_no);
 		model.addAttribute("pension", pension);
+		
+		int count = 0;
+		Enumeration<String> check = session.getAttributeNames();
+		while(check.hasMoreElements()){
+			if(check.nextElement().equals(String.valueOf(pension_no))){
+				count++;
+			}
+		}
+		if(count==0){
+			pensionDao.plusRead(pension_no);
+			session.setAttribute(String.valueOf(pension_no), pension_no);
+		}
+		
 		return "pension/reserve";
 	}
 	
@@ -107,4 +131,38 @@ public class PensionController {
 	public String room_register() {
 		return "pension/room_register";
 	}
+	
+	@RequestMapping("pension/management")
+	public String management(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("userId");
+		Company company = memberDao.info2(id);
+		
+		List<Pension> list = pensionDao.myPension(company.getCompany_no());
+		model.addAttribute("company", company);
+		model.addAttribute("pension_list", list);
+		return "pension/management";
+	}
+	
+	
+	@RequestMapping("/pension_edit")
+	public String pEdit(@RequestParam int pension_no, Model model) {
+		Pension pension = pensionDao.info(pension_no);
+		model.addAttribute("pension", pension);
+		model.addAttribute("pension_no", pension_no);
+		return "pension/pension_edit";
+	}
+	
+	@RequestMapping("/pension_info")
+	public String pInfo(@RequestParam int pension_no, Model model) {
+		Pension pension = pensionDao.info(pension_no);
+		model.addAttribute("pension", pension);
+		return "pension/pension_info";
+	}
+	
+	//객실등록
+	@RequestMapping("pension/room_register")
+	public String roomRegister() {
+		return "pension/room_register";
+	}
+	
 }

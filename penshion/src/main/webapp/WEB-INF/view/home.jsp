@@ -25,16 +25,15 @@
                 	</c:forEach>
                 </tr>
 
-
                 <tr valign="top" bgcolor="silver">
-                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/1.jpg" onclick="location.href='main2.html'">&nbsp;1행 1열</td>
-                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/2.jpg">&nbsp;1행 2열</td>
-                    <td width="20%" class="img" background="${pageContext.request.contextPath}/img/3.jpg">&nbsp;1행 3열</td>
+              		<c:forEach var="pension"  begin="3" step="1" end="5" items="${list_latest}">
+	                   <td width="20%" class="img" background="${pageContext.request.contextPath}/pension/${pension.photo1}" onclick="location.href='reserve?pension_no=${pension.pension_no}'"></td>
+                	</c:forEach>
                 </tr>
                 <tr height=50px>
-                    <th class="midth">끼야호펜션</th>
-                    <th class="midth">이요오펜션</th>
-                    <th class="midth">꾸이익펜션</th>
+              		<c:forEach var="pension"  begin="3" step="1" end="5" items="${list_latest}">
+	                    <th class="midth">${pension.pension_name}</th>
+                	</c:forEach>
                 </tr>
             </table>
 

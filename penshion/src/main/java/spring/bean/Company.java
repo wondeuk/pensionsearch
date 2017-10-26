@@ -11,7 +11,9 @@ public class Company {
 	private String phone;
 	private String crn;
 	private String company_name;
-	private String location;
+	private String location01;
+	private String location02;
+	private String location03;
 	private String email;
 	private String id;
 	private String pw;
@@ -33,10 +35,9 @@ public class Company {
 		setPhone(phone01+"-"+phone02+"-"+phone03);
 		setCrn(request.getParameter("crn"));
 		setCompany_name(request.getParameter("company_name"));
-		String loc01 = request.getParameter("loc01");
-		String loc02 = request.getParameter("loc02");
-		String loc03 = request.getParameter("loc03");
-		setLocation(loc01 +"　"+ loc02 +"　"+ loc03);
+		setLocation01(request.getParameter("loc01"));
+		setLocation02(request.getParameter("loc02"));
+		setLocation03(request.getParameter("loc03"));
 		String email01 = request.getParameter("email01");
 		String email02 = request.getParameter("email02");
 		setEmail(email01+"@"+email02);
@@ -57,7 +58,9 @@ public class Company {
 		setPhone(rs.getString("phone"));
 		setCrn(rs.getString("crn"));
 		setCompany_name(rs.getString("company_name"));
-		setLocation(rs.getString("location"));
+		setLocation01(rs.getString("location01"));
+		setLocation02(rs.getString("location02"));
+		setLocation03(rs.getString("location03"));
 		setEmail(rs.getString("email"));
 		setId(rs.getString("id"));
 		setPw(rs.getString("pw"));
@@ -68,6 +71,24 @@ public class Company {
 	}
 	
 	
+	public String getLocation01() {
+		return location01;
+	}
+	public void setLocation01(String location01) {
+		this.location01 = location01;
+	}
+	public String getLocation02() {
+		return location02;
+	}
+	public void setLocation02(String location02) {
+		this.location02 = location02;
+	}
+	public String getLocation03() {
+		return location03;
+	}
+	public void setLocation03(String location03) {
+		this.location03 = location03;
+	}
 	public int getCompany_no() {
 		return company_no;
 	}
@@ -97,12 +118,6 @@ public class Company {
 	}
 	public void setCompany_name(String company_name) {
 		this.company_name = company_name;
-	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
 	}
 	public String getEmail() {
 		return email;
@@ -154,6 +169,9 @@ public class Company {
 	public String getReg() {
 		return reg;
 	}
+	public String getDate() {
+		return reg.substring(0, 10);
+	}
 	public void setReg(String reg) {
 		this.reg = reg;
 	}
@@ -166,9 +184,9 @@ public class Company {
 	@Override
 	public String toString() {
 		return "Company [company_no=" + company_no + ", domain=" + domain + ", phone=" + phone + ", crn=" + crn
-				+ ", company_name=" + company_name + ", location=" + location + ", email=" + email + ", id=" + id
-				+ ", pw=" + pw + ", manager_name=" + manager_name + ", mobile=" + mobile + ", reg=" + reg + ", agree="
-				+ agree + "]";
+				+ ", company_name=" + company_name + ", location01=" + location01 + ", location02=" + location02
+				+ ", location03=" + location03 + ", email=" + email + ", id=" + id + ", pw=" + pw + ", manager_name="
+				+ manager_name + ", mobile=" + mobile + ", reg=" + reg + ", agree=" + agree + "]";
 	}
 	
 	

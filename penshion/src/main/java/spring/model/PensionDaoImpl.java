@@ -33,26 +33,25 @@ public class PensionDaoImpl implements PensionDao{
 		}
 	};
 	
-	
-	@Override
 	public int insert(int company_no, Pension pension) {
 		String sql = "select pension_seq.nextval from dual";
 		int pension_no = jdbcTemplate.queryForObject(sql, Integer.class);
 		
-		sql ="insert into pension values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?)";
+		sql ="insert into pension values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, 0, ?, ?, ?)";
 
 		Long time = System.currentTimeMillis();
 		Object[] args = {
-				company_no, pension_no,
-				pension.getPension_name(), pension.getLocation(),
+				company_no, pension_no, pension.getPension_name(),
 				pension.getPhone(), pension.getPickup(), pension.getGuide(), pension.getCaution(),
 				pension.getBank(), pension.getAccount(), pension.getDepositor(), pension.getPeak_start(),
-				pension.getPeak_end(), "["+pension_no+"]"+"("+time+")"+pension.getPhoto1(), "["+pension_no+"]"+"("+time+")"+pension.getPhoto2(), "["+pension_no+"]"+"("+time+")"+pension.getPhoto3(), "["+pension_no+"]"+"("+time+")"+pension.getPhoto4(), "["+pension_no+"]"+"("+time+")"+pension.getPhoto5()
+				pension.getPeak_end(), "["+pension_no+"]"+"("+time+")"+pension.getPhoto1(), 
+				"["+pension_no+"]"+"("+time+")"+pension.getPhoto2(), "["+pension_no+"]"+"("+time+")"+pension.getPhoto3(), 
+				"["+pension_no+"]"+"("+time+")"+pension.getPhoto4(), "["+pension_no+"]"+"("+time+")"+pension.getPhoto5(), 
+				pension.getLocation01(), pension.getLocation02(), pension.getLocation03()
 		};
 		jdbcTemplate.update(sql, args);
 		return pension_no;
 	}
-
 
 	public Pension info(int pension_no) {
 		String sql = "select * from pension where pension_no=?";
@@ -60,14 +59,28 @@ public class PensionDaoImpl implements PensionDao{
 		return jdbcTemplate.query(sql, extractor, args);
 	}
 
-
 	public List<Pension> list_latest() {
-		String sql = "select * from pension order by reg desc";
+		String sql = "select * from pension order by read desc";
 		RowMapper<Pension> mapper = (rs, index)->{
 			return new Pension(rs);
 		};
 		return jdbcTemplate.query(sql, mapper);
 	}
-	
+
+	public void plusRead(int pension_no) {
+		String sql = "update pension set read=read+1 where pension_no=?";
+		Object[] args = {pension_no};
+		jdbcTemplate.update(sql, args);
+	}
+
+	public List<Pension> myPension(int company_no) {
+		String sql = "select * from pension where company_no=?";
+		Object[] args = {company_no};
+		RowMapper<Pension> mapper = (rs, index)->{
+			return new Pension(rs);
+		};
+		return jdbcTemplate.query(sql, args, mapper);
+	}
+
 
 }

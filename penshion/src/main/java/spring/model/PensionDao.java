@@ -11,4 +11,6 @@ public interface PensionDao {
 	int insert(int company_no, Pension pension);
 	Pension info(int pension_no);
 	List<Pension> list_latest();
+	void plusRead(int pension_no);
+	List<Pension> myPension(int company_no);
 }

@@ -9,7 +9,9 @@ public class Pension {
 	public int company_no;
 	public int pension_no;
 	public String pension_name;
-	public String location;
+	public String location01;
+	public String location02;
+	public String location03;
 	public String phone;
 	public String pickup;
 	public String guide;
@@ -25,10 +27,37 @@ public class Pension {
 	public String photo3;
 	public String photo4;
 	public String photo5;
+	public int read;
+	
+
 	public Pension() {
 		super();
 	}
 	
+	public String getLocation01() {
+		return location01;
+	}
+
+	public void setLocation01(String location01) {
+		this.location01 = location01;
+	}
+
+	public String getLocation02() {
+		return location02;
+	}
+
+	public void setLocation02(String location02) {
+		this.location02 = location02;
+	}
+
+	public String getLocation03() {
+		return location03;
+	}
+
+	public void setLocation03(String location03) {
+		this.location03 = location03;
+	}
+
 	public String getBank() {
 		return bank;
 	}
@@ -55,14 +84,20 @@ public class Pension {
 	public void setPension_name(String pension_name) {
 		this.pension_name = pension_name;
 	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
-	}
 	public String getPhone() {
 		return phone;
+	}
+	public String getPhone01() {
+		String[] phone_no = phone.split("-");
+		return phone_no[0];
+	}
+	public String getPhone02() {
+		String[] phone_no = phone.split("-");
+		return phone_no[1];
+	}
+	public String getPhone03() {
+		String[] phone_no = phone.split("-");
+		return phone_no[2];
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
@@ -98,19 +133,22 @@ public class Pension {
 		this.depositor = depositor;
 	}
 	public String getPeak_start() {
-		return peak_start;
+		return peak_start.substring(0, 10);
 	}
 	public void setPeak_start(String peak_start) {
 		this.peak_start = peak_start;
 	}
 	public String getPeak_end() {
-		return peak_end;
+		return peak_end.substring(0, 10);
 	}
 	public void setPeak_end(String peak_end) {
 		this.peak_end = peak_end;
 	}
 	public String getReg() {
 		return reg;
+	}
+	public String getDate() {
+		return reg.substring(0, 10);
 	}
 	public void setReg(String reg) {
 		this.reg = reg;
@@ -145,12 +183,23 @@ public class Pension {
 	public void setPhoto5(String photo5) {
 		this.photo5 = photo5;
 	}
+	public int getRead() {
+		return read;
+	}
+	public void setRead(int read) {
+		this.read = read;
+	}
 	
 	public Pension(MultipartHttpServletRequest mRequest, int company_no) {
 		setCompany_no(company_no);
 		setPension_name(mRequest.getParameter("pension_name"));
-		setLocation(mRequest.getParameter("loc01")+mRequest.getParameter("loc02")+mRequest.getParameter("loc03"));
-		setPhone(mRequest.getParameter("mobile1")+ mRequest.getParameter("mobile2")+ mRequest.getParameter("mobile3"));
+		setLocation01(mRequest.getParameter("loc01"));
+		setLocation02(mRequest.getParameter("loc02"));
+		setLocation03(mRequest.getParameter("loc03"));
+		String phone01 = mRequest.getParameter("mobile1");
+		String phone02 = mRequest.getParameter("mobile2");
+		String phone03 = mRequest.getParameter("mobile3");
+		setPhone(phone01+"-"+phone02+"-"+phone03);
 		setPickup(mRequest.getParameter("pickup"));
 		setGuide(mRequest.getParameter("guide"));
 		setCaution(mRequest.getParameter("caution"));
@@ -171,13 +220,18 @@ public class Pension {
 		setPhoto4(photo4.getOriginalFilename());
 		MultipartFile photo5 = mRequest.getFile("photo5");
 		setPhoto5(photo5.getOriginalFilename());
+		
+		String read = mRequest.getParameter("read");
+		setRead(read == null?0:Integer.parseInt(read));
 	}
 	
 	public Pension(ResultSet rs) throws SQLException {
 		setCompany_no(rs.getInt("company_no"));
 		setPension_no(rs.getInt("pension_no"));
 		setPension_name(rs.getString("pension_name"));
-		setLocation(rs.getString("location"));
+		setLocation01(rs.getString("location01"));
+		setLocation02(rs.getString("location02"));
+		setLocation03(rs.getString("location03"));
 		setPhone(rs.getString("phone"));
 		setPickup(rs.getString("pickup"));
 		setGuide(rs.getString("guide"));
@@ -193,18 +247,9 @@ public class Pension {
 		setPhoto3(rs.getString("photo3"));
 		setPhoto4(rs.getString("photo4"));
 		setPhoto5(rs.getString("photo5"));
+		setRead(rs.getInt("read"));
 	}
 
-	@Override
-	public String toString() {
-		return "Pension [company_no=" + company_no + ", pension_no=" + pension_no + ", pension_name=" + pension_name
-				+ ", location=" + location + ", phone=" + phone + ", pickup=" + pickup + ", guide=" + guide
-				+ ", caution=" + caution + ", bank=" + bank + ", account=" + account + ", depositor=" + depositor
-				+ ", peak_start=" + peak_start + ", peak_end=" + peak_end + ", reg=" + reg + ", photo1=" + photo1
-				+ ", photo2=" + photo2 + ", photo3=" + photo3 + ", photo4=" + photo4 + ", photo5=" + photo5 + "]";
-	}
 	
-	
-
 
 }

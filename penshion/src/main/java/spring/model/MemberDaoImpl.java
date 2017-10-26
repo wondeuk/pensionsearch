@@ -110,8 +110,8 @@ public class MemberDaoImpl implements MemberDao{
 		public void insert(Company company) {
 			String sql = "select company_seq.nextval from dual";
 			int company_no = jdbcTemplate.queryForObject(sql, Integer.class);
-			sql = "insert into company values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, ?)";
-			Object[] args = {company_no, company.getDomain(), company.getPhone(), company.getCrn(), company.getCompany_name(), company.getLocation(), company.getEmail(), company.getId(), company.getPw(), company.getManager_name(), company.getMobile(), company.getAgree()};
+			sql = "insert into company values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?)";
+			Object[] args = {company_no, company.getDomain(), company.getPhone(), company.getCrn(), company.getCompany_name(), company.getEmail(), company.getId(), company.getPw(), company.getManager_name(), company.getMobile(), company.getAgree(), company.getLocation01(), company.getLocation02(), company.getLocation03()};
 			jdbcTemplate.update(sql, args);
 		}
 
