@@ -56,6 +56,14 @@ div.row{
     color: white;
 }
 
+#form-btn{
+    font-size:20px;
+    padding:10px;
+    background-color:gray;
+    border:1px solid black;
+    color: white;
+}
+
 /* 좌측, 우측 정렬(div)*/
 div.inner-align-left{
     display: flex;

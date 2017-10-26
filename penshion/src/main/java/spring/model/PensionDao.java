@@ -17,4 +17,6 @@ public interface PensionDao {
 	Pension info(int pension_no);
 	List<Pension> list_latest();
 
+	void plusRead(int pension_no);
+	List<Pension> myPension(int company_no);
 }

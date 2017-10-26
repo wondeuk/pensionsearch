@@ -3,12 +3,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp"%>
 
-
-
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/standing.css">
-
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/standing.css">
 
@@ -52,12 +46,35 @@
 			<td width="10%">${q.boardno}</td>
 			<td width="45%" align="left">&nbsp;&nbsp;&nbsp;${q.title}</td>
 			<td width="25%">${q.writer}</td>
-			<td>${q.reg}</td>
+			<td>${q.date}</td>
 			
 		</tr>
 		
 		</c:forEach>
 	</tbody>
+	
+	<tfoot>
+                <tr>
+                    <td colspan="8" align="right">
+                    	<c:if test="${blockstart > 1}">
+                    		<a href="${pageContext.request.contextPath}/standing/questionboardlist?page=${blockstart-1}${searchParam}">[이전]</a>
+                    	</c:if>
+                        <c:forEach var="n" begin="${blockstart}" end="${blockend}">
+                        	<c:choose>
+                        		<c:when test="${pageNo==n}">
+                        			<a href="#" class="active">${n}</a>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<a href="${pageContext.request.contextPath}/standing/questionboardlist?page=${n}${searchParam}">${n}</a>
+                        		</c:otherwise>
+                        	</c:choose>
+                        </c:forEach>
+                        <c:if test="${blockend < blocktotal}">
+                        	<a href="${pageContext.request.contextPath}/standing/questionboardlist?page=${blockend+1}${searchParam}">[다음]</a>
+                        </c:if>
+                    </td>
+                </tr>
+            </tfoot>
 
 		</table>
 		<div class="empty-row"></div>
@@ -66,28 +83,34 @@
 		<div class="writerbtn" align="right">
 		<input type="button" value="글쓰기" style="width:100; height:30;" onclick="location.href='${pageContext.request.contextPath}/standing/questionboard' ">
 		</div>
+		<div class="empty-row"></div>
 		
 		
 		<div align="center">
-		<form action="list.jsp" method="get">
-			<select name="type">
-				<%--  <%
-					if (type != null && type.equals("writer")) {
-				%>
-				<option value="title">제목</option>
-				<option value="writer" selected>작성자</option>
-				<%
-					} else {
-				%>
-				<option value="title">제목</option>
-				<option value="writer">작성자</option>
-				 <%
-					}
-				%>  --%>
-			</select> <input type="search" name="key" placeholder="검색어" required
-				<%-- value="<%=key == null ? "" : key%> --%>"> <input type="submit"
-				value="검색">
-		</form>
+		<form action="#">
+            <div class="inner-align-right">
+                <div>
+                    <input id="form-btn" type="submit" value="검색">
+                </div>
+                <div>
+                    <input class="form-input" type="search" name="key" placeholder="검색어" value="${param.key}" required>        
+                </div>
+                <div>
+                    <select class="form-input" name="type">
+                    	<c:choose>
+                    		<c:when test="${param.type == 'writer'}">
+								<option value="title">제목</option>
+              					<option value="writer" selected>작성자</option>                    		
+                    		</c:when> 
+                    		<c:otherwise>
+                    			<option value="title">제목</option>
+              					<option value="writer">작성자</option>
+                    		</c:otherwise>
+                    	</c:choose>
+                    </select>
+                </div>
+            </div>
+        </form>
 		</div>
 
 	</div>

@@ -32,14 +32,52 @@ public class questionboardDaolmpl implements questionboardDao{
 	}
 	
 	@Override
-	public List<questionboard> list() {
-		String sql="select * from questionboard order by boardno desc";
+	public List<questionboard> list(int start, int end) {
+		String sql = "select * from ("
+				+ "select rownum as rn, A.* from ("
+//					+ "select * from board order by no desc"
+					+ "select * from questionboard order by boardno desc"				//board를 조회하는데
+				+ ")A"
+			+ ") where rn between ? and ?";
+//		String sql="select * from questionboard order by boardno desc";
+		Object[] args = {
+				start, end
+		};
 		RowMapper<questionboard> mapper = (rs, index)->{
 			return new questionboard(rs);
 		};
-		return jdbcTemplate.query(sql, mapper);
+		return jdbcTemplate.query(sql, mapper, args);
+		
 	}
-
+	
+	@Override
+	public List<questionboard> search(String type, String key, int start, int end) {
+		String sql = "select * from ("
+				+ "select rownum as rn, A.* from ("
+//					+ "select * from board order by no desc"
+					+ "select * from questionboard where "+type+" like ? order by boardno desc"				//board를 조회하는데
+				+ ")A"
+			+ ") where rn between ? and ?";
+		Object[] args = {"%"+key+"%", start, end};
+		RowMapper<questionboard> mapper = (rs, index)->{
+			return new questionboard(rs);
+		};
+		return jdbcTemplate.query(sql, mapper, args);
+	}
+	
+	
+	public int getBoardCount() {
+		String sql = "select count(*) from questionboard";
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+	
+	public int getBoardCount(String type, String key) {
+		String sql = "select count(*) from questionboard where "+type+" like ?";
+		Object[] args = {
+				"%"+key+"%"
+		};
+		return jdbcTemplate.queryForObject(sql, args, Integer.class);
+	}
 
 	
 	
