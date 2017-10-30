@@ -3,11 +3,12 @@
 <%@ include file="/WEB-INF/view/template/header.jsp" %>    
 
 
-<link rel="stylesheet" type="text/css" href="css/member.css">
-			<link rel="stylesheet" type="text/css" href="css/member_register.css">
-			<link rel="stylesheet" type="text/css" href="css/jquery-te-1.4.0.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_register.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-te-1.4.0.css">
+			<script src="${pageContext.request.contextPath}/js/pension_register.js"></script>
 			<script src="https://code.jquery.com/jquery-latest.js"></script>
-			<script src="js/jquery-te-1.4.0.js"></script>
+			<script src="${pageContext.request.contextPath}/js/jquery-te-1.4.0.js"></script>
 			<script>
 				$(document).ready(function() {
 					$(".editor").jqte();
@@ -175,9 +176,8 @@
 				</div>
 				<div class="empty-row"></div>
 				<div class="btnArea text-center">
-					<button type="submit" onclick="sendCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join1.gif"/></button>
-					<button onclick="location.href='${pageContext.request.contextPath}'"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join_cancel.gif" alt="회원가입취소" /></button>
-					
+					<a id="register_btn" type="submit" onclick="sendCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join1.gif"/></a>
+					<a href="${pageContext.request.contextPath}"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join_cancel.gif" alt="회원가입취소" /></a>
 				</div>
 			</form>
 			

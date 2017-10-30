@@ -16,6 +16,7 @@
 .xans-member-join .boardWrite tr:first-child th,
 .xans-member-join .boardWrite tr:first-child td { border-top:0; }
 .xans-member-join .boardWrite input { height:33px; width: 200}
+.xans-member-join .boardWrite input[type=image]{  width:150px; height:100px; }
 .xans-member-join .boardWrite select { height:24px; }
 .xans-member-join .boardWrite img { vertical-align:middle; }
 .xans-member-join .boardWrite a { text-decoration:none; }
@@ -86,3 +87,6 @@
 #realNameAuth p span { display:inline-block; width:80px; }
 #ipinWrap img,
 #mobileWrap img { display:block; }
+#register_btn{
+	cursor:pointer;	
+}

@@ -26,11 +26,11 @@
 
 <div class="empty-row"></div>
 <div class="area-70 center">
-<h2>AA펜션의 @@객실</h2>
+<h2>${room.room_name}</h2>
 </div>
 <div class="area-30 right">
 	<a href="${pageContext.request.contextPath}/pension_info"><button class="pbtn">뒤로</button></a>
-    <a href="${pageContext.request.contextPath}/room_edit"><button class="pbtn">정보수정</button></a>
+    <a href="${pageContext.request.contextPath}/room/room_edit?room_no=${room.room_no}"><button class="pbtn">정보수정</button></a>
     </div>
     
     <div class="empty-row"></div>
@@ -39,46 +39,46 @@
     <table id="profile">
         <tr>
             <th>객실명</th>
-            <td>객실이름을 적을시구요</td>
+            <td>${room.room_name}</td>
         </tr>
         <tr>
             <th>구조/넓이</th>
-            <td>구조랑 넓이 적으시면돼여</td>
+            <td>${room.structure}</td>
         </tr>
         <tr>
             <th>구비시설</th>
-            <td>사용할 시설들</td>
+            <td>${room.facilities}</td>
             
         </tr>
         <tr>
             <th>특이사항</th>
-            <td>특이한 점에 대해 적으라구</td>
+            <td>${room.specialnote}</td>
             
         </tr>
         <tr>
             <th>기준인원/최대인원</th>
-            <td>인원수(명)</td>
+            <td>${room.guest} / ${room.max_guest}</td>
             
         </tr>
         <tr>
             <th>사진1</th>
-            <td><button onclick="move(naver);">사진확인1</button></td>
+            <td><img src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo1}"></td>
         </tr>
         <tr>
             <th>사진2</th>
-            <td>사진확인2</td>
+            <td><img src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo2}"></td>
         </tr>
         <tr>
             <th>사진3</th>
-            <td>사진확인3</td>
+            <td><img src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo3}"></td>
         </tr>
         <tr>
             <th>사진4</th>
-            <td>사진확인4</td>
+            <td><img src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo4}"></td>
         </tr>
         <tr>
             <th>사진5</th>
-            <td>사진확인5</td>
+            <td><img src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo5}"></td>
         </tr>
     </table>
     <div class="empty-row"></div>
@@ -91,10 +91,10 @@
             <th>성수기주말</th>
         </tr>
         <tr>
-            <td>비수기 평일가격</td>
-            <td>비수기 주말가격</td>
-            <td>성수기 평일가격</td>
-            <td>성수기 주말가격 엄청 비쌉니다!!</td>
+            <td>${room.off_weekday}</td>
+            <td>${room.off_weekend}</td>
+            <td>${room.peak_weekday}</td>
+            <td>${room.peak_weekend}</td>
         </tr>
     </table>
     </div>
@@ -110,9 +110,9 @@
             
         </tr>
         <tr>
-            <td>성인요금</td>
-            <td>아동 요금</td>
-            <td>유아도 돈 받나</td>
+            <td>${room.add_adult}</td>
+            <td>${room.add_child}</td>
+            <td>${room.add_baby}</td>
         </tr>
     </table>
     </div>

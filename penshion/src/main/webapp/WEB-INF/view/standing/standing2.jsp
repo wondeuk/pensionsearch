@@ -54,7 +54,7 @@
                 <div class="empty-row"></div>
                 <div class="empty-row"></div>
                 <div class="requestbtn">
-                <center><input type="button" value="입점 신청하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/pension_register' "></center>
+                <center><input type="button" value="입점 신청하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/pension/pension_register' "></center>
                 </div>
                 
                 <div class="empty-row"></div>

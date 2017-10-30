@@ -92,6 +92,9 @@ button:hover .content{
     border: 1px dotted skyblue;
     height: 60px;
 }
+.subtable td{
+    text-align:center;
+}
 .subtable{
     width: 80%;
     border: 2px solid blue;

@@ -16,7 +16,7 @@
                 </tr>
                 <tr valign="top" bgcolor="silver">
               		<c:forEach var="pension"  begin="0" step="1" end="2" items="${list_latest}">
-	                   <td width="20%" class="img" background="${pageContext.request.contextPath}/pension/${pension.photo1}" onclick="location.href='reserve?pension_no=${pension.pension_no}'"></td>
+	                   <td width="20%" class="img" background="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${pension.photo1}" onclick="location.href='${pageContext.request.contextPath}/pension/reserve?pension_no=${pension.pension_no}'"></td>
                 	</c:forEach>
                 </tr>
                 <tr height=50px>
@@ -27,7 +27,7 @@
 
                 <tr valign="top" bgcolor="silver">
               		<c:forEach var="pension"  begin="3" step="1" end="5" items="${list_latest}">
-	                   <td width="20%" class="img" background="${pageContext.request.contextPath}/pension/${pension.photo1}" onclick="location.href='reserve?pension_no=${pension.pension_no}'"></td>
+	                   <td width="20%" class="img" background="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${pension.photo1}" onclick="location.href='${pageContext.request.contextPath}/pension/reserve?pension_no=${pension.pension_no}'"></td>
                 	</c:forEach>
                 </tr>
                 <tr height=50px>

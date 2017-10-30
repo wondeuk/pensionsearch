@@ -118,7 +118,9 @@ public class MemberController {
 	@RequestMapping("/myinfo")
 	public String myinfo(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("userId");
+		
 		Member member = memberDao.info(id);
+		
 		model.addAttribute("info", member);
 		return "member/myinfo";
 	}
@@ -135,6 +137,7 @@ public class MemberController {
 		model.addAttribute("info", member);
 		return "member/edit";
 	}
+	
 	
 	@RequestMapping(value="/edit", method=RequestMethod.POST)
 	public String edit(HttpServletRequest request) {

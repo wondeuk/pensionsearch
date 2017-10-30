@@ -170,8 +170,8 @@
 				<div class="empty-row"></div>
 				
 				<div class="btnArea text-center">
-					<button id="login_btn" type="submit" onclick="sendCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join1.gif"/></button>
-					<button onclick="location.href='${pageContext.request.contextPath}'"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join_cancel.gif" alt="회원가입취소" /></button>
+					<a id="register_btn" type="submit" onclick="sendCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join1.gif"/></a>
+					<a href="${pageContext.request.contextPath}"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join_cancel.gif" alt="회원가입취소" /></a>
 				</div>
 			</form>
 <%@ include file="/WEB-INF/view/template/footer.jsp" %>    

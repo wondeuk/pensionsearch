@@ -99,7 +99,7 @@ function sendCheck() {
 
 	//기본 이벤트를 중지시키는 명령
 	event.preventDefault();
-
+	console.log("sendCheck!");
 	//검사
 	var result = idCheck() && pw1Check() &&
 		pw2Check() && nameCheck();

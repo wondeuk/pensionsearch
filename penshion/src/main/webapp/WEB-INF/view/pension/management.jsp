@@ -85,12 +85,12 @@ $(document).ready(function() {
 			</tr>
 			<c:forEach var="pension_list" items="${pension_list}">
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/pension_info?pension_no=${pension_list.pension_no}">${pension_list.pension_no}</a></td>
+					<td><a href="${pageContext.request.contextPath}/pension/pension_info?pension_no=${pension_list.pension_no}">${pension_list.pension_no}</a></td>
 					<td>${pension_list.pension_name}</td>
 					<td>${pension_list.location01} ${pension_list.location02} ${pension_list.location03}</td>
 					<td>${pension_list.phone}</td>
 	                <td>${pension_list.date}</td>
-					<td><a href="${pageContext.request.contextPath}/pension_edit?pension_no=${pension_list.pension_no}">수정</a>/<a href="${pageContext.request.contextPath}/pension/room_register">등록</a></td>
+					<td><a href="${pageContext.request.contextPath}/pension/pension_edit?pension_no=${pension_list.pension_no}">수정</a>/<a href="${pageContext.request.contextPath}/room/room_register?pension_no=${pension_list.pension_no}">등록</a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -122,9 +122,6 @@ $(document).ready(function() {
 			</tr>
 		</table>
         
-        
-		
->>>>>>> branch 'master' of https://github.com/wondeuk/pensionsearch.git
 	</div>
 	<div class="empty-row"></div>
 	<div class="empty-row"></div>

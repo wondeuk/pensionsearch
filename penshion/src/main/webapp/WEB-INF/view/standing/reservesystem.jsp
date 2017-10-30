@@ -74,11 +74,11 @@
                     일대일상담을 이용하시기 바랍니다.
                     </td>
                      <td class="bottombtn" rowspan="2">
-                    <input type="button" value="문의하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/standing/questionboard' "></button>
+                    <input type="button" value="문의하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/standing/questionboard' ">
                     
                     
                    <td class="bottombtn" rowspan="2">
-                    <input type="button" value="입점 신청하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/pension_register' "></button>
+                    <input type="button" value="입점 신청하기" align="center" style="width:200; height:50;" onclick="location.href='${pageContext.request.contextPath}/pension/pension_register' ">
                 </tr>
                 
             </table>

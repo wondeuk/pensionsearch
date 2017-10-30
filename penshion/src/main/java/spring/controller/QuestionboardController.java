@@ -12,15 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import spring.bean.questionboard;
-import spring.model.questionboardDao;
+import spring.bean.Questionboard;
+import spring.model.QuestionboardDao;
 
 @Controller
 @RequestMapping("/standing")
-public class questionboardController {
+public class QuestionboardController {
 
 	@Autowired
-	private questionboardDao questionboardDao;
+	private QuestionboardDao questionboardDao;
 
 	private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -36,7 +36,7 @@ public class questionboardController {
 		String detail = request.getParameter("detail");
 		String pw = request.getParameter("pw");
 		
-		questionboard q = new questionboard();
+		Questionboard q = new Questionboard();
 		q.setWriter(writer);
 		q.setTitle(title);
 		q.setDetail(detail);

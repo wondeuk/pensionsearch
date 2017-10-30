@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -22,14 +23,21 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import spring.bean.Company;
 import spring.bean.Pension;
+import spring.bean.Room;
+import spring.bean.State;
 import spring.model.MemberDao;
 import spring.model.PensionDao;
+import spring.model.RoomDao;
 
 @Controller
+@RequestMapping("/pension")
 public class PensionController {
 	
 	@Autowired
 	private PensionDao pensionDao;
+	
+	@Autowired
+	private RoomDao roomDao;
 	
 	@Autowired
 	private MemberDao memberDao;
@@ -40,30 +48,22 @@ public class PensionController {
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
 	
-	@RequestMapping("/")
-	public String home(Model model) {
-		List<Pension> list_latest = pensionDao.list_latest();
-		model.addAttribute("list_latest", list_latest);
-		String path = servletContext.getRealPath("/upload");
-
-		log.debug(path);
-		log.debug(path);
-		
-		String test = "첫번째　두번째　세번째";
-		String[] tests = test.split("　");
-		log.debug(tests[0]);
-		log.debug(tests[1]);
-		log.debug(tests[2]);
-		
-		
-		
-		return "home";
-	}
+	
 	
 	@RequestMapping("/reserve")
 	public String reserve(@RequestParam int pension_no, Model model, HttpSession session, HttpServletRequest request) {
 		Pension pension = pensionDao.info(pension_no);
+		List<Room> room_list = roomDao.list(pension_no);
 		model.addAttribute("pension", pension);
+		model.addAttribute("room_list", room_list);
+		
+		int dayCount = 14;				//표시할 날짜 수
+		Map<String, List<State>> reserve_state_list = pensionDao.state(pension_no);
+		
+		model.addAttribute("reserve_state_list", reserve_state_list);
+		model.addAttribute("dayCount", dayCount);		//표시할 날짜 수
+		
+		
 		
 		int count = 0;
 		Enumeration<String> check = session.getAttributeNames();
@@ -99,7 +99,6 @@ public class PensionController {
 		Pension pension = new Pension(mRequest, company_no);
 		int pension_no = pensionDao.insert(company_no, pension);
 		
-		String path = servletContext.getRealPath("/upload");
 		
 		MultipartFile photo1 = mRequest.getFile("photo1");
 		MultipartFile photo2 = mRequest.getFile("photo2");
@@ -109,7 +108,15 @@ public class PensionController {
 		
 		pension = pensionDao.info(pension_no);
 		log.debug(pension.toString());
-		File target = new File(path, pension.getPhoto1());
+		
+		String path = servletContext.getRealPath("/upload")+"/"+"["+pension.getPension_no()+"]"+pension.getPension_name();
+		
+		File target = new File(path);
+		if(!target.exists()) {
+			target.mkdirs();
+		}
+		
+		target = new File(path, pension.getPhoto1());
 		photo1.transferTo(target);
 		target = new File(path, pension.getPhoto2());
 		photo2.transferTo(target);
@@ -129,37 +136,9 @@ public class PensionController {
 		return "pension/success";
 	}
 	
-	@RequestMapping("/room_register")
-	public String room_register() {
-		return "pension/room_register";
-	}
-	
-	@RequestMapping("pension/management")
-	public String management() {
-		
-		return "pension/management";
-	}
-	
-	
-	//객실등록
-	@RequestMapping("pension/room_register")
-	public String roomRegister() {
-		return "pension/room_register";
-	}
-	
 	@RequestMapping("pension/answer_list")
 	public String answerList() {
 		return "pension/answer_list";
-	}
-	
-	@RequestMapping("pension/room_info")
-	public String roomInfo() {
-		return "pension/room_info";
-	}
-	
-	@RequestMapping("/room_edit")
-	public String roomEdit() {
-		return "pension/room_edit";
 	}
 	
 	@RequestMapping("pension/reserve_list")
@@ -171,6 +150,8 @@ public class PensionController {
 	public String imgLook() {
 		return "pension/imglook";
 	}
+	
+	@RequestMapping("/management")
 	public String management(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("userId");
 		Company company = memberDao.info2(id);
@@ -186,17 +167,41 @@ public class PensionController {
 	public String pEdit(@RequestParam int pension_no, Model model) {
 		Pension pension = pensionDao.info(pension_no);
 		model.addAttribute("pension", pension);
-		model.addAttribute("pension_no", pension_no);
 		return "pension/pension_edit";
 	}
 	
-	@RequestMapping("/pension_info")
-	public String pInfo(@RequestParam int pension_no, Model model) {
+	@RequestMapping(value="/pension_edit", method=RequestMethod.POST)
+	public String pEdit(MultipartHttpServletRequest mRequest, @RequestParam int pension_no) throws IllegalStateException, IOException {
 		Pension pension = pensionDao.info(pension_no);
-		model.addAttribute("pension", pension);
-		return "pension/pension_info";
+		pensionDao.update(mRequest, pension);
+		return "redirect:success";
 	}
 	
+	@RequestMapping("/pension_info")
+	public String pInfo(@RequestParam int pension_no, HttpSession session, Model model) {
+		String id = (String)session.getAttribute("userId");
+		int no1 = pensionDao.companycheck(id);
+		int no2 = pensionDao.companycheck(pension_no);
+		if(no1 == no2) {
+			Pension pension = pensionDao.info(pension_no);
+			List<Room> room_list = roomDao.list(pension_no);
+			model.addAttribute("pension", pension);
+			model.addAttribute("room_list", room_list);
+			return "pension/pension_info";
+		}else
+			return "redirect:pension/management";
+	}
+	
+	
+	@RequestMapping("/state")
+	public String state(@RequestParam int pension_no, Model model) {
+		int dayCount = 14;				//표시할 날짜 수
+		Map<String, List<State>> reserve_state_list = pensionDao.state(pension_no);
+		
+		model.addAttribute("reserve_state_list", reserve_state_list);
+		model.addAttribute("dayCount", dayCount);		//표시할 날짜 수
+		return "pension/state";
+	}
 	
 }
 

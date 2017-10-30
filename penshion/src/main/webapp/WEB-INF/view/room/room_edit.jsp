@@ -8,75 +8,80 @@
 			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-te-1.4.0.css">
 
 			<script src="https://code.jquery.com/jquery-latest.js"></script>
-			<script src="js/jquery-te-1.4.0.js"></script>
+			<script src="${pageContext.request.contextPath}/js/jquery-te-1.4.0.js"></script>
+			<script src="${pageContext.request.contextPath}/js/pension_register.js"></script>
+			
 			<script>
 				$(document).ready(function() {
 					$(".editor").jqte();
 				});
 			</script>
 			
-			<form action="user_register02" method="post" id="next02">
+			<form action="room_edit" method="post" id="next02" enctype="multipart/form-data">
+				<input type="hidden" name="pension_no" value="${pension.pension_no}">
+				<input type="hidden" name="room_no" value="${room.room_no}">
+				
 				<div class="xans-member-join area-50 center">
-					<h2>객실 등록</h2>
-					<p class="required"><img src="../img/ico_required.gif" /> 필수입력사항</p>
+					<h2>객실 수정</h2>
+					<p class="required"><img src="${pageContext.request.contextPath}/img/ico_required.gif" /> 필수입력사항</p>
 					<div class="boardWrite">
 						<table>
-							<caption>회원 기본정보</caption>
+							<caption>객실 정보</caption>
 							<tbody>
 								<tr>
-									<th>객실명 <img src="../img/ico_required.gif" /></th>
-									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
+									<th>객실명 <img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
+									<td><input value="${room.room_name}" id="pension_name" name="room_name" class="inputTypeText" placeholder="" type="text"></td>
 								</tr>
 								<tr>
-									<th>구조/넓이<img src="../img/ico_required.gif" /></th>
+									<th>구조/넓이<img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
 									<td>
-										<textarea class="textarea"></textarea>
+										<textarea name="structure" class="textarea">${room.structure}</textarea>
 									</td>
 								</tr>
 								<tr>
 									<th>성인 추가비용 </th>
-									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
+									<td><input id="pension_name" name="add_adult" class="inputTypeText" placeholder="" value="${room.add_adult}" type="text"></td>
 								</tr>
 								<tr>
 									<th>아동 추가비용 </th>
-									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
+									<td><input id="pension_name" name="add_child" class="inputTypeText" placeholder=""  value="${room.add_child}" type="text"></td>
 								</tr>
 								<tr>
 									<th>유아 추가비용 </th>
-									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
+									<td><input id="pension_name" name="add_baby" class="inputTypeText" placeholder="" value="${room.add_baby}" type="text"></td>
 								</tr>
 								<tr>
-									<th>비수기 주중가격 <img src="../img/ico_required.gif" /></th>
-									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
+									<th>비수기 주중가격 <img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
+									<td><input id="pension_name" name="off_weekday" class="inputTypeText" placeholder="" value="${room.off_weekday}" type="text"></td>
 								</tr>
 								<tr>
-									<th>비수기 주말가격 <img src="../img/ico_required.gif" /></th>
-									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
+									<th>비수기 주말가격 <img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
+									<td><input id="pension_name" name="off_weekend" class="inputTypeText" placeholder="" value="${room.off_weekend}" type="text"></td>
 								</tr>
 								<tr>
-									<th>성수기 주중가격<img src="../img/ico_required.gif" /></th>
-									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
+									<th>성수기 주중가격<img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
+									<td><input id="pension_name" name="peak_weekday" class="inputTypeText" placeholder="" value="${room.peak_weekday}" type="text"></td>
 								</tr>
 								<tr>
-									<th>성수기 주말가격 <img src="../img/ico_required.gif" /></th>
-									<td><input id="pension_name" name="pension_name" class="inputTypeText" placeholder="" value="" type="text"></td>
+									<th>성수기 주말가격 <img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
+									<td><input id="pension_name" name="peak_weekend" class="inputTypeText" placeholder="" value="${room.peak_weekend}" type="text"></td>
 								</tr>
 								<tr>
-									<th>구비시설 <img src="../img/ico_required.gif" /></th>
+									<th>구비시설 <img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
 									<td>
-										<textarea class="textarea"></textarea>
+										<textarea name="facilities" class="textarea">${room.facilities}</textarea>
 									</td>
 								</tr>
 								<tr>
-									<th>특이사항 <img src="../img/ico_required.gif" /></th>
+									<th>특이사항 <img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
 									<td>
-										<textarea class="textarea"></textarea>
+										<textarea name="specialnote" class="textarea">${room.specialnote}</textarea>
 									</td>
 								</tr>
 								<tr>
-									<th>기준인원 <img src="../img/ico_required.gif" /></th>
+									<th>기준인원 <img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
 									<td>
-										<select>
+										<select name="guest">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -111,9 +116,9 @@
 									</td>
 								</tr>
 								<tr>
-									<th>최대인원 <img src="../img/ico_required.gif" /></th>
+									<th>최대인원 <img src="${pageContext.request.contextPath}/img/ico_required.gif" /></th>
 									<td>
-										<select>
+										<select name="max_guest">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -171,31 +176,41 @@
 								<tr>
 									<th>객실사진1</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="hidden" name="origin_p1" value="${room.photo1}">
+										<input type="image" src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo1}">
+										사진변경 : <input type="file" id="file" name="photo1" required class="user-input fill">
 									</td>
 								</tr>
 								<tr>
 									<th>객실사진2</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="hidden" name="origin_p2" value="${room.photo2}">	
+										<input type="image" src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo2}">	
+										사진변경 : <input type="file" id="file" name="photo2" required class="user-input fill">
 									</td>
 								</tr>
 								<tr>
 									<th>객실사진3</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="hidden" name="origin_p3" value="${pension.photo3}">
+										<input type="image" src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo3}">
+										사진변경 : <input type="file" id="file" name="photo3" required class="user-input fill">
 									</td>
 								</tr>
 								<tr>
 									<th>객실사진4</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="hidden" name="origin_p4" value="${room.photo4}">
+										<input type="image" src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo4}">
+										사진변경 : <input type="file" id="file" name="photo4" required class="user-input fill">
 									</td>
 								</tr>
 								<tr>
 									<th>객실사진5</th>
 									<td>
-										<input type="file" id="file" name="file" required class="user-input fill">
+										<input type="hidden" name="origin_p5" value="${room.photo5}">
+										<input type="image" src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${room.room_name}/${room.photo5}">
+										사진변경 : <input type="file" id="file" name="photo5" required class="user-input fill">
 									</td>
 								</tr>
 
@@ -205,7 +220,7 @@
 				</div>
 				<div class="empty-row"></div>
 				<div class="btnArea text-center">
-					<a href="#none" onclick="sendCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join1.gif"/></a>
+					<a id="register_btn" onclick="sendCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join1.gif"/></a>
 					<a href="${pageContext.request.contextPath}"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join_cancel.gif" alt="회원가입취소" /></a>
 				</div>
 			</form>
