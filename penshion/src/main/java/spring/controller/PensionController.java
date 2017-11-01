@@ -61,6 +61,7 @@ public class PensionController {
 		Map<String, List<State>> reserve_state_list = pensionDao.state(pension_no);
 		
 		model.addAttribute("reserve_state_list", reserve_state_list);
+		log.debug("id:{}", reserve_state_list);
 		model.addAttribute("dayCount", dayCount);		//표시할 날짜 수
 		
 		
@@ -80,10 +81,7 @@ public class PensionController {
 		return "pension/reserve";
 	}
 	
-	@RequestMapping("/reservation")
-	public String reservation() {
-		return "pension/reservation";
-	}
+	
 	
 	@RequestMapping("/pension_register")
 	public String pension_register() {
@@ -194,11 +192,11 @@ public class PensionController {
 	
 	
 	@RequestMapping("/state")
-	public String state(@RequestParam int pension_no, Model model) {
+	public String state(Model model) {
 		int dayCount = 14;				//표시할 날짜 수
-		Map<String, List<State>> reserve_state_list = pensionDao.state(pension_no);
+		Map<String, List<State>> reserve_state_list = pensionDao.state(29);
 		
-		model.addAttribute("reserve_state_list", reserve_state_list);
+		model.addAttribute("test", reserve_state_list);
 		model.addAttribute("dayCount", dayCount);		//표시할 날짜 수
 		return "pension/state";
 	}

@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp" %> 
+								<script src="https://code.jquery.com/jquery-latest.js"></script>
+								<script src="${pageContext.request.contextPath}/js/sha256.js"></script>
+      							  	<script>
+           									 $(document).ready(function(){
+              								  	$("#member_passwd").keyup(function(){
+             									    var input = $("#member_passwd").val();
+            								        var encrypt = SHA256(input);
+            								       	 $("input[name=pw]").val(encrypt);
+        	     								   });
+        									    });
+           								
+           									 
+    								    </script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member.css">   
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_login.css">   
 <form action="#" method="post">
@@ -20,7 +33,8 @@
                            	<c:choose>
                            		<c:when test="${empty cookie.save.value}">
 		                           	<label class="id"><span>아이디</span><input id="member_id" name="id" class="inputTypeText" placeholder="" value="" type="text"></label>
-		                            <label class="password"><span>비번</span><input id="member_passwd" name="pw" value="" type="password"></label>
+		                            <label class="password"><span>비번</span><input id="member_passwd" name="" value="" type="password"></label>
+		                            <input type="hidden" name="pw">
 		                            <button id="login_btn" type="submit"><img class="btn-img" src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_login.gif"></button>
 									<ul>
 										<li>
@@ -38,7 +52,7 @@
 	                           	<c:otherwise>
 		                           	<label class="id"><span>아이디</span><input id="member_id" name="id" class="inputTypeText" placeholder="" value="${cookie.save.value}" type="text"></label>
 		                            <label class="password"><span>비번</span><input id="member_passwd" name="pw" value="" type="password"></label>
-		                            <button id="login_btn" type="submit"><img class="btn-img" src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_login.gif"></button>
+		                            <button id="login_btn" type=""><img class="btn-img" src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_login.gif"></button>
 									<ul>
 										<li>
 											<input id="save" type="checkbox" name="save" value="remember" checked="checked">

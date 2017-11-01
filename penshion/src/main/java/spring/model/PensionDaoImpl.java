@@ -287,11 +287,9 @@ public class PensionDaoImpl implements PensionDao{
 		c2.set(Integer.parseInt(peak_start[0]), Integer.parseInt(peak_start[1])-1, Integer.parseInt(peak_start[2]));
 		Date d2 = new Date(c2.getTimeInMillis());
 		
-		SimpleDateFormat format01 = new SimpleDateFormat("MM/dd");
+		SimpleDateFormat format01 = new SimpleDateFormat("yy/MM/dd");
 		SimpleDateFormat format02 = new SimpleDateFormat("EEE요일");
 		int dayCount = 14;				//표시할 날짜 수
-		
-//		List<List<State>> reserve_state_list = new ArrayList<List<State>>();
 		Map<String, List<State>> reserve_state_list = new HashMap<String, List<State>>();
 		for(int j = 0; j<room_list.size();j++) {
 			List<State> state_list = new ArrayList<State>();
@@ -314,6 +312,11 @@ public class PensionDaoImpl implements PensionDao{
 				} else {
 					state.setPrice(room_list.get(j).getOff_weekday());
 				}
+				state.setAdd_adult(room_list.get(j).getAdd_adult());
+				state.setAdd_child(room_list.get(j).getAdd_child());
+				state.setAdd_baby(room_list.get(j).getAdd_baby());
+				state.setGuest(room_list.get(j).getGuest());
+				state.setMax_guest(room_list.get(j).getMax_guest());
 				
 				SimpleDateFormat format03 = new SimpleDateFormat("yy/MM/dd");
 				String check_day = format03.format(today.getTime()+((long)1000*60*60*24*i));
@@ -327,11 +330,14 @@ public class PensionDaoImpl implements PensionDao{
 				}
 				state_list.add(state);
 			}
-			String room_name2 = room_list.get(j).getRoom_name();
-			reserve_state_list.put(room_name2, state_list);
+			reserve_state_list.put(room_list.get(j).getRoom_name(), state_list);
 		}
 		return reserve_state_list;
 	}
+
+
+
+	
 
 
 }

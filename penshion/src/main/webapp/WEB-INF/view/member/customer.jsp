@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/customer.css">
-
+        <link rel="stylesheet" type="text/css" href="css/customer.css">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/each.css">
 <h1>고객님의 예약 정보는 아래와 같습니다</h1>
 <table class="edge">
     <tr>
@@ -53,7 +51,47 @@
             
         </tr>
     </table>
+     <div class="empty-row"></div>
+        
             
+        <div class="area-80 center">
+            <span>몇날 몇일까지 입금하지 않으면 자동취소 됩니다.</span>
+        </div>
+            
+        <div class="area-80 center">
+            <span>주의사항</span>
+        </div>
+
+     <div class="empty-row"></div>
+        
+    <table class="area-60">
+        <tr>
+            <th>예약 신청 기간</th>
+            <th>입금 완료 시간</th>
+        </tr>
+        <tr>
+            <td>당일 0시부터 오전 9시 이전</td>
+            <td>오전 10시 이전까지</td>
+        </tr>
+        <tr>
+            <td>오전 8시부터 낮 12시 이전</td>
+            <td>오후 2시 이전까지</td>
+        </tr>
+         <tr>
+            <td>오후 12시부터 오후 4시 이전</td>
+            <td>오후 6시 이전까지</td>
+        </tr>
+         <tr>
+            <td>오후 4시부터 오후 8시 이전</td>
+            <td>오후 9시 이전까지</td>
+        </tr>
+         <tr>
+            <td>오후 8시부터 밤 12시 이전</td>
+            <td>다음날 오전 10시 이전까지</td>
+        </tr>
+    </table>
+        
         </td>
     </tr>
+ 
 </table>

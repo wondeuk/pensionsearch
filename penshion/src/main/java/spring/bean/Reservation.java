@@ -13,6 +13,9 @@ public class Reservation {
 	private int payment_price;
 	private String payment_method;
 	private String payment_condition;
+	private int adult;
+	private int child;
+	private int baby;
 	
 	
 	public Reservation() {
@@ -29,9 +32,36 @@ public class Reservation {
 		setPayment_price(rs.getInt("payment_price"));
 		setPayment_method(rs.getString("payment_method"));
 		setPayment_condition(rs.getString("payment_condition"));
+		setAdult(rs.getInt("adult"));
+		setChild(rs.getInt("child"));
+		setBaby(rs.getInt("baby"));
 	}
 	
 	
+	public int getAdult() {
+		return adult;
+	}
+
+	public void setAdult(int adult) {
+		this.adult = adult;
+	}
+
+	public int getChild() {
+		return child;
+	}
+
+	public void setChild(int child) {
+		this.child = child;
+	}
+
+	public int getBaby() {
+		return baby;
+	}
+
+	public void setBaby(int baby) {
+		this.baby = baby;
+	}
+
 	public int getRoom_no() {
 		return room_no;
 	}
@@ -86,12 +116,13 @@ public class Reservation {
 	public void setPayment_condition(String payment_condition) {
 		this.payment_condition = payment_condition;
 	}
+
 	@Override
 	public String toString() {
 		return "Reservation [room_no=" + room_no + ", reservation_no=" + reservation_no + ", member_no=" + member_no
 				+ ", checkin=" + checkin + ", stay=" + stay + ", payment_reg=" + payment_reg + ", payment_price="
 				+ payment_price + ", payment_method=" + payment_method + ", payment_condition=" + payment_condition
-				+ "]";
+				+ ", adult=" + adult + ", child=" + child + ", baby=" + baby + "]";
 	}
 	
 	

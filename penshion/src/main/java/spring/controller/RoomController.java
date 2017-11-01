@@ -2,8 +2,11 @@ package spring.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,6 +111,85 @@ public class RoomController {
 		Pension pension = pensionDao.info(pension_no);
 		roomDao.update(mRequest, pension, room_no);
 		return "redirect:success";
+	}
+	
+	
+	//펜션 검색
+			@RequestMapping(value="/searchlist", method=RequestMethod.POST)
+			public String searchPension(HttpServletRequest request, Model model) {
+				String search = request.getParameter("city");
+				List<Integer> list = roomDao.locationcheck(search);
+				log.debug(list.toString());
+				
+				//==>지역 검색으로 펜션번호를 list로 출력
+				int people = Integer.parseInt(request.getParameter("people"));
+				List<Integer> nolist = null;
+				List<Integer> nlist = new ArrayList<>();
+				for(int number:list) {
+					//System.out.println("number="+number);
+					nolist = roomDao.peoplecheck(number, people);
+					if(nolist != null) {
+						for(int num:nolist) {
+							//System.out.println("room_no:"+num);
+							nlist.add(num);
+						}
+					}
+				}
+				log.debug(nlist.toString());
+				
+				
+				//==>예약 테이블에서 해당 객실번호가 존재하는지 검사
+				String date= request.getParameter("date");
+
+					System.out.println(date);
+					List<Integer> plist = new ArrayList<>();
+					int num;
+					for(int no : nlist) {
+						num = roomDao.reservecheck(no,date);
+						if(num != 0)
+						plist.add(num);
+					}
+					model.addAttribute("plist", plist);
+					log.debug(plist.toString());
+					
+					List<Pension> pension = new ArrayList<>();
+					Pension p;
+					
+					
+					List<Room> roomInfo= new ArrayList<>();
+					Room room;
+					int a;
+					int b =0;
+					for(int number : plist) {
+						room = roomDao.Roominfo(number);
+						roomInfo.add(room);
+						a = roomDao.checked(number);
+						if(a != b) {
+						p = pensionDao.info(a);
+						pension.add(p);
+						b=a;
+						}
+						
+					}
+					log.debug(roomInfo.toString());
+					model.addAttribute("roomInfo", roomInfo);
+					log.debug(pension.toString());
+					model.addAttribute("pensionInfo", pension);
+
+				return "room/searchlist";
+			}
+	
+	
+	@RequestMapping("/searchlist")
+	public String searchPension(Model model) {
+		List<Pension> pension = pensionDao.list_latest();
+		//List<Pension> pension = roomDao.search();
+		List<Room> roomInfo = roomDao.list();
+
+		model.addAttribute("roomInfo", roomInfo);
+		model.addAttribute("pensionInfo", pension);
+		
+		return "room/searchlist";
 	}
 	
 }

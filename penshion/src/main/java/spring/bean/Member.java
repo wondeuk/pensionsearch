@@ -31,16 +31,13 @@ public class Member {
 		setMember_no(member_no == null?0:Integer.parseInt(member_no));
 		setId(request.getParameter("id"));
 		setName(request.getParameter("name"));
-		setPw(request.getParameter("pw1"));
+		setPw(request.getParameter("pw3"));
 		String email01 = request.getParameter("email01");
 		String email02 = request.getParameter("email02");
 		setEmail(email01+"@"+email02);
 		String mobile01 = request.getParameter("mobile01");
 		String mobile02 = request.getParameter("mobile02");
 		String mobile03 = request.getParameter("mobile03");
-		log.debug("1:{}", mobile01);
-		log.debug("2:{}", mobile02);
-		log.debug("3:{}", mobile03);
 		setMobile(mobile01+"-"+mobile02+"-"+mobile03);
 		setReg(request.getParameter("reg"));
 		String mileage = request.getParameter("mileage");

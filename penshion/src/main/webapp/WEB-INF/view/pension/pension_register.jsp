@@ -142,7 +142,7 @@
 								<tr>
 									<th>펜션사진1</th>
 									<td>
-										<input type="file" id="file" name="photo1" class="user-input fill">
+										<input type="file" id="file" name="photo1" class="user-input fill" required>
 									</td>
 								</tr>
 								<tr>

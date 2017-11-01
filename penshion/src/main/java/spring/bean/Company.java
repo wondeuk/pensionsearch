@@ -42,7 +42,7 @@ public class Company {
 		String email02 = request.getParameter("email02");
 		setEmail(email01+"@"+email02);
 		setId(request.getParameter("id"));
-		setPw(request.getParameter("pw1"));
+		setPw(request.getParameter("pw3"));
 		setManager_name(request.getParameter("name"));
 		String mobile01 = request.getParameter("mobile01");
 		String mobile02 = request.getParameter("mobile02");

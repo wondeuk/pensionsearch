@@ -48,7 +48,7 @@ public class MemberController {
 	@RequestMapping(value="/user_register02", method=RequestMethod.POST)
 	public String user_register02_2(HttpServletRequest request) {
 		String member_type = request.getParameter("member_type");
-		
+		log.debug("pw3:{}", request.getParameter("pw3"));
 		if(member_type.equals("user")) {
 			Member member = new Member(request);
 			memberDao.insert(member);

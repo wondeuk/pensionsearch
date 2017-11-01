@@ -45,7 +45,7 @@ public class RoomDaoImpl implements RoomDao{
 		String sql = "select room_seq.nextval from dual";
 		int room_no = jdbcTemplate.queryForObject(sql, Integer.class);
 		
-		sql ="insert into room values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '가능', ?, ?, ?, ?)";
+		sql ="insert into room values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '가능', ?, ?, ?, ?, ?)";
 		Long time = System.currentTimeMillis();
 
 		Object[] args = {
@@ -107,7 +107,6 @@ public class RoomDaoImpl implements RoomDao{
 		String p5 = photo5.getOriginalFilename();
 		
 		Long time = System.currentTimeMillis();
-		String pension_no = mRequest.getParameter("pension_no"); 
 		
 		String path = servletContext.getRealPath("/upload")+"/"+"["+pension.getPension_no()+"]"
 				+pension.getPension_name()+"/"+mRequest.getParameter("room_name");
@@ -192,5 +191,76 @@ public class RoomDaoImpl implements RoomDao{
 		};
 		jdbcTemplate.update(sql, args);
 	}
+	
+	//펜션 검색- 지역/도시검색
+			@Override
+			public List<Integer> locationcheck(String search) {
+				String sql = "select pension_no from pension where location02 like '%'||?||'%'";
+				RowMapper<Integer> mapper = (rs, index)->{
+					return rs.getInt("pension_no");
+				};
+				List<Integer> pension= jdbcTemplate.query(sql, mapper, search);
+				return pension;
+			}
+
+
+			@Override
+			public List<Integer> peoplecheck(int number, int people) {
+				String sql = "select room_no from room where pension_no=? and max_guest>=?";
+				RowMapper<Integer> mapper = (rs, index)->{
+					return rs.getInt("room_no");
+				};
+				List<Integer> RoomNo = jdbcTemplate.query(sql, mapper, number, people);
+				return RoomNo;
+			}
+
+
+			@Override
+			public int reservecheck(int room_no, String date) {
+				String sql = "select room_no from reservation where room_no=? and checkin=?";
+				RowMapper<Integer> mapper = (rs, index)->{
+					return rs.getInt("room_no");
+				};
+				List<Integer> RoomNo = jdbcTemplate.query(sql, mapper, room_no ,date);
+				for(int num : RoomNo) {
+					if(num == room_no)
+						return room_no=0;
+				}
+				return room_no;
+			}
+
+			@Override
+			public Room Roominfo(int room_no) {
+				String sql = "select * from room where room_no =?";
+				Object[] args = {room_no};
+				RowMapper<Room> mapper = (rs, index)->{
+					return new Room(rs);
+				};
+				List<Room> room= jdbcTemplate.query(sql, args, mapper);
+				Room r1 = room.get(0);
+				return r1;
+			}
+
+			@Override
+			public int checked(int room_no) {
+				String sql = "select pension_no from room where room_no=?";
+				return jdbcTemplate.queryForObject(sql, Integer.class, room_no);
+			}
+			
+			public List<Room> list(){
+				String sql = "select * from room";
+				RowMapper<Room> mapper = (rs, index)->{
+					return new Room(rs);
+				};
+				return jdbcTemplate.query(sql, mapper);
+			}
+			
+			public List<Pension> search(){
+				String sql = "select pension.pension_name from pension, room where pension.pension_no = room.pension_no order by read desc";
+				RowMapper<Pension> mapper = (rs, index)->{
+					return new Pension(rs);
+				};
+				return jdbcTemplate.query(sql, mapper);
+			}
 
 }

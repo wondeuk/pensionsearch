@@ -52,38 +52,82 @@
 						$(".reviewc").css("display", "block");
 					});
 					
-					
-					$("input[type=checkbox]").change(function() {
-						if ($("input[type=checkbox]").is(":checked")) {
+					$("input[type=checkbox]").change(function(total) {
+						var total = 0;
+
+						if ($(this).is(":checked")) {
 							$("#paybox").css("display", "block");
 
-							var name = $(this).next().val();
-							var date = $(this).next().next().val();
-							var guest = $(this).next().next().next().val()+" / " +$(this).next().next().next().next().val();
-							var price = $(this).next().next().next().next().next().val();
+							var id = $(this).val();
+							console.log(id);
+							var room_name = $(this).siblings("#"+id+"room_name").val();
+							var date = $(this).siblings("#"+id+"date").val();
+							var guest = $(this).siblings("#"+id+"guest").val();
+							var max_guest = $(this).siblings("#"+id+"max_guest").val();
+							var price = $(this).siblings("#"+id+"price").val();
+							var add_adult = $(this).siblings("#"+id+"add_adult").val();
+							var add_child = $(this).siblings("#"+id+"add_child").val();
+							var add_baby = $(this).siblings("#"+id+"add_baby").val();
+							var row = appendData(id, room_name, date, guest, max_guest, price, add_adult, add_child, add_baby);
 							
-							var row = appendData(name, date, guest, price);
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='id' value='"+id+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"room_name' value='"+room_name+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"date' value='"+date+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"guest' value='"+guest+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"max_guest' value='"+max_guest+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"price' value='"+price+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"add_adult' value='"+add_adult+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"add_child' value='"+add_child+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"add_baby' value='"+add_baby+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"adult' value='"+guest+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"child' value='0'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"baby' value='0'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"tot' value='"+price+"'>");
 							$("#paybox_body").append(row);
 							
-							console.log("체크박스 체크했음!");
-						} else {
+							
+						} else if($("input[type=checkbox]").is(":checked") == false){
 							$("#paybox").css("display", "none");
-
-							console.log("체크박스 체크 해제!");
+							var id = $(this).val();
+							$("#"+id).remove();
+							$("."+id).remove();
+						} else{
+							var id = $(this).val();
+							$("#"+id).remove();
+							$("."+id).remove();
+							$("#hidden_total").remove();
 						}
-					});
+						
+						$(".total").each(function(){
+							total += parseInt($(this).text());
+							console.log("토탈더함");
+						});
+						$("#total").text("총 결재금액 : "+total);
+						$("#hidden_total").remove();
+						$("#reservation").append("<input type='hidden' id='hidden_total' name='total' value="+total+">");
+					}); 	
+					
+					
 
-					function appendData(name, date, guest, price) {
-						var row = createRow();
-						row.append(createCell(name));
+					function appendData(id, room_name, date, guest, max_guest, price, add_adult, add_child, add_baby) {
+						var row = createRow(id);
+						row.append(createCell(room_name));
 						row.append(createCell(date));
-						row.append(createCell(guest));
-						row.append(createCell(price));
+						row.append(createCell(guest+" / "+max_guest));
+						var cell = createCell(createSelect1(id, guest, max_guest, add_adult, add_child, add_baby, price));
+						row.append(cell);
+						var cell = createCell(createSelect2(id, guest, max_guest, add_adult, add_child, add_baby, price));
+						row.append(cell);
+						var cell = createCell(createSelect3(id, guest, max_guest, add_adult, add_child, add_baby, price));
+						row.append(cell);
+						row.append(createTotal(id, price));
+						
 						return row;
 					}
 
-					function createRow() {
-						return $("<tr/>");
+					function createRow(id) {
+						//return $("<tr id='$(this).val();'/>");
+						return $("<tr/>").attr("id", id);
 					}
 
 					function createCell(obj) {
@@ -92,13 +136,251 @@
 							cell.text(obj);
 						else if (typeof obj === "object")
 							cell.append(obj);
-
 						return cell;
 					}
 					
+					function createTotal(id, obj) {
+						var cell = $("<td/>");
+						cell.text(obj);
+						cell.attr("id", id+"_total");
+						cell.attr("class", "total");
+						return cell;
+					}
 					
+					function createSelect1(id, guest, max_guest, add_adult, add_child, add_baby, price) {
+						var select = $("<select/>");
+						for(var i=0;i<=max_guest;i++){
+							select.append("<option value="+i+">"+i+"</option>");
+						}
+						$(select).children("option").each(function(){
+							if($(this).val() == guest){
+								$(this).attr("selected", true);
+							}
+						});
+						$(select).attr("id", "adult"+id);
+						$(select).on("change", function(){
+							total = changeSelect1(id, guest, max_guest, add_adult, add_child, add_baby, price);
+							//changeSelect2(id, max_guest);
+							//changeSelect3(id, max_guest);
+						});
+						//$(select).val(guest).attr("selected", "selected");
+						/* $("#add_adult"+id+" option[value="+guest+"]").attr("selected", true); */
+						return select;
+					}
+					
+					function createSelect2(id, guest, max_guest, add_adult, add_child, add_baby, price) {
+						var select = $("<select/>");
+						for(var i=0;i<=max_guest-guest;i++){
+							select.append("<option value="+i+">"+i+"</option>");
+						}
+						$(select).attr("id", "child"+id);
+						$(select).on("change", function(){
+							total = changeSelect2(id, guest, max_guest, add_adult, add_child, add_baby, price);
 
+							//changeSelect1(id, max_guest);
+							//changeSelect3(id, max_guest);
+						});
+						return select;
+					}
+					
+					function createSelect3(id, guest, max_guest, add_adult, add_child, add_baby, price) {
+						var select = $("<select/>");
+						for(var i=0;i<=max_guest-guest;i++){
+							select.append("<option value="+i+">"+i+"</option>");
+						}
+						$(select).attr("id", "baby"+id);
+						$(select).on("change", function(){
+							total = changeSelect3(id, guest, max_guest, add_adult, add_child, add_baby, price);
+							//changeSelect1(id, max_guest);
+							//changeSelect2(id, max_guest);
+						});
+						return select;
+					}
+					
+					function changeSelect1(id, guest, max_guest, add_adult, add_child, add_baby, price){
+						selectedOption1 = Number($("#adult"+id+" option:selected").val());
+						selectedOption2 = Number($("#child"+id+" option:selected").val());
+						selectedOption3 = Number($("#baby"+id+" option:selected").val());
+						
+						$("."+id+"[name="+id+"adult]").remove();
+						$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"adult' value='"+selectedOption1+"'>");
+						if(selectedOption1 == 0){
+							alert("보호자 동반없는 미성년자는 예약 및 입실 불가합니다.");
+						}
+						$("#child"+id+" option").remove();
+						$("#baby"+id+" option").remove();
+						
+						for(var i=0;i<=max_guest-selectedOption1-selectedOption3;i++){
+							if(i == selectedOption2){
+								$("#child"+id).append("<option value="+i+" selected>"+i+"</option>");
+							}else{
+								$("#child"+id).append("<option value="+i+">"+i+"</option>");
+							}
+						}
+						for(var i=0;i<=max_guest-selectedOption1-selectedOption2;i++){
+							if(i == selectedOption3){
+								$("#baby"+id).append("<option value="+i+" selected>"+i+"</option>");
+							}else{
+								$("#baby"+id).append("<option value="+i+">"+i+"</option>");
+							}
+						}
+						if(selectedOption1+selectedOption2+selectedOption3>guest){
+							if(selectedOption1<guest && selectedOption2<guest-selectedOption1){
+								total = Number(price)+(add_baby*(selectedOption1+selectedOption2+selectedOption3-guest));
+								$("#"+id+"_total").text(total);
+								$("."+id+"[name="+id+"tot]").remove();
+								$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+							}else if(selectedOption1<guest && selectedOption2>guest-selectedOption1){
+								total = Number(price)+(add_baby*selectedOption3)+(add_child*(selectedOption1+selectedOption2-guest));
+								$("#"+id+"_total").text(total);
+								$("."+id+"[name="+id+"tot]").remove();
+								$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+							}else {
+								total = Number(price)+(add_adult*(selectedOption1-guest)+(add_child*selectedOption2)+(add_baby*selectedOption3));
+								$("#"+id+"_total").text(total);
+								$("."+id+"[name="+id+"tot]").remove();
+								$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+							}
+						}else{
+							total = Number(price);
+							$("#"+id+"_total").text(total);
+							$("."+id+"[name="+id+"tot]").remove();
+							$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+						}
+						
+						total = 0;
+						$(".total").each(function(){
+							total += parseInt($(this).text());
+						});
+						$("#total").text("총 결재금액 : "+total);
+						$("#hidden_total").remove();
+						$("#reservation").append("<input type='hidden' id='hidden_total' name='total' value="+total+">");
+						return total;
+					}
+					
+					function changeSelect2(id, guest, max_guest, add_adult, add_child, add_baby, price){
+						selectedOption1 = Number($("#adult"+id+" option:selected").val());
+						selectedOption2 = Number($("#child"+id+" option:selected").val());
+						selectedOption3 = Number($("#baby"+id+" option:selected").val());
+						
+						$("."+id+"[name="+id+"child]").remove();
+						$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"child' value='"+selectedOption2+"'>");
+						
+						$("#adult"+id+" option").remove();
+						$("#baby"+id+" option").remove();
+						for(var i=0;i<=max_guest-selectedOption2-selectedOption1;i++){
+							if(i == selectedOption3){
+								$("#baby"+id).append("<option value="+i+" selected>"+i+"</option>");
+							}else{
+								$("#baby"+id).append("<option value="+i+">"+i+"</option>");
+							}
+						}
+						for(var i=0;i<=max_guest-selectedOption2-selectedOption3;i++){
+							if(i == selectedOption1){
+								$("#adult"+id).append("<option value="+i+" selected>"+i+"</option>");
+							}else{
+								$("#adult"+id).append("<option value="+i+">"+i+"</option>");
+							}
+						}
+						if(selectedOption1+selectedOption2+selectedOption3>guest){
+							if(selectedOption1<guest && selectedOption2<guest-selectedOption1){
+								total = Number(price)+(add_baby*(selectedOption1+selectedOption2+selectedOption3-guest));
+								$("#"+id+"_total").text(total);
+								$("."+id+"[name="+id+"tot]").remove();
+								$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+							}else if(selectedOption1<guest && selectedOption2>guest-selectedOption1){
+								total = Number(price)+(add_baby*selectedOption3)+(add_child*(selectedOption1+selectedOption2-guest));
+								$("#"+id+"_total").text(total);
+								$("."+id+"[name="+id+"tot]").remove();
+								$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+							}else {
+								total = Number(price)+(add_adult*(selectedOption1-guest)+(add_child*selectedOption2)+(add_baby*selectedOption3));
+								$("#"+id+"_total").text(total);
+								$("."+id+"[name="+id+"tot]").remove();
+								$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+							}
+						}else{
+							total = Number(price);
+							$("#"+id+"_total").text(total);
+							$("."+id+"[name="+id+"tot]").remove();
+							$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+						}
+
+						total = 0;
+						$(".total").each(function(){
+							total += parseInt($(this).text());
+						});
+						$("#total").text("총 결재금액 : "+total);
+						$("#hidden_total").remove();
+						$("#reservation").append("<input type='hidden' id='hidden_total' name='total' value="+total+">");
+						return total;
+					}
+					
+					function changeSelect3(id, guest, max_guest, add_adult, add_child, add_baby, price){
+						selectedOption1 = Number($("#adult"+id+" option:selected").val());
+						selectedOption2 = Number($("#child"+id+" option:selected").val());
+						selectedOption3 = Number($("#baby"+id+" option:selected").val());
+						$("."+id+"[name="+id+"baby]").remove();
+						$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"baby' value='"+selectedOption3+"'>");
+						$("#adult"+id+" option").remove();
+						$("#child"+id+" option").remove();
+						
+						for(var i=0;i<=max_guest-selectedOption3-selectedOption1;i++){
+							if(i == selectedOption2){
+								$("#child"+id).append("<option value="+i+" selected>"+i+"</option>");
+							}else{
+								$("#child"+id).append("<option value="+i+">"+i+"</option>");
+							}
+						}
+						for(var i=0;i<=max_guest-selectedOption3-selectedOption2;i++){
+							if(i == selectedOption1){
+								$("#adult"+id).append("<option value="+i+" selected>"+i+"</option>");
+							}else{
+								$("#adult"+id).append("<option value="+i+">"+i+"</option>");
+							}
+						}
+						if(selectedOption1+selectedOption2+selectedOption3>guest){
+							if(selectedOption1<guest && selectedOption2<guest-selectedOption1){
+								total = Number(price)+(add_baby*(selectedOption1+selectedOption2+selectedOption3-guest));
+								$("#"+id+"_total").text(total);
+								$("."+id+"[name="+id+"tot]").remove();
+								$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+							}else if(selectedOption1<guest && selectedOption2>guest-selectedOption1){
+								total = Number(price)+(add_baby*selectedOption3)+(add_child*(selectedOption1+selectedOption2-guest));
+								$("#"+id+"_total").text(total);
+								$("."+id+"[name="+id+"tot]").remove();
+								$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+							}else {
+								total = Number(price)+(add_adult*(selectedOption1-guest)+(add_child*selectedOption2)+(add_baby*selectedOption3));
+								$("#"+id+"_total").text(total);
+								$("."+id+"[name="+id+"tot]").remove();
+								$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+							}
+						}else{
+							total = Number(price);
+							$("#"+id+"_total").text(total);
+							$("."+id+"[name="+id+"tot]").remove();
+							$("#reservation").append("<input type='hidden' class="+id+" name='"+id+"tot' value="+total+">");
+						}
+
+						total = 0;
+						$(".total").each(function(){
+							total += parseInt($(this).text());
+						});
+						$("#total").text("총 결재금액 : "+total);
+						$("#hidden_total").remove();
+						$("#reservation").append("<input type='hidden' id='hidden_total' name='total' value="+total+">");
+					}
+					
+					
+					$("#reservation").on("click", function(){
+						
+						
+					});
+					
 				});
+				
+				
 			</script>
 			<style>
 					#paybox{
@@ -143,7 +425,7 @@
 							</table>
 
 							<button class="bt1" onclick="location.href='state?pension_no=${pension.pension_no}'">예약현황</button>
-							<button class="bt2" onclick="location.href='reservation'">예약하기</button>
+							<button class="bt2" onclick="location.href='${pageContext.request.contextPath}/reservation/reserving'">예약하기</button>
 							<button class="bt3">찜하기</button>
 						</td>
 					</tr>
@@ -157,63 +439,86 @@
 				<table border="1" align="center">
 					<tr>
 						<td rowspan="2">객실</td>
-						<c:forEach var="state"  begin="0" end="0" step="1" items="${reserve_state_list}">
-							<c:forEach var="s" items="${state.value}">
-								<td>${s.season}</td>
+						<c:forEach var="map"  begin="0" end="0" step="1" items="${reserve_state_list}">
+							<c:forEach var="value" items="${map.value}">
+								<td>${value.season}</td>
 							</c:forEach>
 						</c:forEach>
 					</tr>
 					<tr>
-						<c:forEach var="state"  begin="0" end="0" step="1" items="${reserve_state_list}">
-							<c:forEach var="s" items="${state.value}">
-								<td>${s.date}<br>${s.day}</td>
+						<c:forEach var="map"  begin="0" end="0" step="1" items="${reserve_state_list}">
+							<c:forEach var="value" items="${map.value}">
+								<td>${value.date}<br>${value.day}</td>
 							</c:forEach>
 						</c:forEach>
 					</tr>
 					
-					<c:forEach var="state"  items="${reserve_state_list}">
-						<tr>
-							<td rowspan="2">${state.key}</td>
-								<c:forEach var="s" items="${state.value}">
-									<td>${s.price}</td>
+					<c:forEach var="map"  items="${reserve_state_list}">
+						<c:forEach var="key" items="${map.key}" >
+							<tr>
+								<td rowspan="2">${key}</td>
+								<c:forEach var="value" items="${map.value}">
+									<td>${value.price}</td>
 								</c:forEach>
+							</tr>
+							<tr>
+							<c:forEach var="value" items="${map.value}">
+								<c:choose>
+									<c:when test="${value.reservation eq '가능'}">
+										<td>
+											<input type="checkbox" name="${value.room_id}"  value="${value.room_id}" >
+											<input type="hidden" id="${value.room_id}room_name" name="${value.room_id}room_name" value="${key}">
+											<input type="hidden" id="${value.room_id}date" name="${value.room_id}date" value="${value.date}">
+											<input type="hidden" id="${value.room_id}guest" name="${value.room_id}guest" value="${value.guest}">
+											<input type="hidden" id="${value.room_id}max_guest" name="${value.room_id}max_guest" value="${value.max_guest}">
+											<input type="hidden" id="${value.room_id}price" name="${value.room_id}price" value="${value.price}">
+											<input type="hidden" id="${value.room_id}add_adult" name="${value.room_id}add_adult" value="${value.add_adult}">
+											<input type="hidden" id="${value.room_id}add_child" name="${value.room_id}add_child" value="${value.add_child}">
+											<input type="hidden" id="${value.room_id}add_baby" name="${value.room_id}add_baby" value="${value.add_baby}">
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td>완료</td>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</tr>
-						<tr>
-								<c:forEach var="s" items="${state.value}">
-									<c:choose>
-										<c:when test="${s.reservation eq '가능'}">
-											<td>
-												<input type="checkbox" name="[${s.date}](${s.room_no})" >
-												<input type="hidden" id="room_name" name="[${s.date}](${s.room_no})room_name" value="${state.key}">
-												<input type="hidden" id="date" name="[${s.date}](${s.room_no})date" value="${s.date}">
-												<input type="hidden" id="guest" name="[${s.date}](${s.room_no})guest" value="${s.guest}">
-												<input type="hidden" id="max_guest" name="[${s.date}](${s.room_no})max_guest" value="${s.max_guest}">
-												<input type="hidden" id="price" name="[${s.date}](${s.room_no})price" value="${s.price}">
-											</td>
-										</c:when>
-										<c:otherwise>
-											<td>완료</td>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-						</tr>
+						</c:forEach>
+						
 					</c:forEach>
 				</table>
 				<div class="empty-row"></div>
 				
 					
-				<table border="1" align="center" width="1100px" id="paybox">
-					<thead>
-						<tr>
-							<th>객실명</th>
-							<th>이용일</th>
-							<th>기준인원 / 최대인원</th>
-							<th>결제액</th>
-						</tr>
-					</thead>
-					<tbody id="paybox_body">
-					</tbody>
-				</table>
+				<div class="area-80">
+					<form action="${pageContext.request.contextPath}/reservation/reserving" id="reservation" method="post">
+						<table border="1" align="center" width="100%" id="paybox">
+							<thead>
+								<tr>
+									<th>객실명</th>
+									<th>이용일</th>
+									<th>기준인원 / 최대인원</th>
+									<th>성인</th>
+									<th>아동</th>
+									<th>유아</th>
+									<th>결제액</th>
+								</tr>
+								
+							</thead>
+							<tbody id="paybox_body">
+								
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="7">
+										<div class="text-right" id="total"></div>
+										<div class="text-right"><button class="bt2" onclick="location.href='${pageContext.request.contextPath}/reservation/reserving'">예약하기</button></div>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</form>
+				</div>
 			</div>
 			<div class="empty-row"></div>
 			<div class="empty-row"></div>
@@ -231,17 +536,17 @@
 						<th>상세보기</th>
 					</tr>
 					<c:forEach var="room" items="${room_list}">
-						<tr>
-							<td>${room.room_name}</td>
-							<td>${room.structure}</td>
-							<td>${room.guest} / ${room.max_guest}</td>
-							<td>${room.off_weekday}</td>
-							<td>${room.off_weekend}</td>
-							<td>${room.peak_weekday}</td>
-							<td>${room.peak_weekend}</td>
-							<td>${room.add_adult}/${room.add_child}/${room.add_baby}</td>
-							<td><a href="${pageContext.request.contextPath}/room/room_info?room_no=${room.room_no}">클릭</a></td>
-						</tr>
+							<tr>
+								<td>${room.room_name}</td>
+								<td>${room.structure}</td>
+								<td>${room.guest} / ${room.max_guest}</td>
+								<td>${room.off_weekday}</td>
+								<td>${room.off_weekend}</td>
+								<td>${room.peak_weekday}</td>
+								<td>${room.peak_weekend}</td>
+								<td>${room.add_adult}/${room.add_child}/${room.add_baby}</td>
+								<td><a href="${pageContext.request.contextPath}/room/room_info?room_no=${room.room_no}">클릭</a></td>
+							</tr>
 					</c:forEach>
 				</table>
 			</div>
