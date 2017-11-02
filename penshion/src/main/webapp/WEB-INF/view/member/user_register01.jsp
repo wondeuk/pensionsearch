@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp" %>  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member.css"> 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button.css"> 
 <script src="${pageContext.request.contextPath}/js/user_register.js"></script>
  
-	<form action="user_register02" method="get" onsubmit="agreeCheck();" id="next01">
+	<form action="user_register02" method="get"  id="next01">
 		<div class="area-50 center">
 			<h1>회원가입</h1>
 			<h3>이용약관[필수]</h3>
@@ -21,8 +22,8 @@
 			<label for="cb3">제 3자 제공에 대해 동의합니다.</label>
 			<br><br><br><br>
 			<div class="text-center">
-				<input type="submit" value="확인" >
-				<input type="button" value="취소">
+				<input type="submit" value="다음" onclick="agreeCheck();" class="button mybutton">
+				<input type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}' " class="button lightGrey">
 			</div>
 			<div class="eomty-row"></div>
 		</div>

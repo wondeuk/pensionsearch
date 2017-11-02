@@ -14,10 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.bean.Member;
 import spring.bean.State2;
 import spring.model.MemberDao;
+import spring.model.PensionDao;
 import spring.model.ReserveDao;
 
 @Controller
@@ -30,10 +32,14 @@ public class ReserveController {
 	@Autowired
 	ReserveDao reserveDao;
 	
+	@Autowired
+	PensionDao pensionDao;
+	
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	@RequestMapping("/reserving")
-	public String reserving(HttpSession session, HttpServletRequest request, Model model) {
+	public String reserving(HttpSession session, HttpServletRequest request, @RequestParam int pension_no, Model model) {
+		log.debug("no:{}", pension_no);
 		String[] ids = request.getParameterValues("id");
 		Map<String, List<State2>> state_map = new HashMap<String, List<State2>>();
 		for(int i = 0; i<ids.length;i++) {
@@ -72,19 +78,25 @@ public class ReserveController {
 		model.addAttribute("member", member);
 		model.addAttribute("total", total);
 		model.addAttribute("state_map", state_map);
+		model.addAttribute("pension_no", pension_no);
 		return "reservation/reserving";
 	}
 	
 	@RequestMapping("reserving02")
-	public String reserving02(HttpServletRequest request, HttpSession session) {
+	public String reserving02(HttpServletRequest request, HttpSession session, @RequestParam int pension_no) {
 		String payment_method = request.getParameter("payment_method");
-		
+		String pension_name = pensionDao.nameSearch(pension_no);
 		String[] ids = request.getParameterValues("id");
+		
 		Map<String, List<State2>> state_map = new HashMap<String, List<State2>>();
 		for(int i = 0; i<ids.length;i++) {
 			State2 state = new State2();
 			state.setState_id(ids[i]);
+			state.setPension_name(pension_name);
 			state.setRoom_name(request.getParameter(ids[i]+"room_name"));
+			state.setUser_name(request.getParameter("user_name"));
+			state.setMobile01(request.getParameter("mobile01"));
+			state.setMobile02(request.getParameter("mobile02"));
 			state.setDate(request.getParameter(ids[i]+"date"));
 			String guest = request.getParameter(ids[i]+"guest");
 			state.setGuest(guest == null?0:Integer.parseInt(guest));
@@ -117,7 +129,7 @@ public class ReserveController {
 		String id = (String)session.getAttribute("userId");
 		
 		if(payment_method.equals("account")) {
-			reserveDao.reserveation_insert(state_map, id, payment_method);
+			reserveDao.reserveation_insert(state_map, id, payment_method, pension_no);
 			log.debug("무통장입금");
 		}else {
 			log.debug("카드결제");

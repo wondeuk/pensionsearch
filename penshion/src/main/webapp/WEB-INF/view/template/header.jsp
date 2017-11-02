@@ -18,20 +18,19 @@
             <header>
                 <a href="${pageContext.request.contextPath}" class="">
                 <div class="rogo">
-                    <img src="${pageContext.request.contextPath}/img/pen-icon.png"></div>
+                    <img src="${pageContext.request.contextPath}/img/pengsion.png"></div>
                 </a>
-            
 				<a href="${pageContext.request.contextPath}/room/searchlist" class="left">펜션찾기</a>               
 				<a href="#" class="left">예약확인/취소</a>
                 <a href="#" class="left">공지사항</a>
                 <a href="${pageContext.request.contextPath}/standing/standing2" class="left">입점 문의</a>
                 <a href="${pageContext.request.contextPath}/pension/state" class="left">테스트</a>
                 <c:choose>
-                	<c:when test="${loginFlag}">
+                	<c:when test="${loginFlag eq true && companyFlag eq false}">
             		    <a href="${pageContext.request.contextPath}/member/myinfo" class="left">마이페이지</a>
            		   		<a href="${pageContext.request.contextPath}/member/logout" class="right">로그아웃</a>
                 	</c:when>
-                	<c:when test="${companyFlag}">
+                	<c:when test="${companyFlag eq true && loginFlag eq true}" >
                 		<a href="${pageContext.request.contextPath}/pension/management" class="left">관리자페이지</a>
            		   		<a href="${pageContext.request.contextPath}/member/logout" class="right">로그아웃</a>
                 	</c:when>

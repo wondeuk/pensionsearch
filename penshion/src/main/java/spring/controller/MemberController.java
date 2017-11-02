@@ -1,6 +1,7 @@
 package spring.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import spring.bean.Company;
 import spring.bean.Member;
+import spring.bean.Reservation;
 import spring.model.MemberDao;
+import spring.model.ReserveDao;
 
 @Controller
 @RequestMapping("/member")
@@ -28,6 +31,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ReserveDao reserveDao;
 
 	@RequestMapping("/user_register01")
 	public String user_register01() {
@@ -48,7 +54,6 @@ public class MemberController {
 	@RequestMapping(value="/user_register02", method=RequestMethod.POST)
 	public String user_register02_2(HttpServletRequest request) {
 		String member_type = request.getParameter("member_type");
-		log.debug("pw3:{}", request.getParameter("pw3"));
 		if(member_type.equals("user")) {
 			Member member = new Member(request);
 			memberDao.insert(member);
@@ -82,7 +87,8 @@ public class MemberController {
 			boolean result = memberDao.login(id, pw);
 			if(result) {
 				session.setAttribute("userId", id);
-				session.setAttribute("loginFlag", "true");
+				session.setAttribute("loginFlag", true);
+				session.setAttribute("companyFlag", false);
 				Cookie c = new Cookie("save", id);
 				c.setMaxAge(save==null?0:2419200);
 				response.addCookie(c);
@@ -94,9 +100,9 @@ public class MemberController {
 		}else {
 			boolean result = memberDao.login_company(id, pw);
 			if(result) {
-				Company company = memberDao.info2(id);
 				session.setAttribute("userId", id);
-				session.setAttribute("companyFlag", "true");
+				session.setAttribute("loginFlag", true);
+				session.setAttribute("companyFlag", true);
 				Cookie c = new Cookie("save", id);
 				c.setMaxAge(save==null?0:2419200);
 				response.addCookie(c);
@@ -120,7 +126,8 @@ public class MemberController {
 		String id = (String)session.getAttribute("userId");
 		
 		Member member = memberDao.info(id);
-		
+		List<Reservation> myReservation_list = memberDao.myReservation(member.getMember_no());
+		model.addAttribute("myReservation_list", myReservation_list);
 		model.addAttribute("info", member);
 		return "member/myinfo";
 	}
@@ -133,20 +140,37 @@ public class MemberController {
 	@RequestMapping("/edit")
 	public String edit(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("userId");
-		Member member = memberDao.info(id);
-		model.addAttribute("info", member);
+		if((boolean) session.getAttribute("companyFlag")) {
+			Company company = memberDao.info2(id);
+			model.addAttribute("info", company);
+		}else {
+			Member member = memberDao.info(id);
+			model.addAttribute("info", member);
+		}
 		return "member/edit";
 	}
 	
 	
 	@RequestMapping(value="/edit", method=RequestMethod.POST)
-	public String edit(HttpServletRequest request) {
-		Member member = new Member(request);
-		memberDao.edit(member);
-		return "redirect:myinfo";
+	public String edit(HttpServletRequest request, HttpSession session) {
+		
+		boolean companyFlag = (boolean)session.getAttribute("companyFlag");
+		if(companyFlag) {
+			Company company = new Company(request);
+			memberDao.edit(company);
+			return "redirect:/pension/management";
+		}else {
+			Member member = new Member(request);
+			memberDao.edit(member);
+			return "redirect:myinfo";
+		}
+		
+		
+		
+		
 	}
 	
-	@RequestMapping("/unregister")
+	@RequestMapping(value="/unregister", method=RequestMethod.GET)
 	public String unregister() {
 		return "member/unregister";
 	}
@@ -154,15 +178,30 @@ public class MemberController {
 	@RequestMapping(value="/unregister", method=RequestMethod.POST)
 	public String unregister(@RequestParam String pw, HttpSession session, HttpServletResponse response) throws IOException {
 		String id = (String)session.getAttribute("userId");
-		
-		boolean result = memberDao.unregister(id, pw);
-		if(result) {
-			session.invalidate();
-			return "redirect:goodbye";
+		boolean companyFlag = (boolean)session.getAttribute("companyFlag");
+		log.debug(pw);
+		if(companyFlag) {
+			boolean result = memberDao.unregister_c(id, pw);
+			if(result) {
+				session.invalidate();
+				return "redirect:goodbye";
+			}else {
+				response.sendError(500);
+				return null;
+			}
 		}else {
-			response.sendError(500);
-			return null;
+			boolean result = memberDao.unregister_m(id, pw);
+			if(result) {
+				session.invalidate();
+				return "redirect:goodbye";
+			}else {
+				response.sendError(500);
+				return null;
+			}
 		}
+		
+		
+		
 	}
 	
 	@RequestMapping("/goodbye")
@@ -205,7 +244,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/customer")
-	public String customer() {
+	public String customer(@RequestParam int reservation_no, Model model) {
+		Reservation reservation = reserveDao.info(reservation_no);
+		model.addAttribute("reservation", reservation);
 		return "member/customer";
 	}
 	

@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +24,8 @@ import spring.bean.Room;
 
 @Repository("RoomDao")
 public class RoomDaoImpl implements RoomDao{
-	
+	private Logger log = LoggerFactory.getLogger(getClass());
+
 	@Autowired
 	   private JdbcTemplate jdbcTemplate;
 	
@@ -129,7 +132,7 @@ public class RoomDaoImpl implements RoomDao{
 		if(p2.equals("")) {
 			p2 = mRequest.getParameter("origin_p2");
 		}else {
-			old_file = new File(path, mRequest.getParameter("origin_p1"));
+			old_file = new File(path, mRequest.getParameter("origin_p2"));
 			if(old_file.exists()) {
 				old_file.delete();
 			}
@@ -140,7 +143,8 @@ public class RoomDaoImpl implements RoomDao{
 		if(p3.equals("")) {
 			p3 = mRequest.getParameter("origin_p3");
 		}else {
-			old_file = new File(path, mRequest.getParameter("origin_p1"));
+			old_file = new File(path, mRequest.getParameter("origin_p3"));
+			log.debug(mRequest.getParameter("origin_p3"));
 			if(old_file.exists()) {
 				old_file.delete();
 			}
@@ -151,7 +155,7 @@ public class RoomDaoImpl implements RoomDao{
 		if(p4.equals("")) {
 			p4 = mRequest.getParameter("origin_p4");
 		}else {
-			old_file = new File(path, mRequest.getParameter("origin_p1"));
+			old_file = new File(path, mRequest.getParameter("origin_p4"));
 			if(old_file.exists()) {
 				old_file.delete();
 			}
@@ -162,7 +166,7 @@ public class RoomDaoImpl implements RoomDao{
 		if(p5.equals("")) {
 			p5 = mRequest.getParameter("origin_p5");
 		}else {
-			old_file = new File(path, mRequest.getParameter("origin_p1"));
+			old_file = new File(path, mRequest.getParameter("origin_p5"));
 			if(old_file.exists()) {
 				old_file.delete();
 			}

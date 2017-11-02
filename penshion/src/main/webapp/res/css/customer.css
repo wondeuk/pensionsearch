@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .edge{
-    width: 60%;
+    width: 95%;
     border: 3px solid #666;
     padding: 0px;
 }
@@ -31,4 +31,12 @@ h1{
 
 .roomcost td{
     text-align: right;
+}
+
+span{
+	margin: 2.5%;
+}
+
+.roomcost td{
+	text-align: center;
 }

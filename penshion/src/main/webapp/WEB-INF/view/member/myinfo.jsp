@@ -2,30 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/template/header.jsp" %> 
 
-
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_myinfo.css">
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button.css">
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function() {
 	$("#question").on("click", function() {
 		$(".answer").toggle();
-		console.log("aaa");
 	});
 });
 </script>
-
-<aside>
-	<div class="row">
-		<ul>
-			<li><a href="myinfo" class="">나의 정보</a></li>
-			<li><a href="mileage" class="">적립금</a></li>
-			<li><a href="edit" class="">회원 정보 수정</a></li>
-			<li><a href="unregister" class="">회원 탈퇴</a></li>
-		</ul>
+<div class="area-60 center">
+	<div class="empty-row"></div>
+	<div class="text-right">	
+		<a href="mileage"><button class="button mybutton">적립내역</button></a>
+		<a href="edit"><button class="button mybutton">회원 정보 수정</button></a>
+		<a href="unregister"><button class="button mybutton">회원탈퇴</button></a>
 	</div>
-</aside>
-<div class="area-70" id="main">
 	<div class="table-users">
 		<div class="header">
 			<p class="left">${info.name} 님의 회원정보 </p>
@@ -61,42 +54,29 @@ $(document).ready(function() {
 				<th>예약번호</th>
 				<th>예약일</th>
 				<th>펜션명</th>
+				<th>객실명</th>
 				<th>예약자명</th>
 				<th>예약상태</th>
 				<th>후기작성</th>
 			</tr>
-			<tr>
-				<td><a onClick="window.open('customer','예약정보','fullscreen','fullscreen')">102371924</a></td>
-				<td>2017.10.12</td>
-				<td><a href="#">라봉펜션</a></td>
-				<td>네모라</td>
-				<td>입금대기</td>
-				<td><a href="#">후기작성</a></td>
-			</tr>
-			<tr>
-				<td>102371924</td>
-				<td>2017.10.12</td>
-				<td><a href="#">라봉펜션</a></td>
-				<td>네모라</td>
-				<td>입금대기</td>
-				<td><a href="#">후기작성</a></td>
-			</tr>
-			<tr>
-				<td>102371924</td>
-				<td>2017.10.12</td>
-				<td><a href="#">라봉펜션</a></td>
-				<td>네모라</td>
-				<td>입금대기</td>
-				<td><a href="#">후기작성</a></td>
-			</tr>
-			<tr>
-				<td>102371924</td>
-				<td>2017.10.12</td>
-				<td><a href="#">라봉펜션</a></td>
-				<td>네모라</td>
-				<td>입금대기</td>
-				<td><a href="#">후기작성</a></td>
-			</tr>
+			<c:forEach var="reservation" items="${myReservation_list}">
+				<tr>
+					<td><a onClick="window.open('customer?reservation_no=${reservation.reservation_no}','예약정보','fullscreen','fullscreen')">${reservation.reservation_no}</a></td>
+					<td>${reservation.date}</td>
+					<td><a href="${pageContext.request.contextPath}/pension/reserve?pension_no=${reservation.pension_no}">${reservation.pension_name}</a></td>
+					<td>${reservation.room_name}</td>
+					<td>${reservation.user_name}</td>
+					<c:choose>
+						<c:when test="${reservation.payment_condition eq 'waiting'}">
+							<td>입금대기</td>
+						</c:when>
+						<c:otherwise>
+							<td>완료</td>
+						</c:otherwise>
+					</c:choose>
+					<td><a href="#">후기작성</a></td>
+				</tr>
+			</c:forEach>
 		</table>
 
 		<h3>찜 목록</h3>

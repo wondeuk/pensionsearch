@@ -107,10 +107,11 @@ public class RoomController {
 	}
 	
 	@RequestMapping(value="/room_edit", method=RequestMethod.POST)
-	public String roomEdit(MultipartHttpServletRequest mRequest, @RequestParam int pension_no, @RequestParam int room_no) throws IllegalStateException, IOException {
+	public String roomEdit(MultipartHttpServletRequest mRequest, @RequestParam int pension_no, @RequestParam int room_no, Model model) throws IllegalStateException, IOException {
 		Pension pension = pensionDao.info(pension_no);
 		roomDao.update(mRequest, pension, room_no);
-		return "redirect:success";
+		model.addAttribute("room_no", room_no);
+		return "room/success";
 	}
 	
 	

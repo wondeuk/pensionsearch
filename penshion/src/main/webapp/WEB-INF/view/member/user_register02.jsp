@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/view/template/header.jsp" %>    
 			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member.css">
 			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_register.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button.css">
 			<script src="${pageContext.request.contextPath}/js/user_register.js"></script>
 			<script src="https://code.jquery.com/jquery-latest.js"></script>
 
@@ -184,8 +185,8 @@
 				<div class="empty-row"></div>
 				
 				<div class="btnArea text-center">
-					<a id="register_btn" type="submit" onclick="sendCheck();"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join1.gif"/></a>
-					<a href="${pageContext.request.contextPath}"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/member/btn_member_join_cancel.gif" alt="회원가입취소" /></a>
+					<input type="submit" value="가입" onclick="sendCheck();" class="button mybutton">
+					<input type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}' " class="button lightGrey">
 				</div>
 			</form>
 <%@ include file="/WEB-INF/view/template/footer.jsp" %>    

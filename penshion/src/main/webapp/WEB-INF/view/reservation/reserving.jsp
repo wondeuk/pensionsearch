@@ -63,6 +63,7 @@
                 <div class="info2">
                         <h3>예약</h3>
                            <form action="reserving02" method="post">
+                           <input type="hidden" name="pension_no" value="${pension_no}">
                            <input type="hidden" name="total" value="${total}">
                            <c:forEach var="map" items="${state_map}">
                            		<c:forEach var="key" items="${map.key}">
@@ -104,15 +105,15 @@
                                <table>
 	                               	<tr>
 	                               		<th>예약자명</th>
-	                               		<td>${member.name}</td>
+	                               		<td><input type="text" name="user_name" value="${member.name}" readonly></td>
 	                               	</tr>
 	                               	<tr>
 	                               		<th>연락처</th>
-	                               		<td>${member.mobile}</td>
+	                               		<td><input type="text" name="mobile01" value="${member.mobile}" readonly></td>
 	                               	</tr>
 	                               	<tr>
 	                               		<th>비상연락처</th>
-	                               		<td><input type="text" name="mobile_sec"></td>
+	                               		<td><input type="text" name="mobile02"></td>
 	                               	</tr>
                                </table>
                                <div class="empty-row"></div>

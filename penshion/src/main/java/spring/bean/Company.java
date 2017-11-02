@@ -17,7 +17,7 @@ public class Company {
 	private String email;
 	private String id;
 	private String pw;
-	private String manager_name;
+	private String name;
 	private String mobile;
 	private String reg;
 	private String agree;
@@ -43,7 +43,7 @@ public class Company {
 		setEmail(email01+"@"+email02);
 		setId(request.getParameter("id"));
 		setPw(request.getParameter("pw3"));
-		setManager_name(request.getParameter("name"));
+		setName(request.getParameter("name"));
 		String mobile01 = request.getParameter("mobile01");
 		String mobile02 = request.getParameter("mobile02");
 		String mobile03 = request.getParameter("mobile03");
@@ -64,7 +64,7 @@ public class Company {
 		setEmail(rs.getString("email"));
 		setId(rs.getString("id"));
 		setPw(rs.getString("pw"));
-		setManager_name(rs.getString("manager_name"));
+		setName(rs.getString("name"));
 		setMobile(rs.getString("mobile"));
 		setReg(rs.getString("reg"));
 		setAgree(rs.getString("agree"));
@@ -103,6 +103,18 @@ public class Company {
 	}
 	public String getPhone() {
 		return phone;
+	}
+	public String getPhone01() {
+		String[] temp = phone.split("-");
+		return temp[0];
+	}
+	public String getPhone02() {
+		String[] temp = phone.split("-");
+		return temp[1];
+	}
+	public String getPhone03() {
+		String[] temp = phone.split("-");
+		return temp[2];
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
@@ -145,11 +157,11 @@ public class Company {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	public String getManager_name() {
-		return manager_name;
+	public String getName() {
+		return name;
 	}
-	public void setManager_name(String manager_name) {
-		this.manager_name = manager_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getMobile() {
 		return mobile;
@@ -185,8 +197,8 @@ public class Company {
 	public String toString() {
 		return "Company [company_no=" + company_no + ", domain=" + domain + ", phone=" + phone + ", crn=" + crn
 				+ ", company_name=" + company_name + ", location01=" + location01 + ", location02=" + location02
-				+ ", location03=" + location03 + ", email=" + email + ", id=" + id + ", pw=" + pw + ", manager_name="
-				+ manager_name + ", mobile=" + mobile + ", reg=" + reg + ", agree=" + agree + "]";
+				+ ", location03=" + location03 + ", email=" + email + ", id=" + id + ", pw=" + pw + ", name="
+				+ name + ", mobile=" + mobile + ", reg=" + reg + ", agree=" + agree + "]";
 	}
 	
 	

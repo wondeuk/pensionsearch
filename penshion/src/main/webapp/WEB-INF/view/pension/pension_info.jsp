@@ -14,10 +14,15 @@
     }
 </style>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_myinfo.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button.css">
 <div class="empty-row"></div>
 <div class="area-70 center">
     <h2>펜션정보</h2>
-    
+    <div class="row text-right">
+	    <a href="${pageContext.request.contextPath}/pension/pension_edit?pension_no=${pension.pension_no}"><button class="button mybutton">정보수정</button></a>
+	    <a href="${pageContext.request.contextPath}/room/room_register?pension_no=${pension.pension_no}"><button class="button mybutton" >객실등록</button></a>
+	    <a href="${pageContext.request.contextPath}/pension/reserve_list?pension_no=${pension.pension_no}"><button class="button mybutton">예약현황</button></a>
+    </div>
     <table id="profile">
         <tr>
             <th>펜션명</th>
@@ -88,10 +93,6 @@
     </div>
     <div class="empty-row"></div>
     
-    <div class="area-30 right">
-    <a href="${pageContext.request.contextPath}/room/room_register?pension_no=${pension.pension_no}"><button class="pbtn">객실등록</button></a>
-    <a href="${pageContext.request.contextPath}/pension/pension_edit?pension_no=${pension.pension_no}"><button class="pbtn">정보수정</button></a>
-    </div>
 
         <div class="empty-row"></div>
         

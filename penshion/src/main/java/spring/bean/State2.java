@@ -2,7 +2,11 @@ package spring.bean;
 
 public class State2 {
 	private String state_id;
+	private String pension_name;
 	private String room_name;
+	private String user_name;
+	private String mobile01;
+	private String mobile02;
 	private String date;
 	private int guest;
 	private int max_guest;
@@ -14,15 +18,55 @@ public class State2 {
 	private int child;
 	private int baby;
 	private int tot;
+	
+
 	@Override
 	public String toString() {
-		return "State2 [state_id=" + state_id + ", room_name=" + room_name + ", date=" + date + ", guest=" + guest
-				+ ", max_guest=" + max_guest + ", price=" + price + ", add_adult=" + add_adult + ", add_child="
-				+ add_child + ", add_baby=" + add_baby + ", adult=" + adult + ", child=" + child + ", baby=" + baby
-				+ ", tot=" + tot + "]";
+		return "State2 [state_id=" + state_id + ", pension_name=" + pension_name + ", room_name=" + room_name
+				+ ", user_name=" + user_name + ", mobile01=" + mobile01 + ", mobile02=" + mobile02 + ", date=" + date
+				+ ", guest=" + guest + ", max_guest=" + max_guest + ", price=" + price + ", add_adult=" + add_adult
+				+ ", add_child=" + add_child + ", add_baby=" + add_baby + ", adult=" + adult + ", child=" + child
+				+ ", baby=" + baby + ", tot=" + tot + ", getUser_name()=" + getUser_name() + ", getMobile01()="
+				+ getMobile01() + ", getMobile02()=" + getMobile02() + ", getState_id()=" + getState_id()
+				+ ", getRoom_name()=" + getRoom_name() + ", getDate()=" + getDate() + ", getGuest()=" + getGuest()
+				+ ", getMax_guest()=" + getMax_guest() + ", getPrice()=" + getPrice() + ", getAdd_adult()="
+				+ getAdd_adult() + ", getAdd_child()=" + getAdd_child() + ", getAdd_baby()=" + getAdd_baby()
+				+ ", getAdult()=" + getAdult() + ", getChild()=" + getChild() + ", getBaby()=" + getBaby()
+				+ ", getTot()=" + getTot() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+
+
 	public State2() {
 		super();
+	}
+	
+	
+	
+	public String getPension_name() {
+		return pension_name;
+	}
+	public void setPension_name(String pension_name) {
+		this.pension_name = pension_name;
+	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	public String getMobile01() {
+		return mobile01;
+	}
+	public void setMobile01(String mobile01) {
+		this.mobile01 = mobile01;
+	}
+	public String getMobile02() {
+		return mobile02;
+	}
+	public void setMobile02(String mobile02) {
+		this.mobile02 = mobile02;
 	}
 	public String getState_id() {
 		return state_id;

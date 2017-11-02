@@ -274,7 +274,7 @@ public class PensionDaoImpl implements PensionDao{
 			return new Room(rs);
 		};
 		List<Room> room_list = jdbcTemplate.query(sql, args, mapper);
-		
+
 		String[] peak_end = pension.getPeak_end().split("-");
 		Calendar c1 = Calendar.getInstance();
 		c1.set(Integer.parseInt(peak_end[0]), Integer.parseInt(peak_end[1])-1, Integer.parseInt(peak_end[2]));
@@ -289,18 +289,26 @@ public class PensionDaoImpl implements PensionDao{
 		
 		SimpleDateFormat format01 = new SimpleDateFormat("yy/MM/dd");
 		SimpleDateFormat format02 = new SimpleDateFormat("EEE요일");
-		int dayCount = 14;				//표시할 날짜 수
+		int dayCount = 7;				//표시할 날짜 수
 		Map<String, List<State>> reserve_state_list = new HashMap<String, List<State>>();
+		log.debug("시작지점:{}", System.currentTimeMillis());
+
 		for(int j = 0; j<room_list.size();j++) {
 			List<State> state_list = new ArrayList<State>();
+			log.debug("1지점:{}", j+"//"+System.currentTimeMillis());
+
 			for(int i = 0;i<dayCount;i++) {
 				State state = new State();
 				state.setRoom_no(room_list.get(j).getRoom_no());
+				log.debug("2지점:{}", i+"//"+System.currentTimeMillis());
+
 				if(d1.getTime() >= today.getTime()+((long)1000*60*60*24*i) && d2.getTime() <= today.getTime()+((long)1000*60*60*24*i)) {
 					state.setSeason("성수기");
 				}else {
 					state.setSeason("비수기");
 				}
+				log.debug("3지점:{}", i+"//"+System.currentTimeMillis());
+
 				state.setDate(format01.format(today.getTime()+((long)1000*60*60*24*i)));
 				state.setDay(format02.format(today.getTime()+((long)1000*60*60*24*i)));
 				if(state.getDay().equals("토요일") && state.getSeason().equals("성수기")) {
@@ -312,27 +320,54 @@ public class PensionDaoImpl implements PensionDao{
 				} else {
 					state.setPrice(room_list.get(j).getOff_weekday());
 				}
+				log.debug("4지점:{}", i+"//"+System.currentTimeMillis());
+
 				state.setAdd_adult(room_list.get(j).getAdd_adult());
 				state.setAdd_child(room_list.get(j).getAdd_child());
 				state.setAdd_baby(room_list.get(j).getAdd_baby());
 				state.setGuest(room_list.get(j).getGuest());
 				state.setMax_guest(room_list.get(j).getMax_guest());
-				
+				log.debug("5지점:{}", i+"//"+System.currentTimeMillis());
+
 				SimpleDateFormat format03 = new SimpleDateFormat("yy/MM/dd");
 				String check_day = format03.format(today.getTime()+((long)1000*60*60*24*i));
 				sql = "select count(*) from reservation where room_no=? and checkin=?";
 				Object[] args2 = {room_list.get(j).getRoom_no(), check_day};
 				int count = jdbcTemplate.queryForObject(sql, args2, Integer.class);
+				log.debug("6지점:{}", i+"//"+System.currentTimeMillis());
+
 				if(count > 0) {
 					state.setReservation("완료");
 				} else {
 					state.setReservation("가능");
 				}
+				log.debug("7지점:{}", i+"//"+System.currentTimeMillis());
+
 				state_list.add(state);
 			}
+			log.debug("8지점:{}", j+"//"+System.currentTimeMillis());
+
 			reserve_state_list.put(room_list.get(j).getRoom_name(), state_list);
 		}
+		log.debug("끝지점:{}", System.currentTimeMillis());
+
 		return reserve_state_list;
+	}
+
+	public List<Reservation> reserveList(int pension_no) {
+		String sql = "select * from reservation where pension_no=?";
+		Object[] args = {pension_no};
+		RowMapper<Reservation> mapper = (rs, index)->{
+			return new Reservation(rs);
+		};
+		return jdbcTemplate.query(sql, args, mapper);
+	}
+
+
+	public String nameSearch(int pension_no) {
+		String sql = "select pension_name from pension where pension_no=?";
+		Object[] args = {pension_no};
+		return jdbcTemplate.queryForObject(sql, args, String.class);
 	}
 
 

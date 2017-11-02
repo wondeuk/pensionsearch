@@ -5,6 +5,7 @@
 
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_myinfo.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button.css">
 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -17,19 +18,13 @@ $(document).ready(function() {
 </script>
 
 <div class="empty-row"></div>
-<aside class="area-20">
-	<div class="row">
-		<ul>
-			<li><a href="myinfo" class="">나의 정보 수정</a></li>
-			<li><a href="pension_info" class="">펜션정보 현황</a></li>
-			<li><a href="${pageContext.request.contextPath}/pension/reserve_list" class="">펜션예약 상태</a></li>
-			<li><a href="${pageContext.request.contextPath}/pension/answer_list" class="">펜션 답변상황</a></li>
-		</ul>
+<div class="area-70 center" >
+	<div class="text-right">	
+		<a href="${pageContext.request.contextPath}/member/edit"><button class="button mybutton">가입정보수정</button></a>
+		<a href="${pageContext.request.contextPath}/member/unregister"><button class="button mybutton">회원탈퇴</button></a>
 	</div>
-</aside>
-
-<div class="area-70" id="main">
 	<div class="table-users">
+		
 		<div class="header center">
 			<p class="right"> ${company.company_name} 의 ${company.id} 님 </p>
 			<p class="right"></p>
@@ -81,46 +76,24 @@ $(document).ready(function() {
 				<th>주소</th>
 				<th>펜션연락처</th>
                 <th>등록일</th>
-                <th>수정/객실등록</th>
+                <th>펜션 관리</th>
 			</tr>
 			<c:forEach var="pension_list" items="${pension_list}">
 				<tr>
 					<td><a href="${pageContext.request.contextPath}/pension/pension_info?pension_no=${pension_list.pension_no}">${pension_list.pension_no}</a></td>
-					<td>${pension_list.pension_name}</td>
+					<td><a href="${pageContext.request.contextPath}/pension/reserve?pension_no=${pension_list.pension_no}">${pension_list.pension_name}</a></td>
 					<td>${pension_list.location01} ${pension_list.location02} ${pension_list.location03}</td>
 					<td>${pension_list.phone}</td>
 	                <td>${pension_list.date}</td>
-					<td><a href="${pageContext.request.contextPath}/pension/pension_edit?pension_no=${pension_list.pension_no}">수정</a>/<a href="${pageContext.request.contextPath}/room/room_register?pension_no=${pension_list.pension_no}">등록</a></td>
+					<td><a href="${pageContext.request.contextPath}/pension/pension_info?pension_no=${pension_list.pension_no}">관리</a></td>
 				</tr>
 			</c:forEach>
 		</table>
 		<div class="empty-row"></div>
 		<div class="empty-row"></div>
-		<hr>
 		
 		<div class="empty-row"></div>
 
-		<h3>객실등록 현황</h3>
-		<table id="interest">
-			<tr>
-                <th>객실 번호</th>
-				<th>펜션명</th>
-				<th>객실명</th>
-				<th>구조/넓이</th>
-				<th>기준/최대인원</th>
-				<th>상세보기</th>
-                <th>수정</th>
-			</tr>
-			<tr>
-                <td>1341324</td>
-				<td>밤도펜션</td>
-                <td>123호</td>
-                <td>ㄷ</td>
-                <td>3/5(명)</td>
-                <td><a href=#>상세보기</a></td>
-                <td><a href=#>수정</a></td>
-			</tr>
-		</table>
         
 	</div>
 	<div class="empty-row"></div>

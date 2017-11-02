@@ -3,18 +3,12 @@
 <%@ include file="/WEB-INF/view/template/header.jsp" %>  
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_myinfo.css">
-			<aside>
-				<div class="row">
-					<ul>
-						<li><a href="myinfo" class="">나의 정보</a></li>
-						<li><a href="mileage" class="">적립금</a></li>
-						<li><a href="edit" class="">회원 정보 수정</a></li>
-						<li><a href="unregister" class="">회원 탈퇴</a></li>
-					</ul>
-				</div>
-			</aside>
-			<div class="area-70 center">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button.css">
+			<div class="area-60 center">
 				<div class="empty-row"></div>
+				<div class="text-right">	
+					<a href="myinfo"><button class="button mybutton">뒤로</button></a>
+				</div>
 				<div class="row">
 					<h3>적립금 상세 내역</h3>
 				</div>

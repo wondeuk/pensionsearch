@@ -23,10 +23,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import spring.bean.Company;
 import spring.bean.Pension;
+import spring.bean.Question;
+import spring.bean.Reservation;
 import spring.bean.Room;
 import spring.bean.State;
 import spring.model.MemberDao;
+import spring.model.MiniDao;
 import spring.model.PensionDao;
+import spring.model.ReserveDao;
 import spring.model.RoomDao;
 
 @Controller
@@ -41,9 +45,15 @@ public class PensionController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ReserveDao reserveDao;
 
 	@Autowired
 	private ServletContext servletContext;
+	
+	@Autowired
+	private MiniDao miniDao;
 	
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -61,7 +71,6 @@ public class PensionController {
 		Map<String, List<State>> reserve_state_list = pensionDao.state(pension_no);
 		
 		model.addAttribute("reserve_state_list", reserve_state_list);
-		log.debug("id:{}", reserve_state_list);
 		model.addAttribute("dayCount", dayCount);		//표시할 날짜 수
 		
 		
@@ -77,6 +86,9 @@ public class PensionController {
 			pensionDao.plusRead(pension_no);
 			session.setAttribute(String.valueOf(pension_no), pension_no);
 		}
+		
+		List<Question> list = miniDao.list(pension_no);
+		session.setAttribute("Qlist", list);
 		
 		return "pension/reserve";
 	}
@@ -139,9 +151,20 @@ public class PensionController {
 		return "pension/answer_list";
 	}
 	
-	@RequestMapping("pension/reserve_list")
-	public String reserveList() {
+	@RequestMapping(value="reserve_list", method=RequestMethod.GET)
+	public String reserveList(@RequestParam int pension_no, Model model) {
+		List<Reservation> reservation_list = pensionDao.reserveList(pension_no);
+		model.addAttribute("reservation_list", reservation_list);
 		return "pension/reserve_list";
+	}
+	
+	@RequestMapping(value="reserve_list", method=RequestMethod.POST)
+	public String reserveList(@RequestParam int reservation_no, @RequestParam int pension_no, HttpServletRequest request, Model model) {
+		String payment_condition = request.getParameter("payment_condition");
+		reserveDao.pcEdit(reservation_no, payment_condition);
+		List<Reservation> reservation_list = pensionDao.reserveList(pension_no);
+		model.addAttribute("reservation_list", reservation_list);
+		return "redirect:reserve_list?pension_no="+pension_no;
 	}
 	
 	@RequestMapping("/imglook")

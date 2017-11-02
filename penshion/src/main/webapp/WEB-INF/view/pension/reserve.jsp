@@ -491,7 +491,7 @@
 				
 					
 				<div class="area-80">
-					<form action="${pageContext.request.contextPath}/reservation/reserving" id="reservation" method="post">
+					<form action="${pageContext.request.contextPath}/reservation/reserving?pension_no=${pension.pension_no}" id="reservation" method="post">
 						<table border="1" align="center" width="100%" id="paybox">
 							<thead>
 								<tr>
@@ -512,7 +512,7 @@
 								<tr>
 									<td colspan="7">
 										<div class="text-right" id="total"></div>
-										<div class="text-right"><button class="bt2" onclick="location.href='${pageContext.request.contextPath}/reservation/reserving'">예약하기</button></div>
+										<div class="text-right"><button class="bt2">예약하기</button></div>
 									</td>
 								</tr>
 							</tfoot>
@@ -577,22 +577,36 @@
 				<h1>${pension.caution}</h1>
 			</div>
 			<div class="askc">
-				<h1>질문게시판입니다</h1>
+				<div class="area-80 center">
+					<h3>질문게시판입니다</h3>
+					<a href="${pageContext.request.contextPath}/mini/ask?pension_no=${pension.pension_no}&no=0">질문올리기!!(클릭)</a>
+				</div>
+				<div class="empty-row"></div>
+				<c:forEach var="qq" items="${Qlist}">
+					<div>
+						<table class="qborder center area-80">
+							<tr>
+								<th>${qq.title}</th>
+							</tr>
+							<tr>
+								<td>${qq.id}(${qq.date})<a href="${pageContext.request.contextPath}/mini/ask?pension_no=${pension.pension_no}&no=${qq.question_no}">답글달기</a></td>
+							</tr>
+							<tr>
+								<td>${qq.detail}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="empty-row"></div>
+				</c:forEach>
 			</div>
 			<div class="reviewc">
 				<h1>이용후기 게시판입니다</h1>
 			</div>
-
 			<div class="empty-row"></div>
 			<div class="empty-row"></div>
-
-			
-
 			<hr>
-
 			<div class="empty-row"></div>
 			<div class="empty-row"></div>
-
 			<div class="imglist">
 				<h3>이미지</h3>
 				<img src="${pageContext.request.contextPath}/pension/[${pension.pension_no}]${pension.pension_name}/${pension.photo1}" width="290px" height="232px">

@@ -2,6 +2,7 @@ package spring.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import spring.bean.Company;
 import spring.bean.Member;
+import spring.bean.Reservation;
 
 @Repository(value="UserDao")
 public class MemberDaoImpl implements MemberDao{
@@ -105,19 +107,44 @@ public class MemberDaoImpl implements MemberDao{
 			Object[] args = {member.getPw(), member.getName(), member.getMobile(), member.getEmail(), member.getId()};
 			jdbcTemplate.update(sql, args);
 		}
+		
+		public void edit(Company company) {
+			String sql = "update company set pw=?, name=?, company_name=?, crn=?, "
+					+ "location01=?, location02=?, location03=?, phone=?, mobile=?,  email=?, domain=? where id=?";
+			Object[] args = {
+					company.getPw(), company.getName(), company.getCompany_name(),
+					company.getCrn(), company.getLocation01(), company.getLocation02(), company.getLocation03(),
+					company.getPhone(), company.getMobile(), company.getEmail(), company.getDomain(), company.getId()};
+			jdbcTemplate.update(sql, args);
+		}
 
 		public void insert(Company company) {
 			String sql = "select company_seq.nextval from dual";
 			int company_no = jdbcTemplate.queryForObject(sql, Integer.class);
 			sql = "insert into company values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?)";
-			Object[] args = {company_no, company.getDomain(), company.getPhone(), company.getCrn(), company.getCompany_name(), company.getEmail(), company.getId(), company.getPw(), company.getManager_name(), company.getMobile(), company.getAgree(), company.getLocation01(), company.getLocation02(), company.getLocation03()};
+			Object[] args = {company_no, company.getDomain(), company.getPhone(), company.getCrn(), company.getCompany_name(), company.getEmail(), company.getId(), company.getPw(), company.getName(), company.getMobile(), company.getAgree(), company.getLocation01(), company.getLocation02(), company.getLocation03()};
 			jdbcTemplate.update(sql, args);
 		}
 
-		public boolean unregister(String id, String pw) {
+		public boolean unregister_m(String id, String pw) {
 			String sql = "delete member where id=? and pw=?";
 			Object[] args = {id, pw};
 			return jdbcTemplate.update(sql, args) > 0;
+		}
+		
+		public boolean unregister_c(String id, String pw) {
+			String sql = "delete company where id=? and pw=?";
+			Object[] args = {id, pw};
+			return jdbcTemplate.update(sql, args) > 0;
+		}
+
+		public List<Reservation> myReservation(int member_no) {
+			String sql = "select * from reservation where member_no=?";
+			Object[] args = {member_no};
+			RowMapper<Reservation> mapper = (rs, index)->{
+				return new Reservation(rs);
+			};
+			return jdbcTemplate.query(sql, mapper, args);
 		}
 
 		
