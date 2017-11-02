@@ -425,8 +425,6 @@
 
 							</table>
 
-							<button class="bt1" onclick="location.href='state?pension_no=${pension.pension_no}'">예약현황</button>
-							<button class="bt2" onclick="location.href='${pageContext.request.contextPath}/reservation/reserving'">예약하기</button>
 							<button class="bt3">찜하기</button>
 						</td>
 					</tr>
@@ -437,61 +435,63 @@
 			<div class="empty-row"></div>
 			
 			<div class="area-80 center">
-				<table border="1" align="center" class="type_07">
-					<tr>
-						<td rowspan="2" class="cols">객실</td>
-						<c:forEach var="map"  begin="0" end="0" step="1" items="${reserve_state_list}">
-							<c:forEach var="value" items="${map.value}">
-								<td class="cols">${value.season}</td>
-							</c:forEach>
-						</c:forEach>
-					</tr>
-					<tr>
-						<c:forEach var="map"  begin="0" end="0" step="1" items="${reserve_state_list}">
-							<c:forEach var="value" items="${map.value}">
-								<td class="cols">${value.date}<br>${value.day}</td>
-							</c:forEach>
-						</c:forEach>
-					</tr>
-					
-					<c:forEach var="map"  items="${reserve_state_list}">
-						<c:forEach var="key" items="${map.key}" >
-							<tr>
-								<td rowspan="2" class="cols">${key}</td>
+				<table border="1" align="center" class="type07">
+					<thead>
+						<tr>
+							<th rowspan="2" class="cols" width="100px">객실</th>
+							<c:forEach var="map"  begin="0" end="0" step="1" items="${reserve_state_list}">
 								<c:forEach var="value" items="${map.value}">
-									<td class="cols">${value.price}</td>
+									<th class="cols">${value.season}</th>
 								</c:forEach>
-							</tr>
-							<tr>
-							<c:forEach var="value" items="${map.value}">
-								<c:choose>
-									<c:when test="${value.reservation eq '가능'}">
-										<td class="cols">
-											<input type="checkbox" name="${value.room_id}"  value="${value.room_id}" >
-											<input type="hidden" id="${value.room_id}room_name" name="${value.room_id}room_name" value="${key}">
-											<input type="hidden" id="${value.room_id}date" name="${value.room_id}date" value="${value.date}">
-											<input type="hidden" id="${value.room_id}guest" name="${value.room_id}guest" value="${value.guest}">
-											<input type="hidden" id="${value.room_id}max_guest" name="${value.room_id}max_guest" value="${value.max_guest}">
-											<input type="hidden" id="${value.room_id}price" name="${value.room_id}price" value="${value.price}">
-											<input type="hidden" id="${value.room_id}add_adult" name="${value.room_id}add_adult" value="${value.add_adult}">
-											<input type="hidden" id="${value.room_id}add_child" name="${value.room_id}add_child" value="${value.add_child}">
-											<input type="hidden" id="${value.room_id}add_baby" name="${value.room_id}add_baby" value="${value.add_baby}">
-										</td>
-									</c:when>
-									<c:otherwise>
-										<td class="cols">완료</td>
-									</c:otherwise>
-								</c:choose>
 							</c:forEach>
 						</tr>
+						<tr>
+							<c:forEach var="map"  begin="0" end="0" step="1" items="${reserve_state_list}">
+								<c:forEach var="value" items="${map.value}">
+									<th class="cols">${value.date}<br>${value.day}</th>
+								</c:forEach>
+							</c:forEach>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<c:forEach var="map"  items="${reserve_state_list}">
+							<c:forEach var="key" items="${map.key}" >
+								<tr>
+									<th rowspan="2" >${key}</th>
+									<c:forEach var="value" items="${map.value}">
+										<td>${value.price}</td>
+									</c:forEach>
+								</tr>
+								<tr>
+								<c:forEach var="value" items="${map.value}">
+									<c:choose>
+										<c:when test="${value.reservation eq '가능'}">
+											<td>
+												<input type="checkbox" name="${value.room_id}"  value="${value.room_id}" >
+												<input type="hidden" id="${value.room_id}room_name" name="${value.room_id}room_name" value="${key}">
+												<input type="hidden" id="${value.room_id}date" name="${value.room_id}date" value="${value.date}">
+												<input type="hidden" id="${value.room_id}guest" name="${value.room_id}guest" value="${value.guest}">
+												<input type="hidden" id="${value.room_id}max_guest" name="${value.room_id}max_guest" value="${value.max_guest}">
+												<input type="hidden" id="${value.room_id}price" name="${value.room_id}price" value="${value.price}">
+												<input type="hidden" id="${value.room_id}add_adult" name="${value.room_id}add_adult" value="${value.add_adult}">
+												<input type="hidden" id="${value.room_id}add_child" name="${value.room_id}add_child" value="${value.add_child}">
+												<input type="hidden" id="${value.room_id}add_baby" name="${value.room_id}add_baby" value="${value.add_baby}">
+											</td>
+										</c:when>
+										<c:otherwise>
+											<td>완료</td>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</tr>
+							</c:forEach>
 						</c:forEach>
-						
-					</c:forEach>
+					</tbody>
 				</table>
-				<div class="empty-row"></div>
 				
 					
-				<div class="area-80">
+				<div class="area-80 center">
 					<form action="${pageContext.request.contextPath}/reservation/reserving?pension_no=${pension.pension_no}" id="reservation" method="post">
 						<table border="1" align="center" width="100%" id="paybox" class="type08">
 							<thead>
