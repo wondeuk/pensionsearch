@@ -106,7 +106,7 @@ header .right{
     margin-top: 1em;
 }
 header a{
-    font-size:15px;
+    font-size:25px;
 }
 .plus > a >i{
     margin-top: 18px;
@@ -143,6 +143,13 @@ a:hover{
 
 .active{
 	font-weight: bold;
+}
+
+.maintable{
+   border-radius:50px;
+} 
+.menu ul li a:hover{
+   color:red;
 }
 
 

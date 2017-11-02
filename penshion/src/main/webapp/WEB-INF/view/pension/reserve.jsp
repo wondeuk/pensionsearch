@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
     
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reserve.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/table.css">
 
 			<script src="https://code.jquery.com/jquery-latest.js">
 			</script>
@@ -436,19 +437,19 @@
 			<div class="empty-row"></div>
 			
 			<div class="area-80 center">
-				<table border="1" align="center">
+				<table border="1" align="center" class="type_07">
 					<tr>
-						<td rowspan="2">객실</td>
+						<td rowspan="2" class="cols">객실</td>
 						<c:forEach var="map"  begin="0" end="0" step="1" items="${reserve_state_list}">
 							<c:forEach var="value" items="${map.value}">
-								<td>${value.season}</td>
+								<td class="cols">${value.season}</td>
 							</c:forEach>
 						</c:forEach>
 					</tr>
 					<tr>
 						<c:forEach var="map"  begin="0" end="0" step="1" items="${reserve_state_list}">
 							<c:forEach var="value" items="${map.value}">
-								<td>${value.date}<br>${value.day}</td>
+								<td class="cols">${value.date}<br>${value.day}</td>
 							</c:forEach>
 						</c:forEach>
 					</tr>
@@ -456,16 +457,16 @@
 					<c:forEach var="map"  items="${reserve_state_list}">
 						<c:forEach var="key" items="${map.key}" >
 							<tr>
-								<td rowspan="2">${key}</td>
+								<td rowspan="2" class="cols">${key}</td>
 								<c:forEach var="value" items="${map.value}">
-									<td>${value.price}</td>
+									<td class="cols">${value.price}</td>
 								</c:forEach>
 							</tr>
 							<tr>
 							<c:forEach var="value" items="${map.value}">
 								<c:choose>
 									<c:when test="${value.reservation eq '가능'}">
-										<td>
+										<td class="cols">
 											<input type="checkbox" name="${value.room_id}"  value="${value.room_id}" >
 											<input type="hidden" id="${value.room_id}room_name" name="${value.room_id}room_name" value="${key}">
 											<input type="hidden" id="${value.room_id}date" name="${value.room_id}date" value="${value.date}">
@@ -478,7 +479,7 @@
 										</td>
 									</c:when>
 									<c:otherwise>
-										<td>완료</td>
+										<td class="cols">완료</td>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -492,16 +493,16 @@
 					
 				<div class="area-80">
 					<form action="${pageContext.request.contextPath}/reservation/reserving?pension_no=${pension.pension_no}" id="reservation" method="post">
-						<table border="1" align="center" width="100%" id="paybox">
+						<table border="1" align="center" width="100%" id="paybox" class="type08">
 							<thead>
 								<tr>
-									<th>객실명</th>
-									<th>이용일</th>
-									<th>기준인원 / 최대인원</th>
-									<th>성인</th>
-									<th>아동</th>
-									<th>유아</th>
-									<th>결제액</th>
+									<th class="cols">객실명</th>
+									<th class="cols">이용일</th>
+									<th class="cols">기준인원 / 최대인원</th>
+									<th class="cols">성인</th>
+									<th class="cols">아동</th>
+									<th class="cols">유아</th>
+									<th class="cols">결제액</th>
 								</tr>
 								
 							</thead>

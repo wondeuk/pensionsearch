@@ -10,12 +10,16 @@
         <title>펜션</title>
         <link rel="stylesheet" type="text/css" 
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <style>
+        	#header{
+        		
+        	}
+        </style>
     </head>
     <body>
         <div class="page">
         <!-- 상단영역, 메뉴영역 -->
-            <header>
+            <header id="header">
                 <a href="${pageContext.request.contextPath}" class="">
                 <div class="rogo">
                     <img src="${pageContext.request.contextPath}/img/pengsion.png"></div>

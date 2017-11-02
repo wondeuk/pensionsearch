@@ -110,16 +110,7 @@ html {
     height: 100%;
 }
 
-body,
-code {
-    font: 1em Verdana, Dotum, AppleGothic, sans-serif;
-    color: #353535;
-    background: #fff;
-}
 
-body {
-    min-width: 100%;
-}
 
 body#popup {
     min-width: 0;
@@ -156,9 +147,7 @@ input,
 select,
 textarea {
     font-size: 100%;
-    font-family: "�룍��", Dotum;
     color: #353535;
-    vertical-align: middle;
 }
 
 .inputTypeText {

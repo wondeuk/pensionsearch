@@ -121,8 +121,8 @@ aside {
 }
 
 img {
-	width: 430px;
-	height: 300px;
+	width: 300px;
+	height: 200px;
 }
 
 select{
@@ -145,6 +145,10 @@ select{
     
 #info{
 	width: 1000px;
+}
+
+#rv_info{
+	cursor: pointer;
 }
 /*
         @media screen and (max-width: 700px) {

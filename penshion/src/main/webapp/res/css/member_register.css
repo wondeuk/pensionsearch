@@ -8,20 +8,20 @@
 .xans-member-join ul.grid li { margin:5px 0 0; }
 .xans-member-join .required { margin:-25px 0 10px; color:#353535; text-align:right; }
 .xans-member-join .required img { vertical-align:middle; }
-
+.xans-member-join .boardWrite #member_type0, 
+.xans-member-join .boardWrite #member_type1 { width:13px; }
 .xans-member-join .boardWrite { table-layout:fixed; border:1px solid #d7d5d5; line-height:180%; }
 .xans-member-join .boardWrite th { width:130px; padding:10px 0 8px 20px; border-top:1px solid #e8e8e8; border-right:1px solid #e8e8e8; background-color:#fbfafa; text-align:left; font-weight:normal; vertical-align:middle; }
 .xans-member-join .boardWrite td { width:auto; padding:10px 0 8px 10px; border-top:1px solid #e8e8e8; }
 .xans-member-join .boardWrite tr:first-child th,
 .xans-member-join .boardWrite tr:first-child td { border-top:0; }
-.xans-member-join .boardWrite input { height:33px; width: 200}
 .xans-member-join .boardWrite input[type=image]{  width:150px; height:100px; }
 .xans-member-join .boardWrite select { height:24px; }
 .xans-member-join .boardWrite img { vertical-align:middle; }
 .xans-member-join .boardWrite a { text-decoration:none; }
 .xans-member-join .boardWrite label { padding:0 20px 0 0; }
 .xans-member-join .boardWrite.type th,
-.xans-member-join .boardWrite.type td { padding:18px 0 18px 20px; }
+.xans-member-join .boardWrite.type td { padding:10px 0 8px 20px; }
 .xans-member-join .boardWrite.typeAddinfo th,
 .xans-member-join .boardWrite.typeAddinfo td { border-top:0; border-bottom:1px solid #e8e8e8; }
 .xans-member-join .boardWrite.typeAddinfo label { display:inline-block; }

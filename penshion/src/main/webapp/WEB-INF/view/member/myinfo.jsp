@@ -61,7 +61,7 @@ $(document).ready(function() {
 			</tr>
 			<c:forEach var="reservation" items="${myReservation_list}">
 				<tr>
-					<td><a onClick="window.open('customer?reservation_no=${reservation.reservation_no}','예약정보','fullscreen','fullscreen')">${reservation.reservation_no}</a></td>
+					<td><a id="rv_info" onClick="window.open('customer?reservation_no=${reservation.reservation_no}','예약정보','fullscreen','fullscreen')">${reservation.reservation_no}</a></td>
 					<td>${reservation.date}</td>
 					<td><a href="${pageContext.request.contextPath}/pension/reserve?pension_no=${reservation.pension_no}">${reservation.pension_name}</a></td>
 					<td>${reservation.room_name}</td>
@@ -82,7 +82,7 @@ $(document).ready(function() {
 		<h3>찜 목록</h3>
 		<table id="interest">
 			<tr>
-				<td rowspan="2" width="10%"><img src="img/180556.jpg" width="200" height="140"></td>
+				<td rowspan="2" width="10%"><img src="${pageContext.request.contextPath}/img/180556.jpg" ></td>
 				<th>펜션명</th>
 				<th>등록일</th>
 			</tr>
