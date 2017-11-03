@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import spring.bean.Company;
 import spring.bean.Member;
+import spring.bean.Payment;
 import spring.bean.Reservation;
 import spring.model.MemberDao;
 import spring.model.ReserveDao;
@@ -126,9 +127,12 @@ public class MemberController {
 	@RequestMapping("/myinfo")
 	public String myinfo(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("userId");
-		
 		Member member = memberDao.info(id);
-		List<Reservation> myReservation_list = memberDao.myReservation(member.getMember_no());
+		Payment payment = reserveDao.payment_no(member.getMember_no());
+		List<Payment> payment_list = reserveDao.payment_list(member.getMember_no());
+		log.debug("no123:{}", member.getMember_no());
+		List<Reservation> myReservation_list = memberDao.myReservation(payment.getPayment_no());
+		model.addAttribute("payment_list", payment_list);
 		model.addAttribute("myReservation_list", myReservation_list);
 		model.addAttribute("info", member);
 		return "member/myinfo";
@@ -245,4 +249,28 @@ public class MemberController {
 		return "member/findpw01";
 	}
 	
+	@RequestMapping("/idCheckForm")
+	public String idCheckForm() {
+		return "member/idCheckForm";
+	}
+	
+//	public String  execute(HttpServletRequest request,
+//            HttpServletResponse response){
+// 
+//        String id = request.getParameter("id");
+//        log.debug("id:{}", id);
+//        boolean result = memberDao.duplicateIdCheck(id);
+//        log.debug("result:{}", result);
+//        response.setContentType("text/html;charset=euc-kr");
+// 
+//        if(result)    out.println("0"); // 아이디 중복
+//        else        out.println("1");
+//        
+//        out.close();
+//        
+//        return null;
+//    }
+	
 }
+
+

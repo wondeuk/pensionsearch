@@ -16,5 +16,6 @@ public interface ReserveDao {
 	Reservation info(int reservation_no);
 	Payment payment_info(int payment_no);
 	List<Reservation> reservation_list(int payment_no);
-
+	Payment payment_no(int member_no);
+	List<Payment> payment_list(int member_no);
 }

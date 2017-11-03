@@ -150,6 +150,12 @@ public class ReserveDaoImpl implements ReserveDao{
 		Object[] args = {payment_no};
 		return jdbcTemplate.query(sql, args, extractor2);
 	}
+	
+	public Payment payment_no(int member_no) {
+		String sql = "select * from payment where member_no=?";
+		Object[] args = {member_no};
+		return jdbcTemplate.query(sql, args, extractor2);
+	}
 
 	@Override
 	public List<Reservation> reservation_list(int payment_no) {
@@ -159,6 +165,15 @@ public class ReserveDaoImpl implements ReserveDao{
 			return new Reservation(rs);
 		};
 		
+		return jdbcTemplate.query(sql, args, mapper);
+	}
+
+	public List<Payment> payment_list(int member_no) {
+		String sql = "select * from payment where member_no=? order by reserve_reg desc";
+		Object[] args = {member_no};
+		RowMapper<Payment> mapper = (rs, index)->{
+			return new Payment(rs);
+		};
 		return jdbcTemplate.query(sql, args, mapper);
 	}
 	

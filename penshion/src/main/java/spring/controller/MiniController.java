@@ -14,53 +14,82 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.bean.Answer;
 import spring.bean.Question;
+import spring.model.MemberDao;
 import spring.model.MiniDao;
 
 @Controller
 @RequestMapping("/mini")
 public class MiniController {
-	
-	@Autowired
-	private ServletContext servletContext;
-	
-	@Autowired
-	private MiniDao miniDao;
-	
-	private Logger log = LoggerFactory.getLogger(getClass());
-	
-	
-	@RequestMapping("/ask")
-	public String miniask(@RequestParam int pension_no, @RequestParam int no, HttpSession session) {
-		session.setAttribute("no", pension_no);
-		String mck = (String) session.getAttribute("loginFlag");
-		String cck = (String) session.getAttribute("companyFlag");
-		log.debug(mck);
-		log.debug(cck);
-		if(mck.equals("true") && no == 0) {
-			return "pension/miniask";
-		}else if(cck != null && no>0) {
-			
-			return "pension/miniask";
-		}else if(mck.equals("true") && no>0){
-			return "redirect:/member/logout";
-			
-		}
-		//log.debug("접속 완료");
-//		if(no>0) session.setAttribute("companyFlag", "true");
-		return "redirect:/member/login";
-	}
-	
-	@RequestMapping(value ="/ask", method=RequestMethod.POST)
-	public String QandA(@RequestParam int pension_no, HttpServletRequest request, HttpSession session) {
-		String id = (String)session.getAttribute("userId");
-		//회원 질문 처리
-			Question question = new Question(request, id);
-			log.debug(question.toString());
-			miniDao.insert(question);
+   
+   @Autowired
+   private ServletContext servletContext;
+   
+   @Autowired
+   private MiniDao miniDao;
+   
+   @Autowired
+   private MemberDao memberDao;
+   
+   private Logger log = LoggerFactory.getLogger(getClass());
+   
+   
+   @RequestMapping("/ask")
+   public String miniask(@RequestParam int pension_no, @RequestParam int no, HttpSession session) {
+      session.setAttribute("no", pension_no);
+      String id = (String)session.getAttribute("userId");
+      if(id != null) {
+         boolean ck = memberDao.comCk(id);
+         if(ck && no >0) {
+            log.debug("2"+id);
+            session.setAttribute("comFlag", ck);
+            Question q = miniDao.questionInfo(no);
+            session.setAttribute("qInfo", q);
+            session.setAttribute("qno", no);
+            return "pension/miniask";   
+         }else if(no == 0 && !ck){
+            session.setAttribute("memFlag", "ok");
+            return "pension/miniask";
+         }
+      }
+      
+      return "redirect:/";
+   }
+   
+   @RequestMapping(value ="/ask", method=RequestMethod.POST)
+   public String QandA(@RequestParam int pension_no, @RequestParam int question_no, HttpServletRequest request, HttpSession session) {
+      String id = (String)session.getAttribute("userId");
+      String title = request.getParameter("title");
+      log.debug("title="+title);
+      if(title != null) {
+      //회원 질문 처리
+         log.debug("a");
+         Question question = new Question(request, id);
+         log.debug(question.toString());
+         miniDao.insert(question);
+      }else {
+         log.debug("b");
+         Answer answer = new Answer(request, question_no);
+         log.debug("dd"+answer.toString());
+         miniDao.insert(answer);
+      }
+      log.debug("완료");
+         
 
-		return "redirect:/pension/reserve?pension_no="+pension_no;
-		
-	}
-	
+      return "redirect:/pension/reserve?pension_no="+pension_no;
+      
+      
+   }
+   
+   @RequestMapping("/delete")
+   public String delete(@RequestParam int pension_no, @RequestParam int question_no, HttpSession session) {
+      String id = (String)session.getAttribute("userId");
+      log.debug(id);
+      if(id == null)
+         return "redirect:/pension/reserve?pension_no="+pension_no;
+      //miniDao.delete(question_no, id);
+      
+      return "redirect:/pension/reserve?pension_no="+pension_no;
+   }
+   
 
 }

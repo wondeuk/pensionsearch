@@ -129,6 +129,9 @@ public class Payment {
 	public String getReserve_reg() {
 		return reserve_reg;
 	}
+	public String getReserve_date() {
+		return reserve_reg.substring(0, 10);
+	}
 	public void setReserve_reg(String reserve_reg) {
 		this.reserve_reg = reserve_reg;
 	}

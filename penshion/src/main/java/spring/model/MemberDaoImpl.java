@@ -138,9 +138,10 @@ public class MemberDaoImpl implements MemberDao{
 			return jdbcTemplate.update(sql, args) > 0;
 		}
 
-		public List<Reservation> myReservation(int member_no) {
-			String sql = "select * from reservation where member_no=?";
-			Object[] args = {member_no};
+		public List<Reservation> myReservation(int payment_no) {
+			log.debug("no:{}",payment_no);
+			String sql = "select * from reservation where payment_no=?";
+			Object[] args = {payment_no};
 			RowMapper<Reservation> mapper = (rs, index)->{
 				return new Reservation(rs);
 			};
@@ -158,4 +159,21 @@ public class MemberDaoImpl implements MemberDao{
 			Object[] args = {id};
 			return jdbcTemplate.queryForObject(sql, args, Integer.class);
 		}
+		
+		public boolean comCk(String id) {
+            String sql = "select * from company where id=?";
+            Object[] args = {id};
+            return jdbcTemplate.update(sql, args) > 0;
+         }
+		
+		
+//		public boolean duplicateIdCheck(String id) {
+//			String sql = "select id from member where=?";
+//			Object[] args = {id};
+//			boolean x = false;
+//			
+//			if(jdbcTemplate.queryForObject(sql, args, Integer.class)>0)
+//				x=true;
+//			return x;
+//		}
 }

@@ -56,50 +56,6 @@
 
 
 <!--            Best pension-->
-<table class="maintable" border="5" align="center" width="60%"
-	height="80%" bordercolor="#D9E5FF" bgcolor="white" cellpadding="5"
-	cellspacing="30">
-	<!-- cellpadding : 테두리와 텍스트 사이의 여백
-    cellspacing :  셀과 셀 사이의 간격-->
-	<tr height=50px>
-		<th class="topth"><h2>
-				<font color="red">@BEST PENSION@</font>
-			</h2></th>
-
-	</tr>
-	<tr valign="top" bgcolor="silver">
-		<td width="20%" class="img"
-			background="${pageContext.request.contextPath}/img/1.jpg"
-			onclick="location.href='main3.html'">&nbsp;1행 1열</td>
-		<td width="20%" class="img"
-			background="${pageContext.request.contextPath}/img/2.jpg">&nbsp;1행
-			2열</td>
-		<td width="20%" class="img"
-			background="${pageContext.request.contextPath}/img/3.jpg">&nbsp;1행
-			3열</td>
-	</tr>
-	<tr height=50px>
-		<th class="midth">끼야호펜션</th>
-		<th class="midth">이요오펜션</th>
-		<th class="midth">꾸이익펜션</th>
-	</tr>
-	<tr valign="top" bgcolor="silver">
-		<td width="20%" class="img"
-			background="${pageContext.request.contextPath}/img/1.jpg"
-			onclick="location.href='main2.html'">&nbsp;1행 1열</td>
-		<td width="20%" class="img"
-			background="${pageContext.request.contextPath}/img/2.jpg">&nbsp;1행
-			2열</td>
-		<td width="20%" class="img"
-			background="${pageContext.request.contextPath}/img/3.jpg">&nbsp;1행
-			3열</td>
-	</tr>
-	<tr height=50px>
-		<th class="midth">끼야호펜션</th>
-		<th class="midth">이요오펜션</th>
-		<th class="midth">꾸이익펜션</th>
-	</tr>
-</table>
 
 
 <br>

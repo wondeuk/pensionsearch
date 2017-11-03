@@ -221,8 +221,25 @@ public class Pension {
 		MultipartFile photo5 = mRequest.getFile("photo5");
 		setPhoto5(photo5.getOriginalFilename());
 		
+		if(!photo1.getContentType().startsWith("image")) {
+			return;
+		}
+		if(!photo2.getContentType().startsWith("image")) {
+			return;
+		}
+		if(!photo3.getContentType().startsWith("image")) {
+			return;
+		}
+		if(!photo4.getContentType().startsWith("image")) {
+			return;
+		}
+		if(!photo5.getContentType().startsWith("image")) {
+			return;
+		}
+		
 		String read = mRequest.getParameter("read");
 		setRead(read == null?0:Integer.parseInt(read));
+		
 	}
 	
 	public Pension(ResultSet rs) throws SQLException {

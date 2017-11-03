@@ -130,9 +130,17 @@ public class ReserveController {
 	}
 	
 	@RequestMapping("/reservation_info")
-	public String customer(@RequestParam int reservation_no, Model model) {
-		Reservation reservation = reserveDao.info(reservation_no);
-		model.addAttribute("reservation", reservation);
+	public String customer(@RequestParam int reservation_no, Model model, HttpSession session) {
+		String id = (String)session.getAttribute("userId");
+		Member member = memberDao.info(id);
+		Payment payment = reserveDao.payment_no(member.getMember_no());
+		List<Payment> payment_list = reserveDao.payment_list(member.getMember_no());
+		log.debug("no123:{}", member.getMember_no());
+		List<Reservation> myReservation_list = memberDao.myReservation(payment.getPayment_no());
+		model.addAttribute("payment", payment);
+		model.addAttribute("myReservation_list", myReservation_list);
+		model.addAttribute("info", member);
+		model.addAttribute("payment_list", payment_list);
 		return "reservation/reservation_info";
 	}
 	

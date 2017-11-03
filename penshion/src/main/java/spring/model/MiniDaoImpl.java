@@ -20,59 +20,93 @@ import spring.bean.Question;
 
 @Repository(value="miniDao")
 public class MiniDaoImpl implements MiniDao{
-	private Logger log = LoggerFactory.getLogger(getClass());
+   private Logger log = LoggerFactory.getLogger(getClass());
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	private ServletContext servletContext;
-	
-	private ResultSetExtractor<Question> extractor = new ResultSetExtractor<Question>() {
-		public Question extractData(ResultSet rs) throws SQLException, DataAccessException{
-			//rs.next()가 이루어지지 않은 상태로 들어오기 때문에 내가 직접 처리해야 한다
-			if(rs.next())
-				return new Question(rs);
-			else
-				return null;
-		}
-	};
-	
-	private ResultSetExtractor<Answer> extractor1 = new ResultSetExtractor<Answer>() {
-		public Answer extractData(ResultSet rs) throws SQLException, DataAccessException{
-			//rs.next()가 이루어지지 않은 상태로 들어오기 때문에 내가 직접 처리해야 한다
-			if(rs.next())
-				return new Answer(rs);
-			else
-				return null;
-		}
-	};
+   @Autowired
+   private JdbcTemplate jdbcTemplate;
+   
+   @Autowired
+   private ServletContext servletContext;
+   
+   private ResultSetExtractor<Question> extractor = new ResultSetExtractor<Question>() {
+      public Question extractData(ResultSet rs) throws SQLException, DataAccessException{
+         //rs.next()가 이루어지지 않은 상태로 들어오기 때문에 내가 직접 처리해야 한다
+         if(rs.next())
+            return new Question(rs);
+         else
+            return null;
+      }
+   };
+   
+   private ResultSetExtractor<Answer> extractor1 = new ResultSetExtractor<Answer>() {
+      public Answer extractData(ResultSet rs) throws SQLException, DataAccessException{
+         //rs.next()가 이루어지지 않은 상태로 들어오기 때문에 내가 직접 처리해야 한다
+         if(rs.next())
+            return new Answer(rs);
+         else
+            return null;
+      }
+   };
 
 
-	//질문 올리기
-	@Override
-	public void insert(Question question) {
-		String sql = "select question_seq.nextval from dual";
-		int	question_no = jdbcTemplate.queryForObject(sql,Integer.class);
-		
-		sql = "insert into question values(?,?,?,?,?,sysdate, 0, 0)";
-		Object[] args = {
-				question.getPension_no(), question_no, question.getTitle(), 
-				question.getDetail(), question.getId()
-		};
-		jdbcTemplate.update(sql, args);
-	}
+   //질문 올리기
+   @Override
+   public void insert(Question question) {
+      String sql = "select question_seq.nextval from dual";
+      int   question_no = jdbcTemplate.queryForObject(sql,Integer.class);
+      
+      sql = "insert into question values(?,?,?,?,?,sysdate, 0, 0)";
+      Object[] args = {
+            question.getPension_no(), question_no, question.getTitle(), 
+            question.getDetail(), question.getId()
+      };
+      jdbcTemplate.update(sql, args);
+   }
 
-	//해당 목록 꺼내오기
-	@Override
-	public List<Question> list(int pension_no) {
-		String sql = "select * from question where pension_no=? order by reg desc";
-		RowMapper<Question> mapper = (rs, index)->{
-			return new Question(rs);
-		};
-		return jdbcTemplate.query(sql, mapper, pension_no);
-	}
-	
-	
+   //해당 목록 꺼내오기
+   @Override
+   public List<Question> list(int pension_no) {
+      String sql = "select * from question where pension_no=? order by reg desc";
+      RowMapper<Question> mapper = (rs, index)->{
+         return new Question(rs);
+      };
+      return jdbcTemplate.query(sql, mapper, pension_no);
+   }
+   
+   //답글달기
+      public void insert(Answer answer) {
+         String sql = "select answer_seq.nextval from dual";
+         int   answer_no = jdbcTemplate.queryForObject(sql,Integer.class);
+         
+         sql ="insert into answer values(?, ?, ?, sysdate)";
+         Object[] args = {
+               answer.getQuestion_no(), answer_no, 
+               answer.getDetail()
+         };
+         jdbcTemplate.update(sql, args);
+         
+      }
+
+      //댓글 리스트 
+      public List<Answer> alist() {
+         String sql = "select * from answer order by reg desc";
+         RowMapper<Answer> mapper = (rs, index)->{
+            return new Answer(rs);
+         };
+         return jdbcTemplate.query(sql, mapper);
+      }
+
+      @Override
+      public Question questionInfo(int no) {
+         String sql = "select * from question where question_no =?";
+         RowMapper<Question> mapper = (rs, index)->{
+            return new Question(rs);
+         };
+         List<Question> a = jdbcTemplate.query(sql, mapper, no);
+         return a.get(0);
+      }
+
+   
+   
 
 }

@@ -21,7 +21,9 @@ public interface MemberDao {
 	boolean unregister_m(String id, String pw);
 	boolean unregister_c(String id, String pw);
 	Company info2(String id);
-	List<Reservation> myReservation(int member_no);
+	List<Reservation> myReservation(int payment_no);
 	void useMileage(String id, int useMileage);
 	int member_no(String id);
+//	public boolean duplicateIdCheck(String id);
+	boolean comCk(String id);
 }

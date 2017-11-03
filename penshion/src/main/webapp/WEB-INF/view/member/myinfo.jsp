@@ -1,27 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/template/header.jsp" %> 
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/template/header.jsp"%>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member_myinfo.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/member_myinfo.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/button.css">
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(document).ready(function() {
-	$("#question").on("click", function() {
-		$(".answer").toggle();
+	$(document).ready(function() {
+		$("#question").on("click", function() {
+			$(".answer").toggle();
+		});
 	});
-});
 </script>
 <div class="area-60 center">
 	<div class="empty-row"></div>
-	<div class="text-right">	
-		<a href="mileage"><button class="button mybutton">적립내역</button></a>
-		<a href="edit"><button class="button mybutton">회원 정보 수정</button></a>
-		<a href="unregister"><button class="button mybutton">회원탈퇴</button></a>
+	<div class="text-right">
+		<!-- <a href="mileage"><button class="button mybutton">적립내역</button></a> -->
+		<a href="edit"><button class="button mybutton">회원 정보 수정</button></a> <a
+			href="unregister"><button class="button mybutton">회원탈퇴</button></a>
 	</div>
 	<div class="table-users">
 		<div class="header">
-			<p class="left">${info.name} 님의 회원정보 </p>
+			<p class="left">${info.name}님의 회원정보</p>
 			<p class="right">회원가입일 : ${info.date}</p>
 		</div>
 		<table id="profile">
@@ -31,7 +33,7 @@ $(document).ready(function() {
 				<td>${info.id}</td>
 			</tr>
 			<tr>
-				<td rowspan="3" id="mileage">${info.mileage} 원</td>
+				<td rowspan="3" id="mileage">${info.mileage}원</td>
 				<th>이름</th>
 				<td>${info.name}</td>
 			</tr>
@@ -48,41 +50,46 @@ $(document).ready(function() {
 	<div class="empty-row"></div>
 	<div class="row">
 		<h3>나의 예약내역</h3>
-		<p>비회원 예약을 하신 경우에는 예약확인/취소을 이용하세요.<br>예약번호를 클릭하시면 보다 상세한 예약정보를 확인 할 수 있습니다.<br>비회원 예약건은 조회가 안될수 있습니다. 고객센터로 연락주시면 조회 가능하도록 처리 해드립니다.</p>
+		<p>
+			비회원 예약을 하신 경우에는 예약확인/취소을 이용하세요.<br>예약번호를 클릭하시면 보다 상세한 예약정보를 확인 할
+			수 있습니다.<br>비회원 예약건은 조회가 안될수 있습니다. 고객센터로 연락주시면 조회 가능하도록 처리 해드립니다.
+		</p>
 		<table id="reservation_info">
 			<tr>
 				<th>예약번호</th>
 				<th>예약일</th>
 				<th>펜션명</th>
-				<th>객실명</th>
 				<th>예약자명</th>
 				<th>예약상태</th>
-				<th>후기작성</th>
 			</tr>
-			<c:forEach var="reservation" items="${myReservation_list}">
+			<c:forEach var="payment" begin="0" end="4" step="1" items="${payment_list}"
+				varStatus="status">
 				<tr>
-					<td><a id="rv_info" onClick="window.open('${pageContext.request.contextPath}/reservation/reservation_info?reservation_no=${reservation.reservation_no}','예약정보','fullscreen','fullscreen')">${reservation.reservation_no}</a></td>
-					<td>${reservation.date}</td>
-					<td><a href="${pageContext.request.contextPath}/reservation/reserve?pension_no=${reservation.pension_no}">${reservation.pension_name}</a></td>
-					<td>${reservation.room_name}</td>
-					<td>${reservation.user_name}</td>
+					<td><a id="rv_info"
+						onClick="window.open('${pageContext.request.contextPath}/reservation/reservation_info?reservation_no=${payment.payment_no}','예약정보','width=400','height=400')">${payment.payment_no}</a></td>
+					<td>${payment.reserve_date}</td>
+					<td><a
+						href="${pageContext.request.contextPath}/reservation/reserve?pension_no=${payment.pension_no}">${payment.pension_name}</a></td>
+					<td>${payment.guest_name}</td>
 					<c:choose>
-						<c:when test="${reservation.payment_condition eq 'waiting'}">
+						<c:when test="${payment.payment_condition eq 'waiting'}">
 							<td>입금대기</td>
 						</c:when>
 						<c:otherwise>
 							<td>완료</td>
 						</c:otherwise>
 					</c:choose>
-					<td><a href="#">후기작성</a></td>
 				</tr>
 			</c:forEach>
 		</table>
 
+
+
 		<h3>찜 목록</h3>
 		<table id="interest">
 			<tr>
-				<td rowspan="2" width="10%"><img src="${pageContext.request.contextPath}/img/180556.jpg" ></td>
+				<td rowspan="2" width="10%"><img
+					src="${pageContext.request.contextPath}/img/180556.jpg"></td>
 				<th>펜션명</th>
 				<th>등록일</th>
 			</tr>
@@ -111,8 +118,9 @@ $(document).ready(function() {
 						<p class="reply">Q).사랑더 희망더 두개 예약하고 싶은데요 바베큐는 어디서 먹게되는건가요??</p>
 					</div>
 					<div class="row">
-						<p class="reply">A). 안녕하세요 고객님.^^ 사랑더, 희망더 객실은 공동바베큐장을 이용하셔야 합니다. 기쁨더(1층) 객실을 제외한 전 객실 모두 공동 실내바베큐장을 이용하셔야 하니 참고하시기 바랍니다. 감사합니다!
-						</p>
+						<p class="reply">A). 안녕하세요 고객님.^^ 사랑더, 희망더 객실은 공동바베큐장을 이용하셔야
+							합니다. 기쁨더(1층) 객실을 제외한 전 객실 모두 공동 실내바베큐장을 이용하셔야 하니 참고하시기 바랍니다.
+							감사합니다!</p>
 					</div>
 				</td>
 			</tr>
@@ -122,5 +130,5 @@ $(document).ready(function() {
 	<div class="empty-row"></div>
 	<div class="empty-row"></div>
 </div>
-<%@ include file="/WEB-INF/view/template/footer.jsp" %>    
+<%@ include file="/WEB-INF/view/template/footer.jsp"%>
 

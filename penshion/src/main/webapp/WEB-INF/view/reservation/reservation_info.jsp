@@ -4,8 +4,14 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/customer.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/each.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/button.css">
 <h1>고객님의 예약 정보는 아래와 같습니다</h1>
 <table class="edge">
+	<tr>
+	<td>
+	<button onclick="location.href='${pageContext.request.contextPath}'" class="button mybutton">홈으로</button>
+	</td>
+	</tr>
     <tr>
         <td>
     <table>
@@ -36,15 +42,13 @@
             <th>객실명</th>
             <th>이용일</th>
             <th>성인/아동/유아</th>
-            <th>추가요금</th>
             <th>결제요금</th>
         </tr>
-        <c:forEach var="reservation" items="${reservation_list}">
+        <c:forEach var="reservation" items="${myReservation_list}">
 	        <tr>
 	            <td>${reservation.room_name}</td>
 	            <td>${reservation.date}</td>
 	            <td>${reservation.adult}/${reservation.child}/${reservation.baby}</td>
-	            <td>${reservation.add_adult + reservation.add_child + reservation.add_baby}원</td>
 	            <td>${reservation.room_price}원</td>
 	        </tr>
         </c:forEach>

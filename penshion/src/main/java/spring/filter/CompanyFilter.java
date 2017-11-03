@@ -17,18 +17,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @WebFilter("/*")
-public class LoginFilter implements Filter{
+public class CompanyFilter implements Filter{
 	
 	private Logger log = LoggerFactory.getLogger(getClass());
 
 	//폐쇄할 페이지 명단을 설정
 	//startsWith
 	private String[] closepage = new String[] {
-			"/reservation"
 	};
 	//equals
 	private String[] closepage2 = new String[] {
-			"/member/myinfo", "/member/edit", "/member/mileage", "/member/unregister", "/member/customer",
 			"/pension/pension_register", "pension/pension_edit", "pension/pension_info", "pension/management", 
 			"/room/room_register", "/room/room_edit", "/room/room_info"
 	};
@@ -59,12 +57,12 @@ public class LoginFilter implements Filter{
 				break;
 			}
 		}
+		
+		
 
-		
-		
 		//로그인 검사
 		//session 에 userId 또는 loginFlag가 있으면 로그인 / 아니면 로그아웃
-		if(!flag && session.getAttribute("userId") == null) {
+		if(!flag && session.getAttribute("companyFlag") == null) {
 			response.sendRedirect(request.getContextPath()+"/member/login");
 			return;
 		}

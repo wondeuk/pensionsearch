@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import spring.bean.Answer;
 import spring.bean.Company;
 import spring.bean.Pension;
 import spring.bean.Question;
@@ -74,10 +75,7 @@ public class PensionController {
 		MultipartFile photo3 = mRequest.getFile("photo3");
 		MultipartFile photo4 = mRequest.getFile("photo4");
 		MultipartFile photo5 = mRequest.getFile("photo5");
-		
 		pension = pensionDao.info(pension_no);
-		log.debug(pension.toString());
-		
 		String path = servletContext.getRealPath("/upload")+"/"+"["+pension.getPension_no()+"]"+pension.getPension_name();
 		
 		File target = new File(path);
@@ -185,6 +183,8 @@ public class PensionController {
 			session.setAttribute(String.valueOf(pension_no), pension_no);
 		}
 		
+		List<Answer> alist = miniDao.alist();
+	    session.setAttribute("Alist", alist);
 		List<Question> list = miniDao.list(pension_no);
 		session.setAttribute("Qlist", list);
 		
