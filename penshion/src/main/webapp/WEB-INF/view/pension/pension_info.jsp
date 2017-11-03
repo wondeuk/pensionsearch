@@ -21,7 +21,7 @@
     <div class="row text-right">
 	    <a href="${pageContext.request.contextPath}/pension/pension_edit?pension_no=${pension.pension_no}"><button class="button mybutton">정보수정</button></a>
 	    <a href="${pageContext.request.contextPath}/room/room_register?pension_no=${pension.pension_no}"><button class="button mybutton" >객실등록</button></a>
-	    <a href="${pageContext.request.contextPath}/pension/reserve_list?pension_no=${pension.pension_no}"><button class="button mybutton">예약현황</button></a>
+	    <a href="${pageContext.request.contextPath}/reservation/reserve_list?pension_no=${pension.pension_no}"><button class="button mybutton">예약현황</button></a>
     </div>
     <table id="profile">
         <tr>

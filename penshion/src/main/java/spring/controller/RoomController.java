@@ -97,6 +97,15 @@ public class RoomController {
 		return "room/room_info";
 	}
 	
+	@RequestMapping("/room_info2")
+	public String roomInfo2(@RequestParam int room_no, Model model) {
+		Room room = roomDao.info(room_no);
+		Pension pension = pensionDao.info(room.getPension_no());
+		model.addAttribute("room", room);
+		model.addAttribute("pension", pension);
+		return "room/room_info2";
+	}
+	
 	@RequestMapping("/room_edit")
 	public String roomEdit(@RequestParam int room_no, Model model) {
 		Room room = roomDao.info(room_no);

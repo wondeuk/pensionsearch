@@ -147,6 +147,15 @@ public class MemberDaoImpl implements MemberDao{
 			return jdbcTemplate.query(sql, mapper, args);
 		}
 
-		
-	
+		public void useMileage(String id, int useMileage) {
+			String sql = "update member set mileage=mileage-"+useMileage+" where id=?";
+			Object[] args = {id};
+			jdbcTemplate.update(sql, args);
+		}
+
+		public int member_no(String id) {
+			String sql = "select member_no from member where id=?";
+			Object[] args = {id};
+			return jdbcTemplate.queryForObject(sql, args, Integer.class);
+		}
 }

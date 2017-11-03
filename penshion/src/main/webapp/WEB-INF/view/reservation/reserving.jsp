@@ -69,8 +69,9 @@
                            		<c:forEach var="key" items="${map.key}">
                            			<input type="hidden" name="id" value="${key}">
                            			<c:forEach var="value" items="${map.value}">
+                           				  <input type="hidden" name="${map.key}room_no" value="${value.room_no}">
                            				  <input type="hidden" name="${map.key}room_name" value="${value.room_name}">
-                           				  <input type="hidden" name="${map.key}date" value="${value.date}">
+                           				  <input type="hidden" name="${map.key}checkin" value="${value.date}">
                            				  <input type="hidden" name="${map.key}guest" value="${value.guest}">
                            				  <input type="hidden" name="${map.key}max_guest" value="${value.max_guest}">
                            				  <input type="hidden" name="${map.key}price" value="${value.price}">
@@ -92,7 +93,7 @@
                                		</tr>
                       				<tr>
                                         <th>마일리지 사용</th>
-                                        <td><input type="text"  name="mileage" id="useMileage" min="0" value="" onblur="mileageCheck();">원   <span>*보유적립금은 ${member.mileage}원입니다</span></td>
+                                        <td><input type="text"  name="useMileage" id="useMileage" min="0" value="" onkeyup="mileageCheck();">원   <span>*보유적립금은 ${member.mileage}원입니다</span></td>
                             		</tr>
 									<tr>
 									     <th>총 결제금액</th>

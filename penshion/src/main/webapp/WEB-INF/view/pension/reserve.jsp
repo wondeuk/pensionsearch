@@ -61,6 +61,7 @@
 
 							var id = $(this).val();
 							console.log(id);
+							var room_no = $(this).siblings("#"+id+"room_no").val();
 							var room_name = $(this).siblings("#"+id+"room_name").val();
 							var date = $(this).siblings("#"+id+"date").val();
 							var guest = $(this).siblings("#"+id+"guest").val();
@@ -71,7 +72,9 @@
 							var add_baby = $(this).siblings("#"+id+"add_baby").val();
 							var row = appendData(id, room_name, date, guest, max_guest, price, add_adult, add_child, add_baby);
 							
+							
 							$("#reservation").append("<input type='hidden' class='"+id+"' name='id' value='"+id+"'>");
+							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"room_no' value='"+room_no+"'>");
 							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"room_name' value='"+room_name+"'>");
 							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"date' value='"+date+"'>");
 							$("#reservation").append("<input type='hidden' class='"+id+"' name='"+id+"guest' value='"+guest+"'>");
@@ -469,6 +472,7 @@
 										<c:when test="${value.reservation eq '가능'}">
 											<td>
 												<input type="checkbox" name="${value.room_id}"  value="${value.room_id}" >
+												<input type="hidden" id="${value.room_id}room_no" name="${value.room_id}room_no" value="${value.room_no}">
 												<input type="hidden" id="${value.room_id}room_name" name="${value.room_id}room_name" value="${key}">
 												<input type="hidden" id="${value.room_id}date" name="${value.room_id}date" value="${value.date}">
 												<input type="hidden" id="${value.room_id}guest" name="${value.room_id}guest" value="${value.guest}">

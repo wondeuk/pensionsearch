@@ -24,7 +24,7 @@ public class LoginFilter implements Filter{
 	//폐쇄할 페이지 명단을 설정
 	//startsWith
 	private String[] closepage = new String[] {
-			
+			"/reservation"
 	};
 	//equals
 	private String[] closepage2 = new String[] {

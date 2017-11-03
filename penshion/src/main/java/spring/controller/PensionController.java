@@ -24,13 +24,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import spring.bean.Company;
 import spring.bean.Pension;
 import spring.bean.Question;
-import spring.bean.Reservation;
 import spring.bean.Room;
 import spring.bean.State;
 import spring.model.MemberDao;
 import spring.model.MiniDao;
 import spring.model.PensionDao;
-import spring.model.ReserveDao;
 import spring.model.RoomDao;
 
 @Controller
@@ -47,52 +45,13 @@ public class PensionController {
 	private MemberDao memberDao;
 	
 	@Autowired
-	private ReserveDao reserveDao;
+	private MiniDao miniDao;
 
 	@Autowired
 	private ServletContext servletContext;
 	
-	@Autowired
-	private MiniDao miniDao;
 	
 	private Logger log = LoggerFactory.getLogger(getClass());
-	
-	
-	
-	
-	@RequestMapping("/reserve")
-	public String reserve(@RequestParam int pension_no, Model model, HttpSession session, HttpServletRequest request) {
-		Pension pension = pensionDao.info(pension_no);
-		List<Room> room_list = roomDao.list(pension_no);
-		model.addAttribute("pension", pension);
-		model.addAttribute("room_list", room_list);
-		
-		int dayCount = 14;				//표시할 날짜 수
-		Map<String, List<State>> reserve_state_list = pensionDao.state(pension_no);
-		
-		model.addAttribute("reserve_state_list", reserve_state_list);
-		model.addAttribute("dayCount", dayCount);		//표시할 날짜 수
-		
-		
-		
-		int count = 0;
-		Enumeration<String> check = session.getAttributeNames();
-		while(check.hasMoreElements()){
-			if(check.nextElement().equals(String.valueOf(pension_no))){
-				count++;
-			}
-		}
-		if(count==0){
-			pensionDao.plusRead(pension_no);
-			session.setAttribute(String.valueOf(pension_no), pension_no);
-		}
-		
-		List<Question> list = miniDao.list(pension_no);
-		session.setAttribute("Qlist", list);
-		
-		return "pension/reserve";
-	}
-	
 	
 	
 	@RequestMapping("/pension_register")
@@ -151,21 +110,6 @@ public class PensionController {
 		return "pension/answer_list";
 	}
 	
-	@RequestMapping(value="reserve_list", method=RequestMethod.GET)
-	public String reserveList(@RequestParam int pension_no, Model model) {
-		List<Reservation> reservation_list = pensionDao.reserveList(pension_no);
-		model.addAttribute("reservation_list", reservation_list);
-		return "pension/reserve_list";
-	}
-	
-	@RequestMapping(value="reserve_list", method=RequestMethod.POST)
-	public String reserveList(@RequestParam int reservation_no, @RequestParam int pension_no, HttpServletRequest request, Model model) {
-		String payment_condition = request.getParameter("payment_condition");
-		reserveDao.pcEdit(reservation_no, payment_condition);
-		List<Reservation> reservation_list = pensionDao.reserveList(pension_no);
-		model.addAttribute("reservation_list", reservation_list);
-		return "redirect:reserve_list?pension_no="+pension_no;
-	}
 	
 	@RequestMapping("/imglook")
 	public String imgLook() {
@@ -214,15 +158,39 @@ public class PensionController {
 	}
 	
 	
-	@RequestMapping("/state")
-	public String state(Model model) {
-		int dayCount = 14;				//표시할 날짜 수
-		Map<String, List<State>> reserve_state_list = pensionDao.state(29);
+	@RequestMapping("/reserve")
+	public String reserve(@RequestParam int pension_no, Model model, HttpSession session, HttpServletRequest request) {
+		Pension pension = pensionDao.info(pension_no);
+		List<Room> room_list = roomDao.list(pension_no);
+		model.addAttribute("pension", pension);
+		model.addAttribute("room_list", room_list);
 		
-		model.addAttribute("test", reserve_state_list);
+		int dayCount = 14;				//표시할 날짜 수
+		Map<String, List<State>> reserve_state_list = pensionDao.state(pension_no);
+		
+		model.addAttribute("reserve_state_list", reserve_state_list);
 		model.addAttribute("dayCount", dayCount);		//표시할 날짜 수
-		return "pension/state";
+		
+		
+		
+		int count = 0;
+		Enumeration<String> check = session.getAttributeNames();
+		while(check.hasMoreElements()){
+			if(check.nextElement().equals(String.valueOf(pension_no))){
+				count++;
+			}
+		}
+		if(count==0){
+			pensionDao.plusRead(pension_no);
+			session.setAttribute(String.valueOf(pension_no), pension_no);
+		}
+		
+		List<Question> list = miniDao.list(pension_no);
+		session.setAttribute("Qlist", list);
+		
+		return "pension/reserve";
 	}
+	
 	
 }
 

@@ -23,7 +23,10 @@
 td h3{
     margin: 10%;
     margin-bottom: 0px;
-    
+}
+td h2{
+	margin: 10%;
+    margin-bottom: 0px;
 }
 button{
     display: inline;
@@ -48,9 +51,9 @@ button:hover{
 
 /*중간 메뉴바*/
 .submenu{
-    width: 70%;
     color: #333;
     background-color: gray;
+    text-align: center;
 }
 
 .checked, .row, .ask, .review{
@@ -69,11 +72,9 @@ button:hover{
     
 }
 
-
-
-
 .submenu li{
     display: inline-flex;
+    margin-left: 50px;
 
 }
 
@@ -111,5 +112,23 @@ button:hover .content{
 .imglist{
     width: 80%;
     margin: 0 10%;
-    
+}
+
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.4); /* IE */
+  -moz-transform: scale(1.4); /* FF */
+  -webkit-transform: scale(1.4); /* Safari and Chrome */
+  -o-transform: scale(1.4); /* Opera */
+}
+
+#cbx_tr{
+	height:30px;
+}
+
+#cbx_td{
+	padding: 0px;
+	background: #fff4f8;
+	
 }

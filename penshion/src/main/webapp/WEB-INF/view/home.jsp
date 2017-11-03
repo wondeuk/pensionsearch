@@ -123,12 +123,13 @@
 			바랍니다.
 		</td>
 		<td class="bottombtn" rowspan="2">
-			<button type="button" onclick="location.href='main3.html'"
+			<button type="button" onclick="location.href='${pageContext.request.contextPath}/standing/questionboard'"
 				class="button mybutton">질문답변 바로가기</button>
 		<td class="bottombtn" rowspan="2">
-			<button type="button" onclick="location.href='main3.html'"
+			<button type="button" onclick="location.href='${pageContext.request.contextPath}/pension/pension_register'"
 				class="button mybutton">펜션 등록하기</button>
 	</tr>
+	
 </table>
 </main>
 

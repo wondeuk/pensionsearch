@@ -150,12 +150,6 @@ textarea {
     color: #353535;
 }
 
-.inputTypeText {
-    height: 19px;
-    padding: 3px 0 0 9px;
-    border: 1px solid #d5d5d5;
-}
-
 select {
     height: 24px;
     border: 1px solid #d5d5d5;

@@ -3,6 +3,7 @@ package spring.bean;
 public class State2 {
 	private String state_id;
 	private String pension_name;
+	private int room_no;
 	private String room_name;
 	private String user_name;
 	private String mobile01;
@@ -20,20 +21,16 @@ public class State2 {
 	private int tot;
 	
 
+
+
+
 	@Override
 	public String toString() {
-		return "State2 [state_id=" + state_id + ", pension_name=" + pension_name + ", room_name=" + room_name
-				+ ", user_name=" + user_name + ", mobile01=" + mobile01 + ", mobile02=" + mobile02 + ", date=" + date
-				+ ", guest=" + guest + ", max_guest=" + max_guest + ", price=" + price + ", add_adult=" + add_adult
-				+ ", add_child=" + add_child + ", add_baby=" + add_baby + ", adult=" + adult + ", child=" + child
-				+ ", baby=" + baby + ", tot=" + tot + ", getUser_name()=" + getUser_name() + ", getMobile01()="
-				+ getMobile01() + ", getMobile02()=" + getMobile02() + ", getState_id()=" + getState_id()
-				+ ", getRoom_name()=" + getRoom_name() + ", getDate()=" + getDate() + ", getGuest()=" + getGuest()
-				+ ", getMax_guest()=" + getMax_guest() + ", getPrice()=" + getPrice() + ", getAdd_adult()="
-				+ getAdd_adult() + ", getAdd_child()=" + getAdd_child() + ", getAdd_baby()=" + getAdd_baby()
-				+ ", getAdult()=" + getAdult() + ", getChild()=" + getChild() + ", getBaby()=" + getBaby()
-				+ ", getTot()=" + getTot() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "State2 [state_id=" + state_id + ", pension_name=" + pension_name + ", room_no=" + room_no
+				+ ", room_name=" + room_name + ", user_name=" + user_name + ", mobile01=" + mobile01 + ", mobile02="
+				+ mobile02 + ", date=" + date + ", guest=" + guest + ", max_guest=" + max_guest + ", price=" + price
+				+ ", add_adult=" + add_adult + ", add_child=" + add_child + ", add_baby=" + add_baby + ", adult="
+				+ adult + ", child=" + child + ", baby=" + baby + ", tot=" + tot + "]";
 	}
 
 
@@ -43,7 +40,14 @@ public class State2 {
 	}
 	
 	
-	
+	public int getRoom_no() {
+		return room_no;
+	}
+
+	public void setRoom_no(int room_no) {
+		this.room_no = room_no;
+	}
+
 	public String getPension_name() {
 		return pension_name;
 	}

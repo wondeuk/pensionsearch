@@ -59,7 +59,7 @@
 									</tr>
 									<tr>
 										<th>비밀번호 <img src="${pageContext.request.contextPath}/img/ico_required.gif"/></th>
-										<td><input id="pw1" name="pw1" maxlength="16" 0="disabled" value="" type="password" onblur="pw1Check();">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)
+										<td><input id="pw1" name="pw1" maxlength="16" 0="disabled" value="" type="password" onblur="pw1Check();"> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)
 										<script src="${pageContext.request.contextPath}/js/sha256.js"></script>
 	      							  	<script>
 	           									 $(document).ready(function(){

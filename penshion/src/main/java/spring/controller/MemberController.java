@@ -53,12 +53,14 @@ public class MemberController {
 	
 	@RequestMapping(value="/user_register02", method=RequestMethod.POST)
 	public String user_register02_2(HttpServletRequest request) {
+		log.debug("여기");
 		String member_type = request.getParameter("member_type");
 		if(member_type.equals("user")) {
 			Member member = new Member(request);
 			memberDao.insert(member);
 		}else {
 			Company company = new Company(request);
+			log.debug("company:{}", company);
 			memberDao.insert(company);
 		}
 			
@@ -241,13 +243,6 @@ public class MemberController {
 	@RequestMapping("/findpw01")
 	public String findpw01() {
 		return "member/findpw01";
-	}
-	
-	@RequestMapping("/customer")
-	public String customer(@RequestParam int reservation_no, Model model) {
-		Reservation reservation = reserveDao.info(reservation_no);
-		model.addAttribute("reservation", reservation);
-		return "member/customer";
 	}
 	
 }

@@ -3,82 +3,113 @@ package spring.bean;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class Reservation {
-	private int pension_no;
 	private int room_no;
+	private int payment_no;
 	private int reservation_no;
-	private int member_no;
-	private String pension_name;
 	private String room_name;
-	private String user_name;
-	private String mobile01;
-	private String mobile02;
-	private String date;
-	private String payment_reg;
-	private int payment_price;
-	private String payment_method;
-	private String payment_condition;
+	private String checkin;
+	private int room_price;
 	private int adult;
 	private int child;
 	private int baby;
+	private int add_adult;
+	private int add_child;
+	private int add_baby;
 	
 	
 	public Reservation() {
 		super();
 	}
 	
+	public Reservation(String[] ids, HttpServletRequest request) {
+		String room_no = request.getParameter("room_no");
+		setRoom_no(room_no == null?0:Integer.parseInt(room_no));
+		String payment_no = request.getParameter("payment_no");
+		setPayment_no(payment_no == null?0:Integer.parseInt(payment_no));
+		String reservation_no = request.getParameter("reservation_no");
+		setReservation_no(reservation_no == null?0:Integer.parseInt(reservation_no));
+		setRoom_name(request.getParameter("room_name"));
+		setCheckin(request.getParameter("checkin"));
+		String room_price = request.getParameter("room_price");
+		setRoom_price(room_price == null?0:Integer.parseInt(room_price));
+		String adult = request.getParameter("adult");
+		setAdult(adult == null?0:Integer.parseInt(adult));
+		String child = request.getParameter("child");
+		setChild(child == null?0:Integer.parseInt(child));
+		String baby = request.getParameter("baby");
+		setBaby(baby == null?0:Integer.parseInt(baby));
+		String add_adult = request.getParameter("add_adult");
+		setAdd_adult(add_adult == null?0:Integer.parseInt(add_adult));
+		String add_child = request.getParameter("add_child");
+		setAdd_child(add_child == null?0:Integer.parseInt(add_child));
+		String add_baby = request.getParameter("add_baby");
+		setAdd_baby(add_baby == null?0:Integer.parseInt(add_baby));
+	}
+	
 	public Reservation(ResultSet rs) throws SQLException {
-		setPension_no(rs.getInt("pension_no"));
 		setRoom_no(rs.getInt("room_no"));
+		setPayment_no(rs.getInt("payment_no"));
 		setReservation_no(rs.getInt("reservation_no"));
-		setMember_no(rs.getInt("member_no"));
-		setPension_name(rs.getString("pension_name"));
 		setRoom_name(rs.getString("room_name"));
-		setUser_name(rs.getString("user_name"));
-		setMobile01(rs.getString("mobile01"));
-		setMobile02(rs.getString("mobile02"));
-		setDate(rs.getString("checkin"));
-		setPayment_reg(rs.getString("payment_reg"));
-		setPayment_price(rs.getInt("payment_price"));
-		setPayment_method(rs.getString("payment_method"));
-		setPayment_condition(rs.getString("payment_condition"));
+		setCheckin(rs.getString("checkin"));
+		setRoom_price(rs.getInt("room_price"));
 		setAdult(rs.getInt("adult"));
 		setChild(rs.getInt("child"));
 		setBaby(rs.getInt("baby"));
-	}
-	
-	
-	
-	public String getMobile01() {
-		return mobile01;
+		setAdd_adult(rs.getInt("add_adult"));
+		setAdd_child(rs.getInt("add_child"));
+		setAdd_baby(rs.getInt("add_baby"));
 	}
 
-	public String getPension_name() {
-		return pension_name;
+	public int getAdd_adult() {
+		return add_adult;
 	}
 
-	public void setPension_name(String pension_name) {
-		this.pension_name = pension_name;
+	public void setAdd_adult(int add_adult) {
+		this.add_adult = add_adult;
 	}
 
-	public void setMobile01(String mobile01) {
-		this.mobile01 = mobile01;
+	public int getAdd_child() {
+		return add_child;
 	}
 
-	public String getMobile02() {
-		return mobile02;
+	public void setAdd_child(int add_child) {
+		this.add_child = add_child;
 	}
 
-	public void setMobile02(String mobile02) {
-		this.mobile02 = mobile02;
+	public int getAdd_baby() {
+		return add_baby;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public void setAdd_baby(int add_baby) {
+		this.add_baby = add_baby;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public int getRoom_no() {
+		return room_no;
+	}
+
+	public void setRoom_no(int room_no) {
+		this.room_no = room_no;
+	}
+
+	public int getPayment_no() {
+		return payment_no;
+	}
+
+	public void setPayment_no(int payment_no) {
+		this.payment_no = payment_no;
+	}
+
+	public int getReservation_no() {
+		return reservation_no;
+	}
+
+	public void setReservation_no(int reservation_no) {
+		this.reservation_no = reservation_no;
 	}
 
 	public String getRoom_name() {
@@ -89,12 +120,22 @@ public class Reservation {
 		this.room_name = room_name;
 	}
 
-	public int getPension_no() {
-		return pension_no;
+	public String getCheckin() {
+		return checkin;
+	}
+	public String getDate() {
+		return checkin.substring(0, 10);
+	}
+	public void setCheckin(String checkin) {
+		this.checkin = checkin;
 	}
 
-	public void setPension_no(int pension_no) {
-		this.pension_no = pension_no;
+	public int getRoom_price() {
+		return room_price;
+	}
+
+	public void setRoom_price(int room_price) {
+		this.room_price = room_price;
 	}
 
 	public int getAdult() {
@@ -121,64 +162,17 @@ public class Reservation {
 		this.baby = baby;
 	}
 
-	public int getRoom_no() {
-		return room_no;
-	}
-	public void setRoom_no(int room_no) {
-		this.room_no = room_no;
-	}
-	public int getReservation_no() {
-		return reservation_no;
-	}
-	public void setReservation_no(int reservation_no) {
-		this.reservation_no = reservation_no;
-	}
-	public int getMember_no() {
-		return member_no;
-	}
-	public void setMember_no(int member_no) {
-		this.member_no = member_no;
-	}
-	public String getDate() {
-		return date.substring(0, 10);
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getPayment_reg() {
-		return payment_reg;
-	}
-	public void setPayment_reg(String payment_reg) {
-		this.payment_reg = payment_reg;
-	}
-	public int getPayment_price() {
-		return payment_price;
-	}
-	public void setPayment_price(int payment_price) {
-		this.payment_price = payment_price;
-	}
-	public String getPayment_method() {
-		return payment_method;
-	}
-	public void setPayment_method(String payment_method) {
-		this.payment_method = payment_method;
-	}
-	public String getPayment_condition() {
-		return payment_condition;
-	}
-	public void setPayment_condition(String payment_condition) {
-		this.payment_condition = payment_condition;
-	}
-
 	@Override
 	public String toString() {
-		return "Reservation [pension_no=" + pension_no + ", room_no=" + room_no + ", reservation_no=" + reservation_no
-				+ ", member_no=" + member_no + ", pension_name=" + pension_name + ", room_name=" + room_name
-				+ ", user_name=" + user_name + ", mobile01=" + mobile01 + ", mobile02=" + mobile02 + ", date=" + date
-				+ ", payment_reg=" + payment_reg + ", payment_price=" + payment_price
-				+ ", payment_method=" + payment_method + ", payment_condition=" + payment_condition + ", adult=" + adult
-				+ ", child=" + child + ", baby=" + baby + "]";
+		return "Reservation [room_no=" + room_no + ", payment_no=" + payment_no + ", reservation_no=" + reservation_no
+				+ ", room_name=" + room_name + ", checkin=" + checkin + ", room_price=" + room_price + ", adult="
+				+ adult + ", child=" + child + ", baby=" + baby + ", add_adult=" + add_adult + ", add_child="
+				+ add_child + ", add_baby=" + add_baby + "]";
 	}
+
+	
+	
+	
 
 
 }

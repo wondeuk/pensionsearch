@@ -61,9 +61,9 @@ $(document).ready(function() {
 			</tr>
 			<c:forEach var="reservation" items="${myReservation_list}">
 				<tr>
-					<td><a id="rv_info" onClick="window.open('customer?reservation_no=${reservation.reservation_no}','예약정보','fullscreen','fullscreen')">${reservation.reservation_no}</a></td>
+					<td><a id="rv_info" onClick="window.open('${pageContext.request.contextPath}/reservation/reservation_info?reservation_no=${reservation.reservation_no}','예약정보','fullscreen','fullscreen')">${reservation.reservation_no}</a></td>
 					<td>${reservation.date}</td>
-					<td><a href="${pageContext.request.contextPath}/pension/reserve?pension_no=${reservation.pension_no}">${reservation.pension_name}</a></td>
+					<td><a href="${pageContext.request.contextPath}/reservation/reserve?pension_no=${reservation.pension_no}">${reservation.pension_name}</a></td>
 					<td>${reservation.room_name}</td>
 					<td>${reservation.user_name}</td>
 					<c:choose>

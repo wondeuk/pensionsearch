@@ -11,15 +11,23 @@
     <table>
         <tr>
             <th>펜션명</th>
-            <td>${reservation.pension_name}</td>
+            <td>${payment.pension_name}</td>
         </tr>
         <tr>
-            <th>예약번호</th>
-            <td>${reservation.reservation_no}</td>
+            <th>결제번호</th>
+            <td>${payment.payment_no}</td>
         </tr>
         <tr>
             <th>예약자명</th>
-            <td>${reservation.user_name}<span>(핸드폰: ${reservation.mobile01}, 비상연락처: ${reservation.mobile02})</span></td>
+            <td>${payment.guest_name}<span>(핸드폰: ${payment.mobile01}, 비상연락처: ${payment.mobile02})</span></td>
+        </tr>
+        <tr>
+            <th>예약일</th>
+            <td>${payment.reserve_reg}</td>
+        </tr>
+        <tr>
+            <th>결제일</th>
+            <td>${payment.payment_reg}</td>
         </tr>
     </table>
     
@@ -28,21 +36,25 @@
             <th>객실명</th>
             <th>이용일</th>
             <th>성인/아동/유아</th>
-            <th>결재요금</th>
+            <th>추가요금</th>
+            <th>결제요금</th>
         </tr>
-        <tr>
-            <td>${reservation.room_name}</td>
-            <td>${reservation.date}</td>
-            <td>${reservation.adult}/${reservation.child}/${reservation.baby}</td>
-            <td>${reservation.payment_price}원</td>
-        </tr>
+        <c:forEach var="reservation" items="${reservation_list}">
+	        <tr>
+	            <td>${reservation.room_name}</td>
+	            <td>${reservation.date}</td>
+	            <td>${reservation.adult}/${reservation.child}/${reservation.baby}</td>
+	            <td>${reservation.add_adult + reservation.add_child + reservation.add_baby}원</td>
+	            <td>${reservation.room_price}원</td>
+	        </tr>
+        </c:forEach>
     </table>
     
     <table>
         <tr>
             <th>결제방법</th>
            	<c:choose>
-           		<c:when test="${reservation.payment_method eq 'account'}">
+           		<c:when test="${payment.payment_method eq 'account'}">
            			<td>무통장 입금</td>
            		</c:when>
            		<c:otherwise>
@@ -51,7 +63,7 @@
            	</c:choose>
             <th>예약상태</th>
            	<c:choose>
-           		<c:when test="${reservation.payment_method eq 'waiting'}">
+           		<c:when test="${payment.payment_condition eq 'waiting'}">
            			<td>입금대기</td>
            		</c:when>
            		<c:otherwise>
